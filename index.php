@@ -9,6 +9,7 @@
 
 	<!-- CONTENT -->
 	<section id="content">
+		<p id="TestApiKey"></p>
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu'></i>
@@ -136,9 +137,6 @@
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-	
-
-	<script src="script/script.js"></script>
 
 </body>
 </html>

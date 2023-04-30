@@ -8,4 +8,21 @@
 	<link rel="stylesheet" href="style/style.css">
 	<link rel="icon" href="img/Logo-illustrated.png" type="image/x-icon">
 	<title>GREEN BREEZE HOME</title>
+
+	<script>
+		const localToken = JSON.parse(localStorage.getItem('AccessKey'));
+
+		const TOKEN = () => { 
+			if ( JSON.parse(localStorage.getItem('AccessKey')).accessToken ) 
+			{
+				const accesstokenty = JSON.stringify(localToken.accessToken);
+			}else {
+				const accesstokenty = '';
+			}
+		};
+		
+		if(TOKEN){
+			window.location.href = "http://localhost/Green-Breeze-Home-for-Elderly/login.php" ;
+		}
+	</script>
 </head>
