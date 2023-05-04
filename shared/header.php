@@ -21,7 +21,7 @@
 			}
 		};
 		
-		if(TOKEN){
+		if(!TOKEN){
 			window.location.href = "http://localhost/Green-Breeze-Home-for-Elderly/login.php" ;
 		}
 	</script>
