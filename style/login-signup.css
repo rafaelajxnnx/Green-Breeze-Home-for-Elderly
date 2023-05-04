@@ -10,14 +10,13 @@
   padding: 2% 0 0 ;
   margin: auto;
 
-  border-color: #000000;
-  border-width: 2px;
-  border-style: dashed;
+  
 
 }
 .form img{
     width: 150px;
     margin-bottom: -40px;
+    
     
 }
 .form .greenbreeze-name{
@@ -45,6 +44,8 @@
   padding: 30px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
+  
   
 }
 .form .forgot-pass{

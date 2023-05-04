@@ -67,8 +67,8 @@
 								<th>Name</th>
 								<th>Age</th>
 								<th>Gender</th>
-								<th>Total Medications per week</th>
-								<th>Remaining Medication to take</th>
+								<th>Total Meds per week</th>
+								<th>Remaining Meds to take</th>
                                 <th>Assigned Nurse</th>
                                 <th>Room</th>
                                 <th>Edit</th>
