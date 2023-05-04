@@ -50,7 +50,7 @@
     <li>
         <a href="#">
             <i class='bx bxs-cog' ></i>
-            <span class="text">Settings</span>
+            <span class="text" onclick="window.location.href='signup.php'">Settings</span>
         </a>
     </li>
     <li>
