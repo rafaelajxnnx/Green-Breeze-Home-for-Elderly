@@ -33,7 +33,6 @@
                 <p class="message"></p>
                 <!--<button type="button" onclick="window.location.href='signup.php'">SIGN UP</button>-->
 
-        </form>
         </form>    
     </div>
     

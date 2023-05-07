@@ -208,36 +208,33 @@
                         <i id = "add-medicine" class='bx bx-plus' ></i>
 						<!-- The Modal -->
 							<div id="myModal" class="modal">
-
+							
 							<!-- Modal content -->
 							<div class="modal-content">
 								<span class="close">&times;</span>
+								<form class="form">
 								<h3>Add Medicine</h3>
 								<div class="two-rows" style="margin:0;padding:0">
 									<input type="text" name="drugName" id="drugName" placeholder="Drug Name" />
-									<input type="text" name="companyName" id="companyName" placeholder="Company or Brand Name" />
+									<input type="text" name="brandName" id="brandName" placeholder="Company or Brand Name" />
 								</div>
 								<div class ="one-row">
-								<input type="text" name="drugUsage" id="drugUsage" placeholder="Drug Usage or Condition" />
+								<input type="text" name="Condition" id="Condition" placeholder="Drug Usage or Condition" />
 								</div>
 								<div class="two-rows" style="margin:0;padding:0">
-									<input type="text" name="remMeds" id="redMeds" placeholder="Total Remaining Medicine" />
-									
-		
-										<!--<button class="dropbtn">Dosage</button>-->
-										<select class="dropbtn"onChange="dropdownTip()" id="select" name="search_type" style="margin-right:10px; margin-top:2px;">
-
-											<div class="dropdown-content">
-												<option selected="selected" value="tbsp">tbsp</option> 
-												<option value="mg">mg</option>
-												<option value="ml">ml</option>
-												<option value="tsp">tsp</option>
-											</div>
-										</select>
-
-	
+									<input type="text" name="remainQty" id="remainQty" placeholder="Total Remaining Medicine" />
+									<!--<button class="dropbtn">Dosage</button>-->
+									<select class="dropbtn"onChange="dropdownTip()" id="select" name="dosage" style="margin-right:10px; margin-top:2px;">
+									<div class="dropdown-content">
+										<option selected="selected" value="tbsp">tbsp</option> 
+										<option value="mg">mg</option>
+										<option value="ml">ml</option>
+										<option value="tsp">tsp</option>
+									</div>
+									</select>
 								</div>
 								<button type="submit">ADD</button>
+								</form>
 							</div>
 
 							</div>
@@ -250,7 +247,7 @@
 								<th>Company Brand</th>
 								<th>Condition</th>
 								<th>Remaining</th>
-                                <th>Assigned Patients</th>
+                                <th>Dosage per Serving</th>
                                 <th>Edit</th>
 							</tr>
 						</thead>
@@ -260,7 +257,7 @@
 								<td>Biogesic</td>
 								<td>treat pain <br> reduce a high temperature (fever)</td>
 								<td>89 tablets</td>
-                                <td>8 Patients</td>
+                                <td>ml</td>
                                 <td><i class='bx bx-edit-alt' ></i></td>
 							</tr>
                             <tr>
@@ -268,7 +265,7 @@
 								<td>Sinecod Forte</td>
 								<td>dry cough</td>
 								<td>2 bottles</td>
-                                <td>3 Patients</td>
+                                <td>tbsp</td>
                                 <td><i class='bx bx-edit-alt' ></i></td>
 							</tr>
                             <tr>
@@ -276,7 +273,7 @@
 								<td>RiteMed</td>
 								<td>treat pain <br> reduce a high temperature (fever)</td>
 								<td>40 tablets</td>
-                                <td>9 Patients</td>
+                                <td>mg</td>
                                 <td><i class='bx bx-edit-alt' ></i></td>
 							</tr>
 						</tbody>
@@ -318,6 +315,41 @@
 			var value = document.getElementById('select').value;
 			//document.getElementByID("result").innerHTML = value;
     	}
+		//inserting new data
+		const addPatientformEl = document.querySelector('.form')
+		addPatientformEl.addEventListener('submit', event => {
+			event.preventDefault();
+
+			const formdata = new FormData(addPatientformEl);
+			const data = Object.fromEntries(formdata);
+
+			console.log(data);
+
+			fetch('https://localhost:7139/Medicine/insertNew', {
+					method: 'Post',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(data)
+				})
+				.then(res => {
+					if (res.ok) {
+						return res.json()
+					}
+					return res.text()
+						.then(text => {
+							throw new Error(text)
+						})
+				})
+				.then(data => {
+					if (data != null)
+					console.log(data)
+					window.location.replace("http://localhost/Green-Breeze-Home-for-Elderly/medicine.php");
+
+				})
+				.catch(error => console.log(error));
+
+		});
 	</script>
 
 </body>

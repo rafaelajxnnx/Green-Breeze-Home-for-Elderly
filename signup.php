@@ -30,8 +30,7 @@
                 <p class="message"></p>
                 <button type="submit">REGISTER</button>
 
-        </form>
-        </form>    
+        </form>   
     </div>
   
 
