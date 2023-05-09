@@ -239,71 +239,20 @@
 						</div>
 			
 					</div>
-					<table>
+					<table id="myTable">
 						<thead>
 							<tr>
 								<th>Name</th>
 								<th>Mobile No.</th>
 								<th>Email Address</th>
 								<th>Gender</th>
-								<th>Scheduled Day</th>
-                                <th>Scheduled Time</th>
                                 <th>Room</th>
                                 <th>Edit</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-                                <td>
-									<img src="img/nurseJanna.png">
-									<p>Rafaela Janna Babaran</p>
-								</td>
-								<td>09669872494</td>
-								<td>rafaelajanna@greenbreeze.com</td>
-								<td>Female</td>
-                                <td>M W F</td>
-                                <td>6:00 AM - 6:00 PM</td>
-                                <td>Room #4</td>
-                                <td><i class='bx bx-edit-alt' ></i></td>
-							</tr>
-                            <tr>
-                                <td>
-									<img src="img/nurseJosche.png">
-									<p>Josche Rendon</p>
-								</td>
-								<td>09668975142</td>
-								<td>joscherendon@greenbreeze.com</td>
-								<td>Female</td>
-                                <td>M W F</td>
-                                <td>6:00 AM - 6:00 PM</td>
-                                <td>Room #4</td>
-                                <td><i class='bx bx-edit-alt' ></i></td>
-							</tr>
-                            <tr>
-                                <td>
-									<img src="img/nurseJen.jpg">
-									<p>Jennyline Vasquez</p>
-								</td>
-								<td>09669872494</td>
-								<td>jenvasquez@greenbreeze.com</td>
-								<td>Female</td>
-                                <td>M W F</td>
-                                <td>6:00 AM - 6:00 PM</td>
-                                <td>Room #6</td>
-                                <td><i class='bx bx-edit-alt' ></i></td>
-							</tr>
-                            <tr>
-                                <td>
-									<img src="img/nurseJemina.png">
-									<p>Jemina Keith Fernandez</p>
-								</td>
-								<td>09668975142</td>
-								<td>jeminafernandez@greenbreeze.com</td>
-								<td>Female</td>
-                                <td>M W F</td>
-                                <td>6:00 AM - 6:00 PM</td>
-                                <td>Room #5</td>
-                                <td><i class='bx bx-edit-alt' ></i></td>
+                            
 							</tr>
 						</tbody>
 					</table>
@@ -375,6 +324,58 @@
 				.catch(error => console.log(error));
 
 		});
+
+		//getting data
+		// JavaScript to retrieve and display the data
+		fetch('https://localhost:7139/Nurse/GetAllNurse')
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				} else {
+					throw new Error('Network response was not ok');
+				}
+			})
+			.then(data => {
+			// Select the table body element
+			console.log('Data received from server:', data);
+			const tableBody = document.querySelector('#myTable tbody');
+			console.log('Table body element:', tableBody);
+			
+			// Create a row for each item in the data array
+			data.forEach(item => {
+				console.log('Current item:', item);
+				const row = tableBody.insertRow();
+				
+				// Create cells for the name and age columns
+				const firstLastName = row.insertCell();
+				const Mobile = row.insertCell();
+				const Email = row.insertCell();
+				const Gender = row.insertCell();
+				const RoomNo = row.insertCell();
+				const edit = row.insertCell();
+				
+				// Set the text content of the cells to the item's values
+				firstLastName.textContent = item.firstName + " " + item.lastName;
+				Mobile.textContent = item.contact;
+				Email.textContent = item.email;
+				Gender.textContent = item.gender;
+				RoomNo.textContent = item.roomNumber;
+
+				// Create an edit icon element
+				const editIcon = document.createElement('i');
+				editIcon.classList.add('bx', 'bx-edit-alt');
+				editIcon.addEventListener('click', () => {
+					// Handle the edit icon click event here
+					console.log(`Editing item with ID ${item.ID}`);
+				});
+			
+				// Append the edit icon element to the edit cell
+				edit.appendChild(editIcon);
+			});
+			})
+			.catch(error => {
+			console.error('Error:', error);
+			});
 		
 		
 	</script>

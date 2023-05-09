@@ -221,7 +221,7 @@
 									<input type="text" name="gender" id="gender" placeholder="Gender" />
 									<input type="text" name="height" id="height" placeholder="Height" />
 									<input type="text" name="weight" id="weight" placeholder="Weight" />
-									<input type="text" name="roomNo" id="roomNo" placeholder="Assigned Room" />
+									<input type="text" name="roomNumber" id="roomNo" placeholder="Assigned Room" />
 								</div>
 								<div class ="one-row">
 								<input type="text" name="address" id="address" placeholder="House No.,Street, Barangay, City, Province" />
@@ -241,90 +241,25 @@
 
 								<button type="submit">ADD</button>
 								</form>
-							</div>
+								</div>
 
-							</div>
-
-			
+								</div>
 					</div>
-					<table>
+					<table id="myTable">
 						<thead>
 							<tr>
 								<th>Name</th>
-								<th>Age</th>
+								<th>Birthday</th>
 								<th>Gender</th>
-								<th>Total Meds per week</th>
-								<th>Remaining Meds to take</th>
-                                <th>Assigned Nurse</th>
-                                <th>Room</th>
+								<th>Height</th>
+								<th>Weight</th>
+								<th>Room</th>
                                 <th>Edit</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-                                <td>
-									<img src="img/grandmapic.jpeg">
-									<p>Jane Doe</p>
-								</td>
-								<td>89</td>
-								<td>Female</td>
-								<td>42 Medications</td>
-                                <td>30 Remaining</td>
-                                <td>Nurse Rafaela Janna Babaran</td>
-                                <td>Room #4</td>
-                                <td><i class='bx bx-edit-alt' ></i></td>
-							</tr>
-                            <tr>
-                                <td>
-									<img src="img/grandmapic.jpeg">
-									<p>Jane Doe</p>
-								</td>
-								<td>89</td>
-								<td>Female</td>
-								<td>42 Medications</td>
-                                <td>30 Remaining</td>
-                                <td>Nurse Rafaela Janna Babaran</td>
-                                <td>Room #4</td>
-                                <td><i class='bx bx-edit-alt' ></i></td>
-							</tr>
-                            <tr>
-                                <td>
-									<img src="img/grandmapic.jpeg">
-									<p>Jane Doe</p>
-								</td>
-								<td>89</td>
-								<td>Female</td>
-								<td>42 Medications</td>
-                                <td>30 Remaining</td>
-                                <td>Nurse Rafaela Janna Babaran</td>
-                                <td>Room #4</td>
-                                <td><i class='bx bx-edit-alt' ></i></td>
-							</tr>
-                            <tr>
-                                <td>
-									<img src="img/grandmapic.jpeg">
-									<p>Jane Doe</p>
-								</td>
-								<td>89</td>
-								<td>Female</td>
-								<td>42 Medications</td>
-                                <td>30 Remaining</td>
-                                <td>Nurse Rafaela Janna Babaran</td>
-                                <td>Room #4</td>
-                                <td><i class='bx bx-edit-alt' ></i></td>
-							</tr>
-                            <tr>
-                                <td>
-									<img src="img/grandmapic.jpeg">
-									<p>Jane Doe</p>
-								</td>
-								<td>89</td>
-								<td>Female</td>
-								<td>42 Medications</td>
-                                <td>30 Remaining</td>
-                                <td>Nurse Rafaela Janna Babaran</td>
-                                <td>Room #4</td>
-                                <td><i class='bx bx-edit-alt' ></i></td>
+                                
 							</tr>
 						</tbody>
 					</table>
@@ -395,6 +330,61 @@
 				.catch(error => console.log(error));
 
 		});
+
+		//getting data
+		// JavaScript to retrieve and display the data
+		fetch('https://localhost:7139/Patient/GetAllPatient')
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				} else {
+					throw new Error('Network response was not ok');
+				}
+			})
+			.then(data => {
+			// Select the table body element
+			console.log('Data received from server:', data);
+			const tableBody = document.querySelector('#myTable tbody');
+			console.log('Table body element:', tableBody);
+			
+			// Create a row for each item in the data array
+			data.forEach(item => {
+				console.log('Current item:', item);
+				const row = tableBody.insertRow();
+				
+				// Create cells for the name and age columns
+				const firstLastName = row.insertCell();
+				const Birthday = row.insertCell();
+				const Gender = row.insertCell();
+				const Height = row.insertCell();
+				const Weight = row.insertCell();
+				const Room = row.insertCell();
+				const edit = row.insertCell();
+			
+				// Set the text content of the cells to the item's values
+				firstLastName.textContent = item.firstName + " " + item.lastName;
+				Birthday.textContent = item.birthday;
+				Gender.textContent = item.gender;
+				Height.textContent = item.height;
+				Weight.textContent = item.weight;
+				Room.textContent = item.roomNumber;
+
+				// Create an edit icon element
+				const editIcon = document.createElement('i');
+				editIcon.classList.add('bx', 'bx-edit-alt');
+				editIcon.addEventListener('click', () => {
+					// Handle the edit icon click event here
+					console.log(`Editing item with ID ${item.ID}`);
+				});
+			
+				// Append the edit icon element to the edit cell
+				edit.appendChild(editIcon);
+			});
+			})
+			.catch(error => {
+			console.error('Error:', error);
+			});
+		
 		
 	</script>
 
