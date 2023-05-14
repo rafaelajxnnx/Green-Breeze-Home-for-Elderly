@@ -305,7 +305,7 @@
 
 			console.log(data);
 
-			fetch('https://localhost:7139/Patient/insertNew', {
+			fetch('https://localhost:7139/api/Patient/insertNew', {
 					method: 'Post',
 					headers: {
 						'Content-Type': 'application/json'
@@ -333,7 +333,7 @@
 
 		//getting data
 		// JavaScript to retrieve and display the data
-		fetch('https://localhost:7139/Patient/GetAllPatient')
+		fetch('https://localhost:7139/api/Patient/GetAllPatient')
 			.then(response => {
 				if (response.ok) {
 					return response.json();

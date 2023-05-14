@@ -299,7 +299,7 @@
 
 			console.log(data);
 
-			fetch('https://localhost:7139/Nurse/insertNew', {
+			fetch('https://localhost:7139/api/Nurse/insertNew', {
 					method: 'Post',
 					headers: {
 						'Content-Type': 'application/json'
@@ -327,7 +327,7 @@
 
 		//getting data
 		// JavaScript to retrieve and display the data
-		fetch('https://localhost:7139/Nurse/GetAllNurse')
+		fetch('https://localhost:7139/api/Nurse/GetAllNurse')
 			.then(response => {
 				if (response.ok) {
 					return response.json();

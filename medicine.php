@@ -297,6 +297,7 @@
 			<form class="formupdate">
 				<h3>Edit Medicine</h2>
 					<div class="two-rows" style="margin:0;padding:0">
+						<input type="text" name="id" id="id" placeholder="ID" hidden/>
 						<input type="text" name="drugName" id="drugName" placeholder="Drug Name" />
 						<input type="text" name="brandName" id="brandName" placeholder="Company or Brand Name" />
 					</div>
@@ -361,7 +362,7 @@
 
 			console.log(data);
 
-			fetch('https://localhost:7139/Medicine/insertNew', {
+			fetch('https://localhost:7139/api/Medicine/insertNew', {
 				method: 'Post',
 				headers: {
 					'Content-Type': 'application/json'
@@ -391,7 +392,7 @@
 
 		//getting data
 		// JavaScript to retrieve and display the data
-		fetch('https://localhost:7139/Medicine/GetAllMedicine')
+		fetch('https://localhost:7139/api/Medicine/GetAllMedicine')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -445,11 +446,11 @@
 						const editformEl = document.querySelector('.formupdate');
 
 						// Get the form data from the server
-						fetch('https://localhost:7139/GetMedicine/' + item.id)
+						fetch('https://localhost:7139/api/Medicine/GetMedicine/' + item.id)
 							.then(response => response.json())
 							.then(data => {
 								// Populate the form with the item data
-								//editformEl.elements.id.value = item.id;
+								editformEl.elements.id.value = item.id;
 								editformEl.elements.drugName.value = item.drugName;
 								editformEl.elements.drugName.placeholder = "Drug Name";
 								editformEl.elements.brandName.value = item.brandName;
@@ -471,17 +472,19 @@
 									const itemId = item.id;
 
 									console.log(data);
-
-									fetch('https://localhost:7139/UpdateMedicineInfo/' + itemId, {
+									
+									fetch('https://localhost:7139/api/Medicine/UpdateMedicineInfo/' + itemId, {
 										method: 'PUT',
 										headers: {
 											'Content-Type': 'application/json'
 										},
 										body: JSON.stringify(data)
+										
 									})
 										.then(res => {
 											if (res.ok) {
 												return res.json()
+												console.log(res);
 											}
 											return res.text()
 												.then(text => {
@@ -526,7 +529,7 @@
 						//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
 
 						// Send a DELETE request to the server
-						fetch('https://localhost:7139/DeleteMedicine/' + item.id, {
+						fetch('https://localhost:7139/api/DeleteMedicine/' + item.id, {
 							method: 'DELETE'
 						})
 							.then(response => {

@@ -28,7 +28,7 @@
         const itemId = form.dataset.itemId;
 
         // Fetch the item data from the server
-        fetch('https://localhost:7139/Medicine/GetAllMedicine')
+        fetch('https://localhost:7139/api/Medicine/GetAllMedicine')
             .then(response => response.json())
             .then(data => {
                 // Populate the form with the item data
@@ -52,7 +52,7 @@
             // Get the form data and do something with it (e.g. send it to the server via AJAX)
             const formData = new FormData(form);
             const itemId = formData.get('id');
-            fetch('https://localhost:7139/UpdateMedicineInfo/{ID}' + itemId, {
+            fetch('https://localhost:7139/api/UpdateMedicineInfo/{ID}' + itemId, {
                 method: 'PUT',
                 body: formData
             })
@@ -88,7 +88,7 @@
 
 			console.log(data);
 
-			fetch('https://localhost:7139/UpdateMedicineInfor/{ID}' + itemId, {
+			fetch('https://localhost:7139/api/UpdateMedicineInfor/{ID}' + itemId, {
 				method: 'Put',
 				headers: {
 					'Content-Type': 'application/json'
@@ -122,7 +122,7 @@
 						console.log(data);
 
 						// Get the form data from the server
-						fetch('https://localhost:7139/Medicine/GetAllMedicine')
+						fetch('https://localhost:7139/api/Medicine/GetAllMedicine')
 							.then(response => response.json())
 							.then(data => {
 								// Populate the form with the item data
@@ -153,7 +153,7 @@
 			const data = Object.fromEntries(formdata);
 			console.log(data);
 
-			fetch('https://localhost:7139/UpdateMedicineInfo/' + item.id, {
+			fetch('https://localhost:7139/api/UpdateMedicineInfo/' + item.id, {
 				method: 'Put',
 				headers: {
 					'Content-Type': 'application/json'
