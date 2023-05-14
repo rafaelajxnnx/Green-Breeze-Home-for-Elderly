@@ -43,6 +43,7 @@
                 console.error('Error fetching item data:', error);
             });
 
+
         // Add an event listener for the 'submit' event on the form inside the modal
         form.addEventListener('submit', function (event) {
             // Prevent the default form submission behavior
@@ -75,3 +76,105 @@
 </body>
 
 </html>
+
+//updating new data
+		const updateMedicineformEl = document.querySelector('.formupdate')
+		updateMedicineformEl.addEventListener('submit', event => {
+			event.preventDefault();
+
+			const formdata = new FormData(updateMedicineformEl);
+			const data = Object.fromEntries(formdata);
+			const itemId = item.id;
+
+			console.log(data);
+
+			fetch('https://localhost:7139/UpdateMedicineInfor/{ID}' + itemId, {
+				method: 'Put',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			})
+				.then(res => {
+					if (res.ok) {
+						return res.json()
+					}
+					return res.text()
+						.then(text => {
+							throw new Error(text)
+						})
+				})
+				.then(data => {
+					if (data != null)
+						console.log(data)
+						location.reload();
+
+				})
+				.catch(error => console.log(error));
+
+		});
+
+
+        const editformEl = document.querySelector('.formupdate');
+						const formdata = new FormData(editformEl);
+						const data = Object.fromEntries(formdata);
+
+						console.log(data);
+
+						// Get the form data from the server
+						fetch('https://localhost:7139/Medicine/GetAllMedicine')
+							.then(response => response.json())
+							.then(data => {
+								// Populate the form with the item data
+								data.elements.id.value = item.id;
+								data.elements.drugName.value = item.drugName;
+								data.elements.drugName.placeholder = item.drugName;
+								data.elements.brandName.value = item.brandName;
+								data.elements.brandName.placeholder = item.brandName;
+								data.elements.condition.value = item.condition;
+								data.elements.condition.placeholder = item.condition;
+								data.elements.remainQty.value = item.remainQty;
+								data.elements.remainQty.placeholder = item.remainQty;
+								data.elements.dosage.value = item.dosage;
+								data.elements.dosage.placeholder = item.dosage;
+							})
+
+
+
+
+                            // Add an event listener for the 'submit' event on the form inside the modal
+		const editformEl = document.querySelector('.formupdate');
+		editformEl.addEventListener('submit', function (event) {
+			// Prevent the default form submission behavior
+			event.preventDefault();
+
+			// Get the form data and do something with it (e.g. send it to the server via AJAX)
+			const formdata = new FormData(editformEl);
+			const data = Object.fromEntries(formdata);
+			console.log(data);
+
+			fetch('https://localhost:7139/UpdateMedicineInfo/' + item.id, {
+				method: 'Put',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			})
+				.then(res => {
+					if (res.ok) {
+						return res.json()
+					}
+					return res.text()
+						.then(text => {
+							throw new Error(text)
+						})
+				})
+				.then(data => {
+					if (data != null)
+						console.log(data)
+					location.reload();
+
+				})
+				.catch(error => console.log(error));
+		});
+		//end of Update
