@@ -74,7 +74,8 @@
 		}
 
 		/* The Close Button */
-		.close, .editclose {
+		.close,
+		.editclose {
 			color: #aaaaaa;
 			float: right;
 			font-size: 28px;
@@ -82,7 +83,8 @@
 		}
 
 		.close:hover,
-		.close:focus, .editclose:hover,
+		.close:focus,
+		.editclose:hover,
 		.editclose:focus {
 			color: #000;
 			text-decoration: none;
@@ -237,7 +239,7 @@
 											placeholder="Company or Brand Name" />
 									</div>
 									<div class="one-row">
-										<input type="text" name="Condition" id="Condition"
+										<input type="text" name="condition" id="condition"
 											placeholder="Drug Usage or Condition" />
 									</div>
 									<div class="two-rows" style="margin:0;padding:0">
@@ -269,7 +271,8 @@
 								<th>Condition</th>
 								<th>Remaining</th>
 								<th>Dosage per Serving</th>
-								<th>Edit</th>
+								<th></th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -291,29 +294,29 @@
 		<!-- Modal content -->
 		<div class="modal-content">
 			<span class="editclose">&times;</span>
-			<form class="form">
+			<form class="formupdate">
 				<h3>Edit Medicine</h2>
-				<div class="two-rows" style="margin:0;padding:0">
-					<input type="text" name="drugName" id="drugName" placeholder="Drug Name" />
-					<input type="text" name="brandName" id="brandName" placeholder="Company or Brand Name" />
-				</div>
-				<div class="one-row">
-					<input type="text" name="Condition" id="Condition" placeholder="Drug Usage or Condition" />
-				</div>
-				<div class="two-rows" style="margin:0;padding:0">
-					<input type="text" name="remainQty" id="remainQty" placeholder="Total Remaining Medicine" />
-					<!--<button class="dropbtn">Dosage</button>-->
-					<select class="dropbtn" onChange="dropdownTip()" id="select" name="dosage"
-						style="margin-right:10px; margin-top:2px;">
-						<div class="dropdown-content">
-							<option selected="selected" value="tbsp">tbsp</option>
-							<option value="mg">mg</option>
-							<option value="ml">ml</option>
-							<option value="tsp">tsp</option>
-						</div>
-					</select>
-				</div>
-				<button type="submit">SAVE</button>
+					<div class="two-rows" style="margin:0;padding:0">
+						<input type="text" name="drugName" id="drugName" placeholder="Drug Name" />
+						<input type="text" name="brandName" id="brandName" placeholder="Company or Brand Name" />
+					</div>
+					<div class="one-row">
+						<input type="text" name="condition" id="condition" placeholder="Drug Usage or Condition" />
+					</div>
+					<div class="two-rows" style="margin:0;padding:0">
+						<input type="text" name="remainQty" id="remainQty" placeholder="Total Remaining Medicine" />
+						<!--<button class="dropbtn">Dosage</button>-->
+						<select class="dropbtn" onChange="dropdownTip()" id="select" name="dosage"
+							style="margin-right:10px; margin-top:2px;">
+							<div class="dropdown-content">
+								<option selected="selected" value="tbsp">tbsp</option>
+								<option value="mg">mg</option>
+								<option value="ml">ml</option>
+								<option value="tsp">tsp</option>
+							</div>
+						</select>
+					</div>
+					<button type="submit">SAVE</button>
 			</form>
 		</div>
 
@@ -384,41 +387,8 @@
 
 		});
 
-		//updating new data
-		const updateMedicineformEl = document.querySelector('.form')
-		updateMedicineformEl.addEventListener('submit', event => {
-			event.preventDefault();
 
-			const formdata = new FormData(updateMedicineformEl);
-			const data = Object.fromEntries(formdata);
 
-			console.log(data);
-
-			fetch('https://localhost:7139/UpdateMedicineInfor/{ID}', {
-				method: 'Post',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(data)
-			})
-				.then(res => {
-					if (res.ok) {
-						return res.json()
-					}
-					return res.text()
-						.then(text => {
-							throw new Error(text)
-						})
-				})
-				.then(data => {
-					if (data != null)
-						console.log(data)
-					window.location.replace("http://localhost/Green-Breeze-Home-for-Elderly/medicine.php");
-
-				})
-				.catch(error => console.log(error));
-
-		});
 		//getting data
 		// JavaScript to retrieve and display the data
 		fetch('https://localhost:7139/Medicine/GetAllMedicine')
@@ -447,6 +417,7 @@
 					const remainQty = row.insertCell();
 					const dosage = row.insertCell();
 					const edit = row.insertCell();
+					const del = row.insertCell();
 
 					// Set the text content of the cells to the item's values
 					drugName.textContent = item.drugName;
@@ -459,6 +430,10 @@
 					const editIcon = document.createElement('i');
 					editIcon.classList.add('bx', 'bx-edit-alt');
 
+					// Create a delete icon element
+					const deleteIcon = document.createElement('i');
+					deleteIcon.classList.add('bx', 'bx-trash');
+
 					var editmodal = document.getElementById("editModal");
 					var editspan = document.getElementsByClassName("editclose")[0];
 
@@ -466,8 +441,70 @@
 						// Handle the edit icon click event here
 						console.log(`Editing item with ID ${item.id}`);
 						editmodal.style.display = "block";
-						//end of edit icon click event
+						// Get the form that will be inside the modal
+						const editformEl = document.querySelector('.formupdate');
+
+						// Get the form data from the server
+						fetch('https://localhost:7139/GetMedicine/' + item.id)
+							.then(response => response.json())
+							.then(data => {
+								// Populate the form with the item data
+								//editformEl.elements.id.value = item.id;
+								editformEl.elements.drugName.value = item.drugName;
+								editformEl.elements.drugName.placeholder = "Drug Name";
+								editformEl.elements.brandName.value = item.brandName;
+								editformEl.elements.brandName.placeholder = "Company or Brand Name";
+								editformEl.elements.condition.value = item.condition;
+								editformEl.elements.condition.placeholder = "Condition";
+								editformEl.elements.remainQty.value = item.remainQty;
+								editformEl.elements.remainQty.placeholder = "Total Remaining Medicine";
+								editformEl.elements.dosage.value = item.dosage;
+
+
+								//updating new data
+								const updateMedicineformEl = document.querySelector('.formupdate')
+								updateMedicineformEl.addEventListener('submit', event => {
+									event.preventDefault();
+
+									const formdata = new FormData(updateMedicineformEl);
+									const data = Object.fromEntries(formdata);
+									const itemId = item.id;
+
+									console.log(data);
+
+									fetch('https://localhost:7139/UpdateMedicineInfo/' + itemId, {
+										method: 'PUT',
+										headers: {
+											'Content-Type': 'application/json'
+										},
+										body: JSON.stringify(data)
+									})
+										.then(res => {
+											if (res.ok) {
+												return res.json()
+											}
+											return res.text()
+												.then(text => {
+													throw new Error(text)
+												})
+										})
+										.then(data => {
+											if (data != null)
+												console.log(data)
+											location.reload();
+
+										})
+										.catch(error => console.log(error));
+
+								});
+
+								//end of updating new data
+							})
+							.catch(error => {
+								console.error('Error fetching item data:', error);
+							});
 					});
+
 					// When the user clicks on <span> (x), close the modal
 					editspan.onclick = function () {
 						editmodal.style.display = "none";
@@ -479,13 +516,48 @@
 						}
 					}
 
+
+
+					//event when delete button is clicked
+					deleteIcon.addEventListener('click', () => {
+						// Handle the delete icon click event here
+						console.log(`Deleting item with ID ${item.id}`);
+
+						//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
+
+						// Send a DELETE request to the server
+						fetch('https://localhost:7139/DeleteMedicine/' + item.id, {
+							method: 'DELETE'
+						})
+							.then(response => {
+								if (!response.ok) {
+									throw new Error('Network response was not ok');
+								}
+								return response.json();
+							})
+							.then(data => {
+								console.log('Item deleted:', data);
+								// Remove the deleted row from the table
+								deleteIcon.parentNode.parentNode.remove();
+
+							})
+							.catch(error => {
+								console.error('Error deleting item:', error);
+							});
+
+
+					});
+
 					// Append the edit icon element to the edit cell
 					edit.appendChild(editIcon);
+					del.appendChild(deleteIcon);
 				});
 			})
 			.catch(error => {
 				console.error('Error:', error);
 			});
+
+
 	</script>
 
 </body>
