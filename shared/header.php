@@ -11,17 +11,8 @@
 
 	<script>
 		const localToken = JSON.parse(localStorage.getItem('AccessKey'));
-
-		const TOKEN = () => { 
-			if ( JSON.parse(localStorage.getItem('AccessKey')).accessToken ) 
-			{
-				const accesstokenty = JSON.stringify(localToken.accessToken);
-			}else {
-				const accesstokenty = '';
-			}
-		};
 		
-		if(!TOKEN){
+		if(!localToken){
 			window.location.href = "http://localhost/Green-Breeze-Home-for-Elderly/login.php" ;
 		}
 	</script>

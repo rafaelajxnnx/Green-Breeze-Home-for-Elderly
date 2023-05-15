@@ -295,13 +295,13 @@
 									</div>
 									<div class="two-rows" style="margin:0;padding:0">
 										<p>Assigned Nurse</p>
-										<select name="AssignedNurses"id="nurses"></select>
+										<select name="nurseId" id="nurses"></select>
 										<p>Patient</p>
-										<select name = "patient"id="patient"></select>
+										<select name ="patientId" id="patient"></select>
 									</div>
 									<div class="three-rows" style="margin:0;padding:0">
 										<select name= "medicine"id="medicine"></select>
-										<input type="text" name="Quantity" id="Quantity" placeholder="Quantity" />
+										<input type="text" name="quantity" id="Quantity" placeholder="Quantity" />
 										<select class="dropbtn" onChange="dropdownTip()" id="select" name="dosage"
 											style="margin-right:10px; margin-top:2px;">
 											<div class="dropdown-content">
@@ -405,44 +405,9 @@
 			var value = document.getElementById('select').value;
 			//document.getElementByID("result").innerHTML = value;
 		}
-		//inserting new data
-		const addScheduleformEl = document.querySelector('.form')
-		addScheduleformEl.addEventListener('submit', event => {
-			event.preventDefault();
-
-			const formdata = new FormData(addScheduleformEl);
-			const data = Object.fromEntries(formdata);
-
-			console.log(data);
-
-			fetch('https://localhost:7139/Schedule/insertNew', {
-				method: 'Post',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(data)
-			})
-				.then(res => {
-					if (res.ok) {
-						return res.json()
-					}
-					return res.text()
-						.then(text => {
-							throw new Error(text)
-						})
-				})
-				.then(data => {
-					if (data != null)
-						console.log(data)
-					window.location.replace("http://localhost/Green-Breeze-Home-for-Elderly/schedule.php");
-
-				})
-				.catch(error => console.log(error));
-
-		});
-
+		
 		// Retrieve data from the database and populate the dropdown
-		fetch('https://localhost:7139/Nurse/GetAllNurse')
+		fetch('https://localhost:7139/api/Nurse/GetAllNurse')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -479,7 +444,7 @@
 
 
 		// Retrieve data from the database and populate the dropdown
-		fetch('https://localhost:7139/Patient/GetAllPatient')
+		fetch('https://localhost:7139/api/Patient/GetAllPatient')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -512,7 +477,7 @@
 			
 
 		// Retrieve data from the database and populate the dropdown
-		fetch('https://localhost:7139/Medicine/GetAllMedicine')
+		fetch('https://localhost:7139/api/Medicine/GetAllMedicine')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -542,6 +507,43 @@
 				console.error('Error:', error);
 			});
 			
+
+			//inserting new data
+		const addScheduleformEl = document.querySelector('.form')
+		addScheduleformEl.addEventListener('submit', event => {
+			event.preventDefault();
+
+			const formdata = new FormData(addScheduleformEl);
+			const data = Object.fromEntries(formdata);
+
+			console.log(data);
+
+			fetch('https://localhost:7139/api/Schedule/insertNew', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			})
+				.then(res => {
+					if (res.ok) {
+						return res.json()
+					}
+					return res.text()
+						.then(text => {
+							throw new Error(text)
+						})
+				})
+				.then(data => {
+					if (data != null)
+						console.log(data)
+					window.location.replace("http://localhost/Green-Breeze-Home-for-Elderly/schedule.php");
+
+				})
+				.catch(error => console.log(error));
+
+		});
+
 	</script>
 
 </body>

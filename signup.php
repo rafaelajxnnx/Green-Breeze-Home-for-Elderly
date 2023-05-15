@@ -66,7 +66,7 @@
 
         console.log(data);
 
-        fetch('https://localhost:7139/User/signup', {
+        fetch('https://localhost:7139/api/User/signup', {
                 method: 'Post',
                 headers: {
                     'Content-Type': 'application/json'

@@ -1,26 +1,26 @@
-const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
+// const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
 
-allSideMenu.forEach(item => {
-	const li = item.parentElement;
+// allSideMenu.forEach(item => {
+// 	const li = item.parentElement;
 
-	item.addEventListener('click', function () {
-		allSideMenu.forEach(i => {
-			i.parentElement.classList.remove('active');
-		})
-		li.classList.add('active');
-	})
-});
+// 	item.addEventListener('click', function () {
+// 		allSideMenu.forEach(i => {
+// 			i.parentElement.classList.remove('active');
+// 		})
+// 		li.classList.add('active');
+// 	})
+// });
 
 
 // TOGGLE SIDEBAR
-const menuBar = document.querySelector('#content nav .bx.bx-menu');
-const sidebar = document.getElementById('sidebar');
+// const menuBar = document.querySelector('#content nav .bx.bx-menu');
+// const sidebar = document.getElementById('sidebar');
 
 
-//ITO YUNG ORIGINAL
-menuBar.addEventListener('click', function () {
-	sidebar.classList.toggle('hide');
-})
+// //ITO YUNG ORIGINAL
+// menuBar.addEventListener('click', function () {
+// 	sidebar.classList.toggle('hide');
+// })
 
 
 
@@ -79,8 +79,8 @@ window.addEventListener('resize', function () {
 
 
 function checkAccessToken() {
-	const localstorageAccesstoken = JSON.parse(localStorage.getItem('Key'));
-	if (localstorageAccesstoken.accessToken == null)
+	const localstorageAccesstoken = JSON.parse(localStorage.getItem('AccessKey'));
+	if (localstorageAccesstoken == null)
 	{
 		window.location.replace("http://localhost/Green-Breeze-Home-for-Elderly/login.php");
 	}
