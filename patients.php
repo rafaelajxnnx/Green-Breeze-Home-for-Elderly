@@ -3,166 +3,185 @@
 
 <?php include 'shared/header.php' ?>
 <header>
-<style>
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  top: 10%;
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	<style>
+		/* The Modal (background) */
+		.modal {
+			font-family: FontAwesome, "Poppins", sans-serif;
+			display: none;
+			/* Hidden by default */
+			position: fixed;
+			/* Stay in place */
+			z-index: 1;
+			/* Sit on top */
+			padding-top: 100px;
+			/* Location of the box */
+			top: 10%;
+			height: 100%;
+			/* Full height */
+			overflow: auto;
+			/* Enable scroll if needed */
+			background-color: rgb(0, 0, 0);
+			/* Fallback color */
+			background-color: rgba(0, 0, 0, 0.4);
+			/* Black w/ opacity */
 
-	width: calc(100% - 280px);
-	left: 280px;
-	transition: .3s ease;
-	
-}
+			width: calc(100% - 280px);
+			left: 280px;
+			transition: .3s ease;
 
-/* Modal Content */
-.modal-content {
-	background: var(--light);
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  height: 65%;
-  border-radius: 20px;
-}
-.modal-content .two-rows input{
-  font-family: FontAwesome, "Poppins", sans-serif;
-  outline: 0;
-  background: #f2f2f2;
-  width: 45%;
-  border: 0;
-  margin: 0 5px 10px;
-  padding: 8px;
-  box-sizing: border-box;
-  font-size: 12px;
-  border-radius:10px;
-  float:left;
-  
-}
-.modal-content .one-row input{
-  font-family: FontAwesome, "Poppins", sans-serif;
-  outline: 0;
-  background: #f2f2f2;
-  width: 92%;
-  border: 0;
-  margin: 0 5px 10px;
-  padding: 8px;
-  box-sizing: border-box;
-  font-size: 12px;
-  border-radius:10px;
-  float:left;
-  
-}
-.modal-content .five-rows input{
-  font-family: FontAwesome, "Poppins", sans-serif;
-  background: #f2f2f2;
-  width: 17%;
-  border: 0;
-  margin: 0 5px 10px;
-  padding: 8px;
-  box-sizing: border-box;
-  font-size: 12px;
-  border-radius:10px;
-  float:left;
-  
-  
-}
+		}
 
-/* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
+		/* Modal Content */
+		.modal-content {
+			background: var(--light);
+			margin: auto;
+			padding: 20px;
+			border: 1px solid #888;
+			width: 80%;
+			height: 65%;
+			border-radius: 20px;
+		}
 
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
+		.modal-content .two-rows input {
+			font-family: FontAwesome, "Poppins", sans-serif;
+			outline: 0;
+			background: #f2f2f2;
+			width: 45%;
+			border: 0;
+			margin: 0 5px 10px;
+			padding: 8px;
+			box-sizing: border-box;
+			font-size: 12px;
+			border-radius: 10px;
+			float: left;
+
+		}
+
+		.modal-content .one-row input {
+			font-family: FontAwesome, "Poppins", sans-serif;
+			outline: 0;
+			background: #f2f2f2;
+			width: 92%;
+			border: 0;
+			margin: 0 5px 10px;
+			padding: 8px;
+			box-sizing: border-box;
+			font-size: 12px;
+			border-radius: 10px;
+			float: left;
+
+		}
+
+		.modal-content .five-rows input {
+			font-family: FontAwesome, "Poppins", sans-serif;
+			background: #f2f2f2;
+			width: 17%;
+			border: 0;
+			margin: 0 5px 10px;
+			padding: 8px;
+			box-sizing: border-box;
+			font-size: 12px;
+			border-radius: 10px;
+			float: left;
 
 
-.modal-content button {
-  font-family: "Poppins", sans-serif;
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: .1em;
-  outline: 0;
-  background: #3C91E6;
-  width: 15%;
-  border: 0;
-  border-radius:30px;
-  padding: 8px;
-  color: #FFFFFF;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
-  transition: all 0.2s;
-  float:left;
-}
-.modal-content button:hover,.form button:focus {
-  background: #2167ad;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  transform: translateY(-4px);
-}
-.modal-content button:active {
-  transform: translateY(2px);
-  box-shadow: 0 2.5px 5px rgba(0, 0, 0, 0.2);
-}
+		}
 
-.custom-file-upload {
-	font-family: FontAwesome, "Poppins", sans-serif;
-  outline: 0;
-  background: #f2f2f2;
-  width: 45%;
-  margin: 0 5px 10px;
-  padding: 8px;
-  box-sizing: border-box;
-  font-size: 12px;
-  border-radius:10px;
-  display: inline-block;
-  cursor: pointer;
-}
-.custom-file-upload:hover {background-color: #e3e3e3}
+		/* The Close Button */
+		.close,
+		.editclose {
+			color: #aaaaaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
 
-#sidebar.hide ~ #content {
-	width: calc(100% - 60px);
-	left: 60px;
-}
+		.close:hover,
+		.close:focus,
+		.editclose:hover,
+		.editclose:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
 
 
+		.modal-content button {
+			font-family: "Poppins", sans-serif;
+			font-size: 12px;
+			font-weight: bold;
+			letter-spacing: .1em;
+			outline: 0;
+			background: #3C91E6;
+			width: 15%;
+			border: 0;
+			border-radius: 30px;
+			padding: 8px;
+			color: #FFFFFF;
+			-webkit-transition: all 0.3 ease;
+			transition: all 0.3 ease;
+			cursor: pointer;
+			transition: all 0.2s;
+			float: left;
+		}
 
-</style>
+		.modal-content button:hover,
+		.form button:focus {
+			background: #2167ad;
+			box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+			transform: translateY(-4px);
+		}
+
+		.modal-content button:active {
+			transform: translateY(2px);
+			box-shadow: 0 2.5px 5px rgba(0, 0, 0, 0.2);
+		}
+
+		.custom-file-upload {
+			font-family: FontAwesome, "Poppins", sans-serif;
+			outline: 0;
+			background: #f2f2f2;
+			width: 45%;
+			margin: 0 5px 10px;
+			padding: 8px;
+			box-sizing: border-box;
+			font-size: 12px;
+			border-radius: 10px;
+			display: inline-block;
+			cursor: pointer;
+		}
+
+		.custom-file-upload:hover {
+			background-color: #e3e3e3
+		}
+
+		#sidebar.hide~#content {
+			width: calc(100% - 60px);
+			left: 60px;
+		}
+	</style>
 </header>
+
 <body>
 
-<?php include 'shared/sidebar.php'?>
+	<?php include 'shared/sidebar.php' ?>
 
 	<!-- CONTENT -->
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu' ></i>
+			<i class='bx bx-menu'></i>
 			<!---<a href="#" class="nav-link">Categories</a> --->
 			<form action="#">
 				<div class="form-input">
 					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+					<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
 				</div>
 			</form>
 			<!--<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>-->
 			<a href="#" class="notification">
-				<i class='bx bxs-bell' ></i>
+				<i class='bx bxs-bell'></i>
 				<span class="num">8</span>
 			</a>
 			<a href="#" class="profile">
@@ -187,7 +206,7 @@
 					</ul>
 				</div>
 				<a href="#" class="btn-download">
-					<i class='bx bxs-cloud-download' ></i>
+					<i class='bx bxs-cloud-download'></i>
 					<span class="text">Download PDF</span>
 				</a>
 			</div>
@@ -196,11 +215,11 @@
 				<div class="order">
 					<div class="head">
 						<h3>List of Patients</h3>
-						<i class='bx bx-search' ></i>
-						<i class='bx bx-filter' ></i>
-                        <i id = "add-patient" class='bx bx-plus' ></i>
+						<i class='bx bx-search'></i>
+						<i class='bx bx-filter'></i>
+						<i id="add-patient" class='bx bx-plus'></i>
 						<!-- The Modal -->
-							<div id="myModal" class="modal">
+						<div id="myModal" class="modal">
 
 							<!-- Modal content -->
 							<div class="modal-content">
@@ -208,26 +227,28 @@
 								<span class="close">&times;</span>
 
 								<form class="form">
-								<h3>Add New Patient</h3>
-								<label for="file-upload" class="custom-file-upload">Upload Profile Picture</label><input id="file-upload" type="file"/>
+									<h3>Add New Patient</h3>
+									<label for="file-upload" class="custom-file-upload">Upload Profile
+										Picture</label><input id="file-upload" type="file" />
 
-								<div class="two-rows" style="margin:0;padding:0">
-									<input type="text" name="firstName" id="firstName" placeholder="First Name" />
-									<input type="text" name="lastName" id="lastName" placeholder="Last Name" />
-								</div>
-								
-								<div class="five-rows" style="margin:0;padding:0">
-									<input type="date" name="birthday" id="birthday"/>
-									<input type="text" name="gender" id="gender" placeholder="Gender" />
-									<input type="text" name="height" id="height" placeholder="Height" />
-									<input type="text" name="weight" id="weight" placeholder="Weight" />
-									<input type="text" name="roomNumber" id="roomNo" placeholder="Assigned Room" />
-								</div>
-								<div class ="one-row">
-								<input type="text" name="address" id="address" placeholder="House No.,Street, Barangay, City, Province" />
-								</div>
-	
-								<!--Guardian Info
+									<div class="two-rows" style="margin:0;padding:0">
+										<input type="text" name="firstName" id="firstName" placeholder="First Name" />
+										<input type="text" name="lastName" id="lastName" placeholder="Last Name" />
+									</div>
+
+									<div class="five-rows" style="margin:0;padding:0">
+										<input type="date" name="birthday" id="birthday" />
+										<input type="text" name="gender" id="gender" placeholder="Gender" />
+										<input type="text" name="height" id="height" placeholder="Height" />
+										<input type="text" name="weight" id="weight" placeholder="Weight" />
+										<input type="text" name="roomNumber" id="roomNo" placeholder="Assigned Room" />
+									</div>
+									<div class="one-row">
+										<input type="text" name="address" id="address"
+											placeholder="House No.,Street, Barangay, City, Province" />
+									</div>
+
+									<!--Guardian Info
 								<h3>Guardian Information</h3>
 								<div class="two-rows" style="margin:0;padding:0">
 									<input type="text" name="firstName" id="firstName" placeholder="First Name" />
@@ -239,11 +260,11 @@
 								</div>
 								-->
 
-								<button type="submit">ADD</button>
+									<button type="submit">ADD</button>
 								</form>
-								</div>
+							</div>
 
-								</div>
+						</div>
 					</div>
 					<table id="myTable">
 						<thead>
@@ -254,23 +275,60 @@
 								<th>Height</th>
 								<th>Weight</th>
 								<th>Room</th>
-                                <th>Edit</th>
+								<th></th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-                                
+
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				
+
 			</div>
 		</main>
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-	
+
+	<!--This code will open a modal content to edit the Medicine--->
+	<div id="editModal" class="modal">
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="editclose">&times;</span>
+			<form class="formupdate">
+				<h3>Edit Patient</h3>
+				<!--<label for="file-upload" id="ProfilePic" class="custom-file-upload">Upload Profile Picture</label><input
+					id="file-upload" type="file" />-->
+
+				<input type="text" name="id" id="id" placeholder="ID" hidden />
+
+				<div class="two-rows" style="margin:0;padding:0">
+					<input type="text" name="firstName" id="firstName" placeholder="First Name" />
+					<input type="text" name="lastName" id="lastName" placeholder="Last Name" />
+				</div>
+
+				<div class="five-rows" style="margin:0;padding:0">
+					<input type="date" name="birthday" id="birthday" />
+					<input type="text" name="gender" id="gender" placeholder="Gender" />
+					<input type="text" name="height" id="height" placeholder="Height" />
+					<input type="text" name="weight" id="weight" placeholder="Weight" />
+					<input type="text" name="roomNumber" id="roomNo" placeholder="Assigned Room" />
+				</div>
+				<div class="one-row">
+					<input type="text" name="address" id="address"
+						placeholder="House No.,Street, Barangay, City, Province" />
+				</div>
+
+
+				<button type="submit">SAVE</button>
+			</form>
+		</div>
+
+	</div>
+
 
 	<script src="script/script.js"></script>
 	<script>
@@ -281,20 +339,20 @@
 		// Get the <span> element that closes the modal
 		var span = document.getElementsByClassName("close")[0];
 		// When the user clicks the button, open the modal 
-		btn.onclick = function() {
-		modal.style.display = "block";
+		btn.onclick = function () {
+			modal.style.display = "block";
 		}
 		// When the user clicks on <span> (x), close the modal
-		span.onclick = function() {
-		modal.style.display = "none";
-		}
-		// When the user clicks anywhere outside of the modal, close it
-		window.onclick = function(event) {
-		if (event.target == modal) {
+		span.onclick = function () {
 			modal.style.display = "none";
 		}
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function (event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
 		}
-		
+
 		//inserting new data
 		const addPatientformEl = document.querySelector('.form')
 		addPatientformEl.addEventListener('submit', event => {
@@ -306,12 +364,12 @@
 			console.log(data);
 
 			fetch('https://localhost:7139/api/Patient/insertNew', {
-					method: 'Post',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify(data)
-				})
+				method: 'Post',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			})
 				.then(res => {
 					if (res.ok) {
 						return res.json()
@@ -323,7 +381,7 @@
 				})
 				.then(data => {
 					if (data != null)
-					console.log(data)
+						console.log(data)
 					window.location.replace("http://localhost/Green-Breeze-Home-for-Elderly/patients.php");
 
 				})
@@ -342,51 +400,176 @@
 				}
 			})
 			.then(data => {
-			// Select the table body element
-			console.log('Data received from server:', data);
-			const tableBody = document.querySelector('#myTable tbody');
-			console.log('Table body element:', tableBody);
-			
-			// Create a row for each item in the data array
-			data.forEach(item => {
-				console.log('Current item:', item);
-				const row = tableBody.insertRow();
-				
-				// Create cells for the name and age columns
-				const firstLastName = row.insertCell();
-				const Birthday = row.insertCell();
-				const Gender = row.insertCell();
-				const Height = row.insertCell();
-				const Weight = row.insertCell();
-				const Room = row.insertCell();
-				const edit = row.insertCell();
-			
-				// Set the text content of the cells to the item's values
-				firstLastName.textContent = item.firstName + " " + item.lastName;
-				Birthday.textContent = item.birthday;
-				Gender.textContent = item.gender;
-				Height.textContent = item.height;
-				Weight.textContent = item.weight;
-				Room.textContent = item.roomNumber;
+				// Select the table body element
+				console.log('Data received from server:', data);
+				const tableBody = document.querySelector('#myTable tbody');
+				console.log('Table body element:', tableBody);
 
-				// Create an edit icon element
-				const editIcon = document.createElement('i');
-				editIcon.classList.add('bx', 'bx-edit-alt');
-				editIcon.addEventListener('click', () => {
-					// Handle the edit icon click event here
-					console.log(`Editing item with ID ${item.ID}`);
+				// Create a row for each item in the data array
+				data.forEach(item => {
+					console.log('Current item:', item);
+					const row = tableBody.insertRow();
+
+					// Create cells for the name and age columns
+					const firstLastName = row.insertCell();
+					const Birthday = row.insertCell();
+					const Gender = row.insertCell();
+					const Height = row.insertCell();
+					const Weight = row.insertCell();
+					const Room = row.insertCell();
+					const edit = row.insertCell();
+					const del = row.insertCell();
+
+					// Set the text content of the cells to the item's values
+					firstLastName.textContent = item.firstName + " " + item.lastName;
+					Birthday.textContent = item.birthday;
+					Gender.textContent = item.gender;
+					Height.textContent = item.height;
+					Weight.textContent = item.weight;
+					Room.textContent = item.roomNumber;
+
+					// Create an edit icon element
+					const editIcon = document.createElement('i');
+					editIcon.classList.add('bx', 'bx-edit-alt');
+
+					// Create a delete icon element
+					const deleteIcon = document.createElement('i');
+					deleteIcon.classList.add('bx', 'bx-trash');
+
+					var editmodal = document.getElementById("editModal");
+					var editspan = document.getElementsByClassName("editclose")[0];
+
+					editIcon.addEventListener('click', () => {
+						// Handle the edit icon click event here
+						console.log(`Editing item with ID ${item.ID}`);
+
+						editmodal.style.display = "block";
+
+						const editformEl = document.querySelector('.formupdate');
+
+						// Get the form data from the server
+						fetch('https://localhost:7139/api/Patient/GetPatient/' + item.id)
+							.then(response => response.json())
+							.then(data => {
+								// Populate the form with the item data
+								editformEl.elements.id.value = item.id;
+								editformEl.elements.firstName.value = item.firstName;
+								editformEl.elements.firstName.placeholder = "firstName";
+								editformEl.elements.lastName.value = item.lastName;
+								editformEl.elements.lastName.placeholder = "lastName";
+								editformEl.elements.gender.value = item.gender;
+								editformEl.elements.gender.placeholder = "gender";
+								editformEl.elements.birthday.value = item.birthday;
+								editformEl.elements.birthday.placeholder = "birthday";
+								editformEl.elements.roomNumber.value = item.roomNumber;
+								editformEl.elements.roomNumber.placeholder = "roomNumber";
+								editformEl.elements.address.value = item.address;
+								editformEl.elements.address.placeholder = "address";
+								editformEl.elements.height.value = item.height;
+								editformEl.elements.height.placeholder = "height";
+								editformEl.elements.weight.value = item.weight;
+								editformEl.elements.weight.placeholder = "weight";
+
+
+								//updating new data
+								const updateMedicineformEl = document.querySelector('.formupdate')
+								updateMedicineformEl.addEventListener('submit', event => {
+									event.preventDefault();
+
+									const formdata = new FormData(updateMedicineformEl);
+									const data = Object.fromEntries(formdata);
+									const itemId = item.id;
+
+									console.log(data);
+
+									fetch('https://localhost:7139/api/Patient/UpdatePatientInfo/' + itemId, {
+										method: 'PUT',
+										headers: {
+											'Content-Type': 'application/json'
+										},
+										body: JSON.stringify(data)
+
+									})
+										.then(res => {
+											if (res.ok) {
+												return res.json()
+												console.log(res);
+											}
+											return res.text()
+												.then(text => {
+													throw new Error(text)
+												})
+										})
+										.then(data => {
+											if (data != null)
+												console.log(data)
+											location.reload();
+
+										})
+										.catch(error => console.log(error));
+
+								});
+
+								//end of updating new data
+							})
+							.catch(error => {
+								console.error('Error fetching item data:', error);
+							});
+					});
+
+					// When the user clicks on <span> (x), close the modal
+					editspan.onclick = function () {
+						editmodal.style.display = "none";
+					}
+					// When the user clicks anywhere outside of the modal, close it
+					window.onclick = function (event) {
+						if (event.target == editmodal) {
+							editmodal.style.display = "none";
+						}
+					}
+
+					//event when delete button is clicked
+					deleteIcon.addEventListener('click', () => {
+						// Handle the delete icon click event here
+						console.log(`Deleting item with ID ${item.id}`);
+
+						//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
+
+						// Send a DELETE request to the server
+						fetch('https://localhost:7139/api/Patient/DeletePatient/' + item.id, {
+							method: 'DELETE'
+						})
+							.then(response => {
+								if (!response.ok) {
+									throw new Error('Network response was not ok');
+								}
+								return response.json();
+							})
+							.then(data => {
+								console.log('Item deleted:', data);
+								// Remove the deleted row from the table
+								deleteIcon.parentNode.parentNode.remove();
+
+							})
+							.catch(error => {
+								console.error('Error deleting item:', error);
+							});
+
+
+					});
+
+					// Append the edit icon element to the edit cell
+					edit.appendChild(editIcon);
+					del.appendChild(deleteIcon);
 				});
-			
-				// Append the edit icon element to the edit cell
-				edit.appendChild(editIcon);
-			});
 			})
 			.catch(error => {
-			console.error('Error:', error);
+				console.error('Error:', error);
 			});
-		
-		
+
+
 	</script>
 
 </body>
+
 </html>

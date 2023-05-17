@@ -1,4 +1,4 @@
-<!-- SIDEBAR -->
+<body><!-- SIDEBAR -->
 <section id="sidebar">
 
     <a href="index.php" class="brand">
@@ -8,7 +8,7 @@
     </a>
 
     <ul class="side-menu top">
-        <li class="active">
+        <li class="">
             <a href="index.php">
                 <i class='bx bxs-dashboard'></i>
                 <span class="text">Dashboard</span>
@@ -62,15 +62,18 @@
     </ul>
 </section>
 <!-- SIDEBAR -->
-
 <script>
-    // Add active class to the current button (highlight it)
-    var a = document.querySelectorAll(".side-menu a");
-    for (var i = 0, length = a.length; i < length; i++) {
-        a[i].onclick = function() {
-            var b = document.querySelector(".menu li.active");
-            if (b) b.classList.remove("active");
-            this.parentNode.classList.add('active');
-        };
-    }
+const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
+
+		allSideMenu.forEach(item => {
+			const li = item.parentElement;
+
+			item.addEventListener('click', function () {
+				allSideMenu.forEach(i => {
+					i.parentElement.classList.remove('active');
+				})
+				li.classList.add('active');
+			})
+		});
 </script>
+</body>

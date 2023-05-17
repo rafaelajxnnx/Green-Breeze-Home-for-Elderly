@@ -178,3 +178,35 @@
 				.catch(error => console.log(error));
 		});
 		//end of Update
+
+
+
+		CODE SA BABA NG <SIDEBAR class="PHP"><script>
+    // Get all the li elements
+    var liElements = document.getElementsByTagName("li");
+
+    // Add a click event listener to each li element
+    for (var i = 0; i < liElements.length; i++) {
+        liElements[i].addEventListener("click", function () {
+            // Remove the active class from all li elements
+            for (var j = 0; j < liElements.length; j++) {
+                liElements[j].classList.remove("active");
+            }
+
+            // Add the active class to the clicked li element
+            this.classList.add("active");
+        });
+    }
+
+
+    // Add active class to the current button (highlight it)
+    var a = document.querySelectorAll(".side-menu li a");
+    for (var i = 0, length = a.length; i < length; i++) {
+        a[i].onclick = function () {
+            var b = document.querySelector(".side-menu li.active");
+            if (b) b.classList.remove("active");
+            this.parentNode.classList.add('active');
+        };
+    }
+
+</script> </SIDEBAR>

@@ -32,6 +32,8 @@
 
 		}
 
+
+
 		/* Modal Content */
 		.modal-content {
 			background: var(--light);
@@ -296,28 +298,28 @@
 			<span class="editclose">&times;</span>
 			<form class="formupdate">
 				<h3>Edit Medicine</h3>
-					<div class="two-rows" style="margin:0;padding:0">
-						<input type="text" name="id" id="id" placeholder="ID" hidden/>
-						<input type="text" name="drugName" id="drugName" placeholder="Drug Name" />
-						<input type="text" name="brandName" id="brandName" placeholder="Company or Brand Name" />
-					</div>
-					<div class="one-row">
-						<input type="text" name="condition" id="condition" placeholder="Drug Usage or Condition" />
-					</div>
-					<div class="two-rows" style="margin:0;padding:0">
-						<input type="text" name="remainQty" id="remainQty" placeholder="Total Remaining Medicine" />
-						<!--<button class="dropbtn">Dosage</button>-->
-						<select class="dropbtn" onChange="dropdownTip()" id="select" name="dosage"
-							style="margin-right:10px; margin-top:2px;">
-							<div class="dropdown-content">
-								<option selected="selected" value="tbsp">tbsp</option>
-								<option value="mg">mg</option>
-								<option value="ml">ml</option>
-								<option value="tsp">tsp</option>
-							</div>
-						</select>
-					</div>
-					<button type="submit">SAVE</button>
+				<div class="two-rows" style="margin:0;padding:0">
+					<input type="text" name="id" id="id" placeholder="ID" hidden />
+					<input type="text" name="drugName" id="drugName" placeholder="Drug Name" />
+					<input type="text" name="brandName" id="brandName" placeholder="Company or Brand Name" />
+				</div>
+				<div class="one-row">
+					<input type="text" name="condition" id="condition" placeholder="Drug Usage or Condition" />
+				</div>
+				<div class="two-rows" style="margin:0;padding:0">
+					<input type="text" name="remainQty" id="remainQty" placeholder="Total Remaining Medicine" />
+					<!--<button class="dropbtn">Dosage</button>-->
+					<select class="dropbtn" onChange="dropdownTip()" id="select" name="dosage"
+						style="margin-right:10px; margin-top:2px;">
+						<div class="dropdown-content">
+							<option selected="selected" value="tbsp">tbsp</option>
+							<option value="mg">mg</option>
+							<option value="ml">ml</option>
+							<option value="tsp">tsp</option>
+						</div>
+					</select>
+				</div>
+				<button type="submit">SAVE</button>
 			</form>
 		</div>
 
@@ -472,14 +474,14 @@
 									const itemId = item.id;
 
 									console.log(data);
-									
+
 									fetch('https://localhost:7139/api/Medicine/UpdateMedicineInfo/' + itemId, {
 										method: 'PUT',
 										headers: {
 											'Content-Type': 'application/json'
 										},
 										body: JSON.stringify(data)
-										
+
 									})
 										.then(res => {
 											if (res.ok) {
@@ -529,7 +531,7 @@
 						//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
 
 						// Send a DELETE request to the server
-						fetch('https://localhost:7139/api/DeleteMedicine/' + item.id, {
+						fetch('https://localhost:7139/api/Medicine/DeleteMedicine/' + item.id, {
 							method: 'DELETE'
 						})
 							.then(response => {
@@ -559,6 +561,9 @@
 			.catch(error => {
 				console.error('Error:', error);
 			});
+
+
+	
 
 
 	</script>

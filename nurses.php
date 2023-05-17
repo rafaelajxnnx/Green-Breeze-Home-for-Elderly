@@ -6,6 +6,7 @@
 	<style>
 		/* The Modal (background) */
 		.modal {
+			font-family: FontAwesome, "Poppins", sans-serif;
 			display: none;
 			/* Hidden by default */
 			position: fixed;
@@ -454,7 +455,20 @@
 								editformEl.elements.lastName.placeholder = "lastName";
 								editformEl.elements.gender.value = item.gender;
 								editformEl.elements.gender.placeholder = "gender";
-								
+								editformEl.elements.birthday.value = item.birthday;
+								editformEl.elements.birthday.placeholder = "birthday";
+								editformEl.elements.roomNumber.value = item.roomNumber;
+								editformEl.elements.roomNumber.placeholder = "roomNumber";
+								editformEl.elements.address.value = item.address;
+								editformEl.elements.address.placeholder = "address";
+								editformEl.elements.contact.value = item.contact;
+								editformEl.elements.contact.placeholder = "contact";
+								editformEl.elements.username.value = item.userName;
+								editformEl.elements.username.placeholder = "username";
+								editformEl.elements.password.value = item.password;
+								editformEl.elements.password.placeholder = "password";
+
+
 								//updating new data
 								const updateMedicineformEl = document.querySelector('.formupdate')
 								updateMedicineformEl.addEventListener('submit', event => {
@@ -500,7 +514,7 @@
 								console.error('Error fetching item data:', error);
 							});
 					});
-					
+
 					// When the user clicks on <span> (x), close the modal
 					editspan.onclick = function () {
 						editmodal.style.display = "none";
@@ -522,7 +536,7 @@
 						//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
 
 						// Send a DELETE request to the server
-						fetch('https://localhost:7139/api/DeleteNurse/' + item.id, {
+						fetch('https://localhost:7139/api/Nurse/DeleteNurse/' + item.id, {
 							method: 'DELETE'
 						})
 							.then(response => {
@@ -552,6 +566,9 @@
 			.catch(error => {
 				console.error('Error:', error);
 			});
+		
+		
+		
 
 
 	</script>
