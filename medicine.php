@@ -221,7 +221,7 @@
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>Assigned List of Medication</h3>
+						<h3>List of Medication</h3>
 						<i class='bx bx-search'></i>
 						<i class='bx bx-filter'></i>
 						<i id="add-medicine" class='bx bx-plus'></i>
@@ -295,7 +295,7 @@
 		<div class="modal-content">
 			<span class="editclose">&times;</span>
 			<form class="formupdate">
-				<h3>Edit Medicine</h2>
+				<h3>Edit Medicine</h3>
 					<div class="two-rows" style="margin:0;padding:0">
 						<input type="text" name="id" id="id" placeholder="ID" hidden/>
 						<input type="text" name="drugName" id="drugName" placeholder="Drug Name" />

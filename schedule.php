@@ -300,7 +300,7 @@
 										<select name ="patientId" id="patient"></select>
 									</div>
 									<div class="three-rows" style="margin:0;padding:0">
-										<select name= "medicine"id="medicine"></select>
+										<select name= "medicineId"id="medicine"></select>
 										<input type="text" name="quantity" id="Quantity" placeholder="Quantity" />
 										<select class="dropbtn" onChange="dropdownTip()" id="select" name="dosage"
 											style="margin-right:10px; margin-top:2px;">

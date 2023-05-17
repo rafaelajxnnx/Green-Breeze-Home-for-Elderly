@@ -65,7 +65,7 @@ loginformEl.addEventListener('submit', event => {
 
     console.log(data);
 
-    fetch('https://localhost:7139/login', {
+    fetch('https://localhost:7139/api/User/login', {
         method: 'Post',
         headers: {
             'Content-Type': 'application/json'
