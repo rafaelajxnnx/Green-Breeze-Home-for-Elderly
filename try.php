@@ -1,212 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-<header>
-</header>
+<html>
+<head>
 
+  <style>
+h1 {
+  text-align: center;
+}
+
+#timeForm {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#clock {
+  font-size: 48px;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+
+  </style>
+</head>
 <body>
-    <form class="form">
-        <h3>Edit Medicine</h2>
-            <div class="two-rows" style="margin:0;padding:0">
-                <input type="text" name="drugName" id="drugName" />
-                <input type="text" name="brandName" id="brandName" />
-            </div>
-            <div class="one-row">
-                <input type="text" name="condition" id="condition" />
-            </div>
-            <div class="two-rows" style="margin:0;padding:0">
-                <input type="text" name="remainQty" id="remainQty" />
-                <input type="text" name="dosage" id="dosage" />
 
-            </div>
-            <button type="submit">SAVE</button>
-    </form>
+<h1>Date and Time Input Form</h1>
+  <form id="dateTimeForm">
+    <label for="dateInput">Enter a date:</label>
+    <input type="date" id="dateInput" required>
+    <br>
+    <label for="timeInput">Enter a time:</label>
+    <input type="time" id="timeInput" required>
+    <br>
+    <button type="submit">Update Date and Time</button>
+  </form>
 
-    <script>
+  <div id="clock"></div>
+  <script>
+function updateTime() {
+  var currentTime = new Date();
+  var hours = currentTime.getHours();
+  var minutes = currentTime.getMinutes();
+  var seconds = currentTime.getSeconds();
 
-        const form = document.querySelector('form');
+  // Add leading zeros if the values are less than 10
+  hours = (hours < 10 ? "0" : "") + hours;
+  minutes = (minutes < 10 ? "0" : "") + minutes;
+  seconds = (seconds < 10 ? "0" : "") + seconds;
 
-        const itemId = form.dataset.itemId;
+  var timeString = hours + ":" + minutes + ":" + seconds;
+  document.getElementById("clock").textContent = timeString;
+}
 
-        // Fetch the item data from the server
-        fetch('https://localhost:7139/api/Medicine/GetAllMedicine')
-            .then(response => response.json())
-            .then(data => {
-                // Populate the form with the item data
-                drugName.value = data.drugName;
-                brandName.value = data.brandName;
-                condition.value = data.condition;
-                remainQty.value = data.remainQty;
-                dosage.value = data.dosage;
+function updateCustomDateTime(event) {
+  event.preventDefault();
+  var dateInput = document.getElementById("dateInput").value;
+  var timeInput = document.getElementById("timeInput").value;
 
-            })
-            .catch(error => {
-                console.error('Error fetching item data:', error);
-            });
+  var dateTimeString = dateInput + "T" + timeInput;
+  var customDateTime = new Date(dateTimeString);
+
+  if (!isNaN(customDateTime)) {
+    var isoDateTime = customDateTime.toISOString();
+    document.getElementById("customDateTime").textContent = isoDateTime;
+    setInterval(updateTime, 1000); // Resume updating the time every second
+    document.getElementById("dateTimeForm").reset();
+  }
+}
+
+document.getElementById("dateTimeForm").addEventListener("submit", updateCustomDateTime);
 
 
-        // Add an event listener for the 'submit' event on the form inside the modal
-        form.addEventListener('submit', function (event) {
-            // Prevent the default form submission behavior
-            event.preventDefault();
-
-            // Get the form data and do something with it (e.g. send it to the server via AJAX)
-            const formData = new FormData(form);
-            const itemId = formData.get('id');
-            fetch('https://localhost:7139/api/UpdateMedicineInfo/{ID}' + itemId, {
-                method: 'PUT',
-                body: formData
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Item updated:', data);
-                    // Hide the modal
-                    // Reload the page to show the updated data in the table
-                    location.reload();
-                })
-                .catch(error => {
-                    console.error('Error updating item:', error);
-                });
-        });
-    </script>
+  </script>
 </body>
-
 </html>
-
-//updating new data
-		const updateMedicineformEl = document.querySelector('.formupdate')
-		updateMedicineformEl.addEventListener('submit', event => {
-			event.preventDefault();
-
-			const formdata = new FormData(updateMedicineformEl);
-			const data = Object.fromEntries(formdata);
-			const itemId = item.id;
-
-			console.log(data);
-
-			fetch('https://localhost:7139/api/UpdateMedicineInfor/{ID}' + itemId, {
-				method: 'Put',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(data)
-			})
-				.then(res => {
-					if (res.ok) {
-						return res.json()
-					}
-					return res.text()
-						.then(text => {
-							throw new Error(text)
-						})
-				})
-				.then(data => {
-					if (data != null)
-						console.log(data)
-						location.reload();
-
-				})
-				.catch(error => console.log(error));
-
-		});
-
-
-        const editformEl = document.querySelector('.formupdate');
-						const formdata = new FormData(editformEl);
-						const data = Object.fromEntries(formdata);
-
-						console.log(data);
-
-						// Get the form data from the server
-						fetch('https://localhost:7139/api/Medicine/GetAllMedicine')
-							.then(response => response.json())
-							.then(data => {
-								// Populate the form with the item data
-								data.elements.id.value = item.id;
-								data.elements.drugName.value = item.drugName;
-								data.elements.drugName.placeholder = item.drugName;
-								data.elements.brandName.value = item.brandName;
-								data.elements.brandName.placeholder = item.brandName;
-								data.elements.condition.value = item.condition;
-								data.elements.condition.placeholder = item.condition;
-								data.elements.remainQty.value = item.remainQty;
-								data.elements.remainQty.placeholder = item.remainQty;
-								data.elements.dosage.value = item.dosage;
-								data.elements.dosage.placeholder = item.dosage;
-							})
-
-
-
-
-                            // Add an event listener for the 'submit' event on the form inside the modal
-		const editformEl = document.querySelector('.formupdate');
-		editformEl.addEventListener('submit', function (event) {
-			// Prevent the default form submission behavior
-			event.preventDefault();
-
-			// Get the form data and do something with it (e.g. send it to the server via AJAX)
-			const formdata = new FormData(editformEl);
-			const data = Object.fromEntries(formdata);
-			console.log(data);
-
-			fetch('https://localhost:7139/api/UpdateMedicineInfo/' + item.id, {
-				method: 'Put',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(data)
-			})
-				.then(res => {
-					if (res.ok) {
-						return res.json()
-					}
-					return res.text()
-						.then(text => {
-							throw new Error(text)
-						})
-				})
-				.then(data => {
-					if (data != null)
-						console.log(data)
-					location.reload();
-
-				})
-				.catch(error => console.log(error));
-		});
-		//end of Update
-
-
-
-		CODE SA BABA NG <SIDEBAR class="PHP"><script>
-    // Get all the li elements
-    var liElements = document.getElementsByTagName("li");
-
-    // Add a click event listener to each li element
-    for (var i = 0; i < liElements.length; i++) {
-        liElements[i].addEventListener("click", function () {
-            // Remove the active class from all li elements
-            for (var j = 0; j < liElements.length; j++) {
-                liElements[j].classList.remove("active");
-            }
-
-            // Add the active class to the clicked li element
-            this.classList.add("active");
-        });
-    }
-
-
-    // Add active class to the current button (highlight it)
-    var a = document.querySelectorAll(".side-menu li a");
-    for (var i = 0, length = a.length; i < length; i++) {
-        a[i].onclick = function () {
-            var b = document.querySelector(".side-menu li.active");
-            if (b) b.classList.remove("active");
-            this.parentNode.classList.add('active');
-        };
-    }
-
-</script> </SIDEBAR>

@@ -167,6 +167,11 @@
 			transform: translateY(2px);
 			box-shadow: 0 2.5px 5px rgba(0, 0, 0, 0.2);
 		}
+
+		.error {
+			color: red;
+			font-weight: bold;
+		}
 	</style>
 </header>
 
@@ -223,7 +228,7 @@
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>List of Medication</h3>
+						<h3>List of Medicine</h3>
 						<i class='bx bx-search'></i>
 						<i class='bx bx-filter'></i>
 						<i id="add-medicine" class='bx bx-plus'></i>
@@ -233,6 +238,7 @@
 							<!-- Modal content -->
 							<div class="modal-content">
 								<span class="close">&times;</span>
+								<p id="error-message" class="error"></p>
 								<form class="form">
 									<h3>Add Medicine</h3>
 									<div class="two-rows" style="margin:0;padding:0">
@@ -246,7 +252,7 @@
 									</div>
 									<div class="two-rows" style="margin:0;padding:0">
 										<input type="text" name="remainQty" id="remainQty"
-											placeholder="Total Remaining Medicine" />
+											placeholder="Usual Quantity per Serving" />
 										<!--<button class="dropbtn">Dosage</button>-->
 										<select class="dropbtn" onChange="dropdownTip()" id="select" name="dosage"
 											style="margin-right:10px; margin-top:2px;">
@@ -270,9 +276,9 @@
 							<tr>
 								<th>Drug Name</th>
 								<th>Company Brand</th>
-								<th>Condition</th>
-								<th>Remaining</th>
-								<th>Dosage per Serving</th>
+								<th>Used for Condition/s</th>
+								<th>Usual Qty Given</th>
+								<th>Dosage</th>
 								<th></th>
 								<th></th>
 							</tr>
@@ -296,6 +302,7 @@
 		<!-- Modal content -->
 		<div class="modal-content">
 			<span class="editclose">&times;</span>
+			<p id="error-message-edit" class="error"></p>
 			<form class="formupdate">
 				<h3>Edit Medicine</h3>
 				<div class="two-rows" style="margin:0;padding:0">
@@ -307,7 +314,7 @@
 					<input type="text" name="condition" id="condition" placeholder="Drug Usage or Condition" />
 				</div>
 				<div class="two-rows" style="margin:0;padding:0">
-					<input type="text" name="remainQty" id="remainQty" placeholder="Total Remaining Medicine" />
+					<input type="text" name="remainQty" id="remainQty" placeholder="Usual Quantity per Serving" />
 					<!--<button class="dropbtn">Dosage</button>-->
 					<select class="dropbtn" onChange="dropdownTip()" id="select" name="dosage"
 						style="margin-right:10px; margin-top:2px;">
@@ -356,6 +363,8 @@
 		}
 		//inserting new data
 		const addMedicineformEl = document.querySelector('.form')
+		const errorElement = document.getElementById('error-message');
+
 		addMedicineformEl.addEventListener('submit', event => {
 			event.preventDefault();
 
@@ -378,6 +387,7 @@
 					return res.text()
 						.then(text => {
 							throw new Error(text)
+
 						})
 				})
 				.then(data => {
@@ -387,6 +397,7 @@
 
 				})
 				.catch(error => console.log(error));
+			errorElement.textContent = 'Error: Medicine already exists.';
 
 		});
 
@@ -460,12 +471,14 @@
 								editformEl.elements.condition.value = item.condition;
 								editformEl.elements.condition.placeholder = "Condition";
 								editformEl.elements.remainQty.value = item.remainQty;
-								editformEl.elements.remainQty.placeholder = "Total Remaining Medicine";
+								editformEl.elements.remainQty.placeholder = "Usual Quantity per Serving";
 								editformEl.elements.dosage.value = item.dosage;
 
 
 								//updating new data
 								const updateMedicineformEl = document.querySelector('.formupdate')
+								const errorElement = document.getElementById('error-message-edit');
+
 								updateMedicineformEl.addEventListener('submit', event => {
 									event.preventDefault();
 
@@ -500,6 +513,7 @@
 
 										})
 										.catch(error => console.log(error));
+										errorElement.textContent = 'Error: Cannot update. Medicine inserted already exists.';
 
 								});
 
@@ -563,7 +577,7 @@
 			});
 
 
-	
+
 
 
 	</script>

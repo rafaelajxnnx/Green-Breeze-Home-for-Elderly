@@ -29,6 +29,8 @@
 			left: 280px;
 			transition: .3s ease;
 
+			overflow: auto;
+
 		}
 
 		/* Modal Content */
@@ -40,9 +42,57 @@
 			width: 80%;
 			height: 65%;
 			border-radius: 20px;
+
+			overflow-y: auto;
+
 		}
 
-		.modal-content .two-rows input {
+		.hsviewmodal {
+			font-family: FontAwesome, "Poppins", sans-serif;
+			display: none;
+			/* Hidden by default */
+			position: fixed;
+			/* Stay in place */
+			z-index: 1;
+			/* Sit on top */
+			padding-top: 100px;
+			/* Location of the box */
+			top: 5%;
+			height: 100%;
+			/* Full height */
+			overflow: auto;
+			/* Enable scroll if needed */
+			background-color: rgb(0, 0, 0);
+			/* Fallback color */
+			background-color: rgba(0, 0, 0, 0.4);
+			/* Black w/ opacity */
+
+			width: calc(100% - 280px);
+			left: 280px;
+			transition: .3s ease;
+
+			overflow: auto;
+
+		}
+
+		/* Modal Content */
+		.hsviewmodal-content {
+			background: var(--light);
+			margin: auto;
+			padding: 20px;
+			border: 1px solid #888;
+			width: 80%;
+			height: 80%;
+			border-radius: 20px;
+
+			overflow-y: auto;
+
+		}
+
+
+
+		.modal-content .two-rows input,
+		.hsviewmodal-content .two-rows input {
 			font-family: FontAwesome, "Poppins", sans-serif;
 			outline: 0;
 			background: #f2f2f2;
@@ -57,7 +107,8 @@
 
 		}
 
-		.modal-content .one-row input {
+		.modal-content .one-row input,
+		.hsviewmodal-content .one-row input {
 			font-family: FontAwesome, "Poppins", sans-serif;
 			outline: 0;
 			background: #f2f2f2;
@@ -69,6 +120,21 @@
 			font-size: 12px;
 			border-radius: 10px;
 			float: left;
+
+		}
+
+		.hsviewmodal-content .three-rows input {
+			font-family: FontAwesome, "Poppins", sans-serif;
+			background: #f2f2f2;
+			width: 30%;
+			border: 0;
+			margin: 0 5px 10px;
+			padding: 8px;
+			box-sizing: border-box;
+			font-size: 12px;
+			border-radius: 10px;
+			float: left;
+
 
 		}
 
@@ -87,9 +153,12 @@
 
 		}
 
+
 		/* The Close Button */
 		.close,
-		.editclose {
+		.editclose,
+		.hsviewclose,
+		.hsaddclose {
 			color: #aaaaaa;
 			float: right;
 			font-size: 28px;
@@ -99,14 +168,19 @@
 		.close:hover,
 		.close:focus,
 		.editclose:hover,
-		.editclose:focus {
+		.editclose:focus,
+		.hsviewclose:hover,
+		.hsviewclose:focus,
+		.hsaddclose:hover,
+		.hsaddclose:focus {
 			color: #000;
 			text-decoration: none;
 			cursor: pointer;
 		}
 
 
-		.modal-content button {
+		.modal-content button,
+		.hsviewmodal-content button {
 			font-family: "Poppins", sans-serif;
 			font-size: 12px;
 			font-weight: bold;
@@ -126,13 +200,15 @@
 		}
 
 		.modal-content button:hover,
-		.form button:focus {
+		.form button:focus,
+		.hsviewmodal-content button:hover {
 			background: #2167ad;
 			box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 			transform: translateY(-4px);
 		}
 
-		.modal-content button:active {
+		.modal-content button:active,
+		.hsviewmodal-content button:active {
 			transform: translateY(2px);
 			box-shadow: 0 2.5px 5px rgba(0, 0, 0, 0.2);
 		}
@@ -159,6 +235,99 @@
 			width: calc(100% - 60px);
 			left: 60px;
 		}
+
+		/* Accordion styles */
+		.hsviewmodal-content .accordion {
+			background-color: #eee;
+			color: #444;
+			cursor: pointer;
+			padding: 10px;
+			width: 100%;
+			text-align: left;
+			border: none;
+			outline: none;
+			transition: 0.4s;
+			border-radius: 0px;
+
+			margin: 5px 0 0 0;
+		}
+
+		.hsviewmodal-content .accordion:hover {
+			background-color: #ccc;
+
+		}
+
+		.hsviewmodal-content .accordion:after {
+			content: '\002B';
+			color: #777;
+			font-weight: bold;
+			float: right;
+			margin-left: 5px;
+
+		}
+
+		.hsviewmodal-content .active:after {
+			content: "\2212";
+
+
+		}
+
+		.hsviewmodal-content .panel {
+			padding: 0 20px;
+			width: 100%;
+
+			background-color: white;
+			display: none;
+			overflow: hidden;
+			font-size: 12px;
+
+		}
+
+		/*yung dropdown*/
+		.dropbtn {
+			font-family: FontAwesome, "Poppins", sans-serif;
+			outline: 0;
+			background: #f2f2f2;
+			width: 30%;
+			border: 0;
+			margin: 0 5px 10px;
+			padding: 8px;
+			box-sizing: border-box;
+			font-size: 12px;
+			border-radius: 10px;
+			float: left;
+		}
+
+
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			background-color: #f9f9f9;
+			min-width: 160px;
+			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+			z-index: 1;
+		}
+
+		.dropdown-content option {
+			color: black;
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;
+			font-size: 14px;
+		}
+
+		.dropdown-content option:hover {
+			background-color: #f1f1f1
+		}
+
+		.dropdown-content {
+			display: block;
+		}
+
+		.error {
+			color: red;
+			font-weight: bold;
+		}
 	</style>
 </header>
 
@@ -177,6 +346,7 @@
 					<input type="search" placeholder="Search...">
 					<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
 				</div>
+
 			</form>
 			<!--<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>-->
@@ -218,6 +388,8 @@
 						<i class='bx bx-search'></i>
 						<i class='bx bx-filter'></i>
 						<i id="add-patient" class='bx bx-plus'></i>
+						<i id="add-medhistory" class='bx bx-plus-circle'></i>
+
 						<!-- The Modal -->
 						<div id="myModal" class="modal">
 
@@ -228,6 +400,7 @@
 
 								<form class="form">
 									<h3>Add New Patient</h3>
+									<p id="error-message" class="error"></p>
 									<label for="file-upload" class="custom-file-upload">Upload Profile
 										Picture</label><input id="file-upload" type="file" />
 
@@ -241,7 +414,7 @@
 										<input type="text" name="gender" id="gender" placeholder="Gender" />
 										<input type="text" name="height" id="height" placeholder="Height" />
 										<input type="text" name="weight" id="weight" placeholder="Weight" />
-										<input type="text" name="roomNumber" id="roomNo" placeholder="Assigned Room" />
+										<input type="text" name="roomId" id="roomNo" placeholder="Assigned Room" />
 									</div>
 									<div class="one-row">
 										<input type="text" name="address" id="address"
@@ -293,11 +466,12 @@
 	</section>
 	<!-- CONTENT -->
 
-	<!--This code will open a modal content to edit the Medicine--->
+	<!--This code will open a modal content to edit the Patient--->
 	<div id="editModal" class="modal">
 		<!-- Modal content -->
 		<div class="modal-content">
 			<span class="editclose">&times;</span>
+			<p id="error-message-edit" class="error"></p>
 			<form class="formupdate">
 				<h3>Edit Patient</h3>
 				<!--<label for="file-upload" id="ProfilePic" class="custom-file-upload">Upload Profile Picture</label><input
@@ -315,7 +489,7 @@
 					<input type="text" name="gender" id="gender" placeholder="Gender" />
 					<input type="text" name="height" id="height" placeholder="Height" />
 					<input type="text" name="weight" id="weight" placeholder="Weight" />
-					<input type="text" name="roomNumber" id="roomNo" placeholder="Assigned Room" />
+					<input type="text" name="roomId" id="roomId" placeholder="Assigned Room" />
 				</div>
 				<div class="one-row">
 					<input type="text" name="address" id="address"
@@ -329,9 +503,112 @@
 
 	</div>
 
+	<!--This code will open a modal content to see the Medication History--->
+	<div id="hsaddModal" class="hsviewmodal">
+		<!-- Modal content -->
+		<div class="hsviewmodal-content">
+			<span class="hsaddclose">&times;</span>
+			<h3>Medication History of Patient</h3>
+			<!-- Accordion -->
+
+			<form class="formmedhistory">
+
+				<!--<label for="file-upload" id="ProfilePic" class="custom-file-upload">Upload Profile Picture</label><input
+					id="file-upload" type="file" />-->
+
+
+				<div class="three-rows" style="margin:0;padding:0">
+					<input type="text" name="doctor" id="doctor" placeholder="Doctor" />
+					<select class="dropbtn" onChange="dropdownTip()" name="patientId" id="patient"></select>
+					<input type="date" name="date" id="date" placeholder="Date" />
+				</div>
+
+				<div class="one-row">
+					<input type="text" name="condition" id="condition" placeholder="Condition" />
+				</div>
+
+
+				<button type="submit">ADD NEW</button>
+			</form>
+
+
+		</div>
+
+	</div>
+
+	<div id="hsviewModal" class="hsviewmodal">
+		<!-- Modal content -->
+		<div class="hsviewmodal-content">
+			<span class="hsviewclose">&times;</span>
+			<h3>Medication History of Patient</h3>
+			<!-- Accordion -->
+			<button class="accordion" onclick="toggleAccordion(1)">Accordion 1</button>
+			<div class="panel">
+				<p>Details for Accordion 1</p>
+			</div>
+
+			<button class="accordion" onclick="toggleAccordion(2)">Accordion 2</button>
+			<div class="panel">
+				<p>Details for Accordion 2</p>
+			</div>
+
+			<button class="accordion" onclick="toggleAccordion(3)">Accordion 3</button>
+			<div class="panel">
+				<p>Details for Accordion 3</p>
+			</div>
+		</div>
+
+	</div>
+
+
 
 	<script src="script/script.js"></script>
 	<script>
+		// Toggle accordion panel
+		function toggleAccordion(accordionId) {
+			var accordion = document.getElementsByClassName("accordion")[accordionId - 1];
+			var panel = accordion.nextElementSibling;
+			accordion.classList.toggle("active");
+			panel.style.display = panel.style.display === "block" ? "none" : "block";
+		}
+
+		//function dropdownTip() {
+		//	var value = document.getElementById('select').value;
+		//document.getElementByID("result").innerHTML = value;
+		//}
+
+		// Retrieve data from the database and populate the dropdown
+		fetch('https://localhost:7139/api/Patient/GetAllPatient')
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				} else {
+					throw new Error('Network response was not ok');
+				}
+			})
+			.then(data => {
+				console.log('Data received from server:', data);
+
+				// Get the dropdown element
+				const dropdown = document.getElementById('patient');
+
+				// Populate the dropdown with the retrieved data
+				data.forEach(item => {
+					const option = document.createElement('option');
+					option.textContent = item.firstName + " " + item.lastName;
+					option.value = item.id;
+					dropdown.appendChild(option);
+				});
+				dropdown.addEventListener('change', function () {
+					const selectedValue = this.value;
+					console.log('Selected Value:', selectedValue);
+				});
+			})
+			.catch(error => {
+				console.error('Error:', error);
+			});
+
+
 		// sa modal
 		var modal = document.getElementById("myModal");
 		// Get the button that opens the modal
@@ -353,8 +630,31 @@
 			}
 		}
 
+		// sa modal
+		var hsaddmodal = document.getElementById("hsaddModal");
+		// Get the button that opens the modal
+		var btn = document.getElementById("add-medhistory");
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("hsaddclose")[0];
+		// When the user clicks the button, open the modal 
+		btn.onclick = function () {
+			hsaddmodal.style.display = "block";
+		}
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function () {
+			hsaddmodal.style.display = "none";
+		}
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function (event) {
+			if (event.target == hsaddmodal) {
+				hsaddmodal.style.display = "none";
+			}
+		}
+
 		//inserting new data
 		const addPatientformEl = document.querySelector('.form')
+		const errorElement = document.getElementById('error-message');
+
 		addPatientformEl.addEventListener('submit', event => {
 			event.preventDefault();
 
@@ -386,6 +686,46 @@
 
 				})
 				.catch(error => console.log(error));
+			errorElement.textContent = 'Error: Patient already exists.';
+
+
+		});
+
+		//inserting new data
+		const addMedHistoryformEl = document.querySelector('.formmedhistory')
+		//addMedHistoryformEl.elements.patientId.value = item.id;
+
+		addMedHistoryformEl.addEventListener('submit', event => {
+			event.preventDefault();
+
+			const formdata = new FormData(addMedHistoryformEl);
+			const data = Object.fromEntries(formdata);
+
+			console.log(data);
+
+
+			fetch('https://localhost:7139/api/MedHistory/insertNew', {
+				method: 'Post',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			})
+				.then(res => {
+					if (res.ok) {
+						return res.json()
+					}
+					return res.text()
+						.then(text => {
+							throw new Error(text)
+						})
+				})
+				.then(data => {
+					if (data != null)
+						console.log(data)
+
+				})
+				.catch(error => console.log(error));
 
 		});
 
@@ -403,6 +743,7 @@
 				// Select the table body element
 				console.log('Data received from server:', data);
 				const tableBody = document.querySelector('#myTable tbody');
+				const tableHistoryBody = document.querySelector('#myHistoryTable tbody');
 				console.log('Table body element:', tableBody);
 
 				// Create a row for each item in the data array
@@ -419,14 +760,16 @@
 					const Room = row.insertCell();
 					const edit = row.insertCell();
 					const del = row.insertCell();
+					const hs = row.insertCell();
+
 
 					// Set the text content of the cells to the item's values
 					firstLastName.textContent = item.firstName + " " + item.lastName;
-					Birthday.textContent = item.birthday;
+					Birthday.textContent = formatDate(item.birthday);
 					Gender.textContent = item.gender;
 					Height.textContent = item.height;
 					Weight.textContent = item.weight;
-					Room.textContent = item.roomNumber;
+					Room.textContent = item.roomId;
 
 					// Create an edit icon element
 					const editIcon = document.createElement('i');
@@ -436,8 +779,14 @@
 					const deleteIcon = document.createElement('i');
 					deleteIcon.classList.add('bx', 'bx-trash');
 
+					const hsIcon = document.createElement('i');
+					hsIcon.classList.add('bx', 'bx-history');
+
 					var editmodal = document.getElementById("editModal");
 					var editspan = document.getElementsByClassName("editclose")[0];
+
+					var hsviewmodal = document.getElementById("hsviewModal");
+					var hsviewspan = document.getElementsByClassName("hsviewclose")[0];
 
 					editIcon.addEventListener('click', () => {
 						// Handle the edit icon click event here
@@ -461,8 +810,8 @@
 								editformEl.elements.gender.placeholder = "gender";
 								editformEl.elements.birthday.value = item.birthday;
 								editformEl.elements.birthday.placeholder = "birthday";
-								editformEl.elements.roomNumber.value = item.roomNumber;
-								editformEl.elements.roomNumber.placeholder = "roomNumber";
+								editformEl.elements.roomId.value = item.roomId;
+								editformEl.elements.roomId.placeholder = "roomId";
 								editformEl.elements.address.value = item.address;
 								editformEl.elements.address.placeholder = "address";
 								editformEl.elements.height.value = item.height;
@@ -473,6 +822,8 @@
 
 								//updating new data
 								const updateMedicineformEl = document.querySelector('.formupdate')
+								const errorElement = document.getElementById('error-message-edit');
+
 								updateMedicineformEl.addEventListener('submit', event => {
 									event.preventDefault();
 
@@ -507,6 +858,8 @@
 
 										})
 										.catch(error => console.log(error));
+									errorElement.textContent = 'Error: Cannot update. Patient name inserted already exists.';
+
 
 								});
 
@@ -558,15 +911,50 @@
 
 					});
 
+					//event when history button is clicked
+					hsIcon.addEventListener('click', () => {
+						console.log(`Viewing item with ID ${item.id}`);
+
+
+						hsviewmodal.style.display = "block";
+
+
+						//------------------------//
+
+
+
+
+					});
+					// When the user clicks on <span> (x), close the modal
+					hsviewspan.onclick = function () {
+						hsviewmodal.style.display = "none";
+					}
+					// When the user clicks anywhere outside of the modal, close it
+					window.onclick = function (event) {
+						if (event.target == hsviewmodal) {
+							hsviewmodal.style.display = "none";
+						}
+					}
+
 					// Append the edit icon element to the edit cell
 					edit.appendChild(editIcon);
 					del.appendChild(deleteIcon);
+					hs.appendChild(hsIcon);
 				});
 			})
 			.catch(error => {
 				console.error('Error:', error);
 			});
 
+
+		function formatDate(dateString) {
+			const date = new Date(dateString);
+			const month = date.toLocaleString('default', { month: 'long' });
+			const day = date.getDate();
+			const year = date.getFullYear();
+
+			return `${month} ${day}, ${year}`;
+		}
 
 	</script>
 

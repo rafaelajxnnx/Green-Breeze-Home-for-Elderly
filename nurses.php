@@ -158,6 +158,29 @@
 			width: calc(100% - 60px);
 			left: 60px;
 		}
+
+		.error {
+			color: red;
+			font-weight: bold;
+		}
+
+		
+		.image-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 10vh;
+			width: 10vh;
+			/* Set the container to be a square */
+		}
+
+		/* Adjust the image size and shape */
+		.image-container img {
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			object-fit: cover;
+		}
 	</style>
 </header>
 
@@ -228,8 +251,9 @@
 
 								<form class="form">
 									<h3>Add New Nurse</h3>
+									<p id="error-message" class="error"></p>
 									<label for="file-upload" id="ProfilePic" class="custom-file-upload">Upload Profile
-										Picture</label><input id="file-upload" type="file" />
+										Picture</label><input id="file-upload" type="file" name="File" />
 
 									<div class="two-rows" style="margin:0;padding:0">
 										<input type="text" name="firstName" id="firstName" placeholder="First Name" />
@@ -239,8 +263,7 @@
 									<div class="three-rows" style="margin:0;padding:0">
 										<input type="date" name="birthday" id="birthday" />
 										<input type="text" name="gender" id="gender" placeholder="Gender" />
-										<input type="text" name="roomNumber" id="roomNumber"
-											placeholder="Assigned Room" />
+										<input type="text" name="roomId" id="roomId" placeholder="Assigned Room" />
 									</div>
 									<div class="one-row">
 										<input type="text" name="address" id="address"
@@ -264,6 +287,7 @@
 						<thead>
 							<tr>
 								<th>Name</th>
+								<th>Birthday</th>
 								<th>Mobile No.</th>
 								<th>Username</th>
 								<th>Gender</th>
@@ -292,10 +316,14 @@
 		<!-- Modal content -->
 		<div class="modal-content">
 			<span class="editclose">&times;</span>
+			<p id="error-message-edit" class="error"></p>
 			<form class="formupdate">
 				<h3>Edit Nurse</h3>
-				<!--<label for="file-upload" id="ProfilePic" class="custom-file-upload">Upload Profile Picture</label><input
-					id="file-upload" type="file" />-->
+				<div class="image-container">
+					<img id="image" name="ProfilePic" src="">
+				</div>
+				<!--<label for="file-upload" id="ProfilePic" class="custom-file-upload">Upload Profile
+					Picture</label><input id="file-upload" type="file" name="File" />-->
 
 				<input type="text" name="id" id="id" placeholder="ID" hidden />
 
@@ -307,7 +335,7 @@
 				<div class="three-rows" style="margin:0;padding:0">
 					<input type="date" name="birthday" id="birthday" />
 					<input type="text" name="gender" id="gender" placeholder="Gender" />
-					<input type="text" name="roomNumber" id="roomNumber" placeholder="Assigned Room" />
+					<input type="text" name="roomId" id="roomId" placeholder="Assigned Room" />
 				</div>
 				<div class="one-row">
 					<input type="text" name="address" id="address"
@@ -364,10 +392,10 @@
 
 			fetch('https://localhost:7139/api/Nurse/insertNew', {
 				method: 'Post',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(data)
+				// headers: {
+				// 	'Content-Type': 'application/json'
+				// },
+				body: formdata
 			})
 				.then(res => {
 					if (res.ok) {
@@ -411,6 +439,7 @@
 
 					// Create cells for the name and age columns
 					const firstLastName = row.insertCell();
+					const Birthday = row.insertCell();
 					const Mobile = row.insertCell();
 					const Username = row.insertCell();
 					const Gender = row.insertCell();
@@ -420,10 +449,11 @@
 
 					// Set the text content of the cells to the item's values
 					firstLastName.textContent = item.firstName + " " + item.lastName;
+					Birthday.textContent = formatDate(item.birthday);
 					Mobile.textContent = item.contact;
 					Username.textContent = item.userName;
 					Gender.textContent = item.gender;
-					RoomNo.textContent = item.roomNumber;
+					RoomNo.textContent = item.roomId;
 
 					// Create an edit icon element
 					const editIcon = document.createElement('i');
@@ -438,7 +468,7 @@
 
 					editIcon.addEventListener('click', () => {
 						// Handle the edit icon click event here
-						console.log(`Editing item with ID ${item.ID}`);
+						console.log(`Editing item with ID ${item.id}`);
 						editmodal.style.display = "block";
 
 						const editformEl = document.querySelector('.formupdate');
@@ -448,6 +478,14 @@
 							.then(response => response.json())
 							.then(data => {
 								// Populate the form with the item data
+								const imagePath = item.profilePicPath;
+								const baseUrl = "https://localhost:7139/"; // Replace with your base URL
+								const completePath = baseUrl + imagePath;
+
+								const imageElement = document.getElementById('image');
+								imageElement.src = completePath;
+
+
 								editformEl.elements.id.value = item.id;
 								editformEl.elements.firstName.value = item.firstName;
 								editformEl.elements.firstName.placeholder = "firstName";
@@ -457,8 +495,8 @@
 								editformEl.elements.gender.placeholder = "gender";
 								editformEl.elements.birthday.value = item.birthday;
 								editformEl.elements.birthday.placeholder = "birthday";
-								editformEl.elements.roomNumber.value = item.roomNumber;
-								editformEl.elements.roomNumber.placeholder = "roomNumber";
+								editformEl.elements.roomId.value = item.roomId;
+								editformEl.elements.roomId.placeholder = "roomId";
 								editformEl.elements.address.value = item.address;
 								editformEl.elements.address.placeholder = "address";
 								editformEl.elements.contact.value = item.contact;
@@ -471,6 +509,8 @@
 
 								//updating new data
 								const updateMedicineformEl = document.querySelector('.formupdate')
+								const errorElement = document.getElementById('error-message-edit');
+
 								updateMedicineformEl.addEventListener('submit', event => {
 									event.preventDefault();
 
@@ -505,6 +545,9 @@
 
 										})
 										.catch(error => console.log(error));
+									errorElement.textContent = 'Error: Cannot update. Something wrong with the information inserted.';
+
+
 
 								});
 
@@ -566,9 +609,18 @@
 			.catch(error => {
 				console.error('Error:', error);
 			});
-		
-		
-		
+
+
+		function formatDate(dateString) {
+			const date = new Date(dateString);
+			const month = date.toLocaleString('default', { month: 'long' });
+			const day = date.getDate();
+			const year = date.getFullYear();
+
+			return `${month} ${day}, ${year}`;
+		}
+
+
 
 
 	</script>

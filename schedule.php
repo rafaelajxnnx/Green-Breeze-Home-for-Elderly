@@ -71,6 +71,21 @@
 
 		}
 
+		.modal-content .three-rows input {
+			font-family: FontAwesome, "Poppins", sans-serif;
+			background: #f2f2f2;
+			width: 30%;
+			border: 0;
+			margin: 0 5px 10px;
+			padding: 10px;
+			box-sizing: border-box;
+			font-size: 14px;
+			border-radius: 10px;
+			float: left;
+
+
+		}
+
 		/* The Close Button */
 		.close {
 			color: #aaaaaa;
@@ -161,20 +176,7 @@
 			box-shadow: 0 2.5px 5px rgba(0, 0, 0, 0.2);
 		}
 
-		.modal-content .three-rows input {
-			font-family: FontAwesome, "Poppins", sans-serif;
-			background: #f2f2f2;
-			width: 30%;
-			border: 0;
-			margin: 0 5px 10px;
-			padding: 8px;
-			box-sizing: border-box;
-			font-size: 12px;
-			border-radius: 10px;
-			float: left;
 
-
-		}
 
 		/*yung dropdown*/
 		.dropbtn {
@@ -215,6 +217,12 @@
 
 		.dropdown-content {
 			display: block;
+		}
+
+		.clearfix::after {
+			content: "";
+			clear: both;
+			display: table;
 		}
 	</style>
 </header>
@@ -289,21 +297,38 @@
 
 								<form class="form">
 									<h3>Add New Schedule</h3>
+									<input type="text" name="status" id="status" placeholder="status" hidden />
+
 									<div class="two-rows" style="margin:0;padding:0">
-										<input type="text" name="time" id="time" placeholder="Time" />
-										<input type="date" name="date" id="Date" />
+										<!--<select class="dropbtn" onChange="dropdownTip()" id="select" name="time"
+											style="margin-right:10px; margin-top:2px; width:30%;">
+											<div class="dropdown-content">
+												<option selected="selected" value="6:00 AM">6:00 AM</option>
+												<option value="7:00 AM">7:00 AM</option>
+												<option value="8:00 AM">8:00 AM</option>
+												<option value="9:00 AM">9:00 AM</option>
+											</div>
+											
+										</select>-->
+
+										<!--<label for="alarm-input">Set Alarm:</label>-->
+										<input type="time" name="time" id="time">
+										<!--<button id="set-alarm-button">Set</button>-->
+
+										<input type="date" name="date" id="date" />
 									</div>
 									<div class="two-rows" style="margin:0;padding:0">
-										<p>Assigned Nurse</p>
-										<select name="nurseId" id="nurses"></select>
-										<p>Patient</p>
-										<select name ="patientId" id="patient"></select>
+										<!--<p>Assigned Nurse</p>-->
+										<select class="dropbtn" name="nurseId" id="nurseId"></select>
+										<!--<p>Patient</p>-->
+										<select class="dropbtn" name="patientId" id="patientId"></select>
 									</div>
 									<div class="three-rows" style="margin:0;padding:0">
-										<select name= "medicineId"id="medicine"></select>
-										<input type="text" name="quantity" id="Quantity" placeholder="Quantity" />
-										<select class="dropbtn" onChange="dropdownTip()" id="select" name="dosage"
-											style="margin-right:10px; margin-top:2px;">
+										<select style="width:30%;" class="dropbtn" name="medicineId" id="medicineId">
+										</select>
+										<input type="text" name="quantity" id="quantity" placeholder="Quantity" />
+										<select class="dropbtn" id="dosage" name="dosage"
+											style="margin-right:10px; margin-top:2px; width:30%;">
 											<div class="dropdown-content">
 												<option selected="selected" value="tbsp">tbsp</option>
 												<option value="mg">mg</option>
@@ -401,11 +426,13 @@
 		}
 
 		//para maselect yung napili sa dropdown DI PA SURE
-		function dropdownTip() {
-			var value = document.getElementById('select').value;
-			//document.getElementByID("result").innerHTML = value;
-		}
-		
+		//function dropdownTip() {
+		//	var value = document.getElementById('select').value;
+		//document.getElementByID("result").innerHTML = value;
+		//}
+
+
+
 		// Retrieve data from the database and populate the dropdown
 		fetch('https://localhost:7139/api/Nurse/GetAllNurse')
 			.then(response => {
@@ -419,7 +446,7 @@
 				console.log('Data received from server:', data);
 
 				// Get the dropdown element
-				const dropdown = document.getElementById('nurses');
+				const dropdown = document.getElementById('nurseId');
 
 				// Populate the dropdown with the retrieved data
 				data.forEach(item => {
@@ -432,15 +459,15 @@
 				});
 
 				dropdown.addEventListener('change', function () {
-				const selectedValue = this.value;
-				console.log('Selected Value:', selectedValue);
-			});
+					const selectedValue = this.value;
+					console.log('Selected Value:', selectedValue);
+				});
 			})
 			.catch(error => {
 				console.error('Error:', error);
 			});
-		
-			
+
+
 
 
 		// Retrieve data from the database and populate the dropdown
@@ -456,7 +483,7 @@
 				console.log('Data received from server:', data);
 
 				// Get the dropdown element
-				const dropdown = document.getElementById('patient');
+				const dropdown = document.getElementById('patientId');
 
 				// Populate the dropdown with the retrieved data
 				data.forEach(item => {
@@ -466,15 +493,15 @@
 					dropdown.appendChild(option);
 				});
 				dropdown.addEventListener('change', function () {
-				const selectedValue = this.value;
-				console.log('Selected Value:', selectedValue);
-			});
+					const selectedValue = this.value;
+					console.log('Selected Value:', selectedValue);
+				});
 			})
 			.catch(error => {
 				console.error('Error:', error);
 			});
 
-			
+
 
 		// Retrieve data from the database and populate the dropdown
 		fetch('https://localhost:7139/api/Medicine/GetAllMedicine')
@@ -489,7 +516,7 @@
 				console.log('Data received from server:', data);
 
 				// Get the dropdown element
-				const dropdown = document.getElementById('medicine');
+				const dropdown = document.getElementById('medicineId');
 
 				// Populate the dropdown with the retrieved data
 				data.forEach(item => {
@@ -499,22 +526,60 @@
 					dropdown.appendChild(option);
 				});
 				dropdown.addEventListener('change', function () {
-				const selectedValue = this.value;
-				console.log('Selected Value:', selectedValue);
-			});
+					const selectedValue = this.value;
+					console.log('Selected Value:', selectedValue);
+				});
 			})
 			.catch(error => {
 				console.error('Error:', error);
 			});
-			
 
-			//inserting new data
+
+		//inserting new data
 		const addScheduleformEl = document.querySelector('.form')
 		addScheduleformEl.addEventListener('submit', event => {
 			event.preventDefault();
 
-			const formdata = new FormData(addScheduleformEl);
-			const data = Object.fromEntries(formdata);
+			//const formdata = new FormData(addScheduleformEl);
+			//const data = Object.fromEntries(formdata);
+
+			// Get the date and time values from the input fields
+			//var status = document.getElementById('status').value = "false";
+			var nurseValue = document.getElementById('nurseId').value;
+			var patientValue = document.getElementById('patientId').value;
+			var medicineValue = document.getElementById('medicineId').value;
+			var quantityValue = document.getElementById('quantity').value;
+			var dosageValue = document.getElementById('dosage').value;
+			var dateValue = document.getElementById('date').value;
+			var timeValue = document.getElementById('time').value;
+
+
+
+			// Split the date value into year, month, and day
+			var [year, month, day] = dateValue.split('-');
+
+			// Split the time value into hours and minutes
+			var [hours, minutes] = timeValue.split(':');
+
+			// Create a new Date object with the corrected date and time values
+			var dateTimeObject = new Date(year, month - 1, day, hours, minutes, 0);
+			console.log(dateTimeObject);
+
+
+			// Format the date and time as a string in the desired format
+			var utcString = dateTimeObject.toISOString().split('T')[0] + 'T' + dateTimeObject.toTimeString().split(' ')[0];
+			console.log(utcString);
+
+			// Create an object to send via AJAX
+			var data = {
+				status: false,
+				nurseId: nurseValue,
+				patientId: patientValue,
+				medicineId: medicineValue,
+				quantity: quantityValue,
+				dosage: dosageValue,
+				dateTime: utcString
+			};
 
 			console.log(data);
 
@@ -543,6 +608,7 @@
 				.catch(error => console.log(error));
 
 		});
+
 
 	</script>
 
