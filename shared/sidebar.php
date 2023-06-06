@@ -44,13 +44,14 @@
                 <span class="text">Message</span>
             </a>
         </li>
+        
     </ul>
 
     <ul class="side-menu">
         <li>
-            <a href="#">
+            <a href="signup.php">
                 <i class='bx bxs-cog'></i>
-                <span class="text" onclick="window.location.href='signup.php'">Settings</span>
+                <span class="text">Admins</span>
             </a>
         </li>
         <li>

@@ -16,7 +16,7 @@
 			/* Sit on top */
 			padding-top: 100px;
 			/* Location of the box */
-			top: 10%;
+			top: 0%;
 			height: 100%;
 			/* Full height */
 			overflow: auto;
@@ -172,6 +172,7 @@
 			color: red;
 			font-weight: bold;
 		}
+	
 	</style>
 </header>
 
@@ -183,11 +184,11 @@
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu'></i>
+			<!--<i class='bx bx-menu'></i>-->
 			<!---<a href="#" class="nav-link">Categories</a> --->
 			<form action="#">
 				<div class="form-input">
-					<input type="search" placeholder="Search...">
+				<input type="search" id="search-bar" onkeyup="searchTable()" placeholder="Search...">
 					<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
 				</div>
 			</form>
@@ -219,7 +220,7 @@
 						</li>-->
 					</ul>
 				</div>
-				<a href="#" class="btn-download">
+				<a href="#" class="btn-download"  id="downloadButton">
 					<i class='bx bxs-cloud-download'></i>
 					<span class="text">Download PDF</span>
 				</a>
@@ -229,7 +230,8 @@
 				<div class="order">
 					<div class="head">
 						<h3>List of Medicine</h3>
-						<i class='bx bx-search'></i>
+						
+						<!--<i class='bx bx-search'></i>-->
 						<i class='bx bx-filter'></i>
 						<i id="add-medicine" class='bx bx-plus'></i>
 						<!-- The Modal -->
@@ -302,7 +304,6 @@
 		<!-- Modal content -->
 		<div class="modal-content">
 			<span class="editclose">&times;</span>
-			<p id="error-message-edit" class="error"></p>
 			<form class="formupdate">
 				<h3>Edit Medicine</h3>
 				<div class="two-rows" style="margin:0;padding:0">
@@ -334,6 +335,8 @@
 
 
 	<script src="script/script.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.3.2/dist/html2canvas.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 	<script>
 		// sa modal
 		var modal = document.getElementById("myModal");
@@ -397,7 +400,7 @@
 
 				})
 				.catch(error => console.log(error));
-			errorElement.textContent = 'Error: Medicine already exists.';
+			//errorElement.textContent = 'Error: Medicine already exists.';
 
 		});
 
@@ -477,8 +480,6 @@
 
 								//updating new data
 								const updateMedicineformEl = document.querySelector('.formupdate')
-								const errorElement = document.getElementById('error-message-edit');
-
 								updateMedicineformEl.addEventListener('submit', event => {
 									event.preventDefault();
 
@@ -513,7 +514,6 @@
 
 										})
 										.catch(error => console.log(error));
-										errorElement.textContent = 'Error: Cannot update. Medicine inserted already exists.';
 
 								});
 
@@ -575,6 +575,81 @@
 			.catch(error => {
 				console.error('Error:', error);
 			});
+
+
+
+			window.jsPDF = window.jspdf.jsPDF;
+
+		// Function to convert table to PDF
+		function convertToPDF() {
+
+			const table = document.getElementById("myTable");
+			html2canvas(table).then(canvas => {
+				const tableImage = canvas.toDataURL("image/png");
+
+				const imgWidth = 190; // Desired width in PDF units
+				const imgHeight = (canvas.height * imgWidth) / canvas.width; // Calculate height based on aspect ratio
+
+				const pdf = new jsPDF();
+
+				// Add company logo
+				const logoImage = "img/Logo-illustrated.png";
+				const logoWidth = 30; // Desired width of the logo in PDF units
+				const logoHeight = 30; // Calculate height based on aspect ratio
+				pdf.addImage(logoImage, "PNG", 10, 10, logoWidth, logoHeight);
+
+			
+
+				// Add additional title
+				const additionalTitle = "Medicine Information Summary";
+				const titleX = 50; // X-coordinate of the title
+				const titleY = 25; // Y-coordinate of the title
+				const fontColor = "#342E37"; // Font color (red)
+				pdf.setFontSize(18);
+				pdf.setTextColor(fontColor);
+				pdf.setFont("helvetica", "bold");
+				pdf.text(additionalTitle, titleX, titleY);
+
+				// Add the table image
+				pdf.addImage(tableImage, "PNG", 10, 40, imgWidth, imgHeight);
+
+				pdf.save("MedicineInformationSummary.pdf");
+			});
+		}
+		// Attach event listener to download button
+		const downloadButton = document.getElementById("downloadButton");
+		downloadButton.addEventListener("click", convertToPDF);
+
+		function searchTable() {
+			var input, filter, table, tr, td1, td2,td3,td4,td5, i, txtValue1, txtValue2,txtValue3,txtValue4,txtValue5;
+			input = document.getElementById("search-bar");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr");
+
+			for (i = 0; i < tr.length; i++) {
+				td1 = tr[i].getElementsByTagName("td")[0];
+				td2 = tr[i].getElementsByTagName("td")[1];
+				td3 = tr[i].getElementsByTagName("td")[2];
+				td4 = tr[i].getElementsByTagName("td")[3];
+				td5 = tr[i].getElementsByTagName("td")[4];
+				if (td1 && td2 && td3 && td4 && td5) {
+					txtValue1 = td1.textContent || td1.innerText;
+					txtValue2 = td2.textContent || td2.innerText;
+					txtValue3 = td3.textContent || td3.innerText;
+					txtValue4 = td4.textContent || td4.innerText;
+					txtValue5 = td5.textContent || td5.innerText;
+
+
+					if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 || txtValue3.toUpperCase().indexOf(filter) > -1 || txtValue4.toUpperCase().indexOf(filter) > -1 || txtValue5.toUpperCase().indexOf(filter) > -1 ) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+
 
 
 

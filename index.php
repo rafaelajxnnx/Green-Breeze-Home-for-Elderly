@@ -12,7 +12,7 @@
 		<p id="TestApiKey"></p>
 		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu'></i>
+			<!--<i class='bx bx-menu'></i>-->
 			<!---<a href="#" class="nav-link">Categories</a> --->
 			<form action="#">
 				<div class="form-input">
@@ -49,10 +49,10 @@
 						</li>-->
 					</ul>
 				</div>
-				<a href="#" class="btn-download">
+				<!--<a href="#" class="btn-download">
 					<i class='bx bxs-cloud-download' ></i>
 					<span class="text">Download PDF</span>
-				</a>
+				</a>-->
 			</div>
 
 			<ul class="box-info">
@@ -84,7 +84,7 @@
 				<div class="order">
 					<div class="head">
 						<h3>Progress</h3>
-						<i class='bx bx-search' ></i>
+						<!--<i class='bx bx-search' ></i>-->
 						<i class='bx bx-filter' ></i>
 			
 					</div>
@@ -100,34 +100,34 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>01-10-2021</td>
+								<td>June 2, 2023</td>
 								<td>
 									<!--<img src="C:\Users\pc\OneDrive\Documents\acadzzz - 4th year\Green Breeze Admin Website\grandmapic.jpeg">-->
 									<p>Jane Doe</p>
 								</td>
 								<td>RENVELA: Sevelemer or Sevelamer Carbonate</td>
-								<td>Nuse AJ Concepcion</td>
-								<td><span class="status completed">Completed</span></td>
+								<td>AJ Concepcion</td>
+								<td><span class="status completed">COMPLETED</span></td>
 							</tr>
 							<tr>
-								<td>01-10-2021</td>
+								<td>June 2, 2023</td>
 								<td>
 									<!--<img src="C:\Users\pc\OneDrive\Documents\acadzzz - 4th year\Green Breeze Admin Website\grandmapic.jpeg">-->
 									<p>Jane Doe</p>
 								</td>
 								<td>RENVELA: Sevelemer or Sevelamer Carbonate</td>
-								<td>Nuse AJ Concepcion</td>
-								<td><span class="status pending">Failed</span></td>
+								<td>AJ Concepcion</td>
+								<td><span class="status pending">FAILED</span></td>
 							</tr>
 							<tr>
-								<td>01-10-2021</td>
+								<td>June 2, 2023</td>
 								<td>
 									<!--<img src="C:\Users\pc\OneDrive\Documents\acadzzz - 4th year\Green Breeze Admin Website\grandmapic.jpeg">-->
 									<p>Jane Doe</p>
 								</td>
 								<td>RENVELA: Sevelemer or Sevelamer Carbonate</td>
-								<td>Nuse AJ Concepcion</td>
-								<td><span class="status process">On Progress</span></td>
+								<td>AJ Concepcion</td>
+								<td><span class="status process">ON PROGRESS</span></td>
 							</tr>
 						</tbody>
 					</table>
