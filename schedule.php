@@ -436,7 +436,7 @@
 
 
 		// Retrieve data from the database and populate the dropdown
-		fetch('https://localhost:7139/api/Nurse/GetAllNurse')
+		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/GetAllNurse')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -473,7 +473,7 @@
 
 
 		// Retrieve data from the database and populate the dropdown
-		fetch('https://localhost:7139/api/Patient/GetAllPatient')
+		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/GetAllPatient')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -506,7 +506,7 @@
 
 
 		// Retrieve data from the database and populate the dropdown
-		fetch('https://localhost:7139/api/Medicine/GetAllMedicine')
+		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Medicine/GetAllMedicine')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -585,7 +585,7 @@
 
 			console.log(data);
 
-			fetch('https://localhost:7139/api/Schedule/insertNew', {
+			fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Schedule/insertNew', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -604,7 +604,7 @@
 				.then(data => {
 					if (data != null)
 						console.log(data)
-					window.location.replace("http://localhost/Green-Breeze-Home-for-Elderly/schedule.php");
+					window.location.replace("schedule.php");
 
 				})
 				.catch(error => console.log(error));
@@ -627,7 +627,7 @@
 
 		//GET data
 		// JavaScript to retrieve and display the data
-		fetch('https://localhost:7139/api/Schedule/GetAllSchedule')
+		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Schedule/GetAllSchedule')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -675,7 +675,7 @@
 					var editspan = document.getElementsByClassName("editclose")[0];
 
 					// Fetch Nurse details based on NurseId
-					fetch(`https://localhost:7139/api/Nurse/GetNurse/${item.nurseId}`)
+					fetch(`http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/GetNurse/${item.nurseId}`)
 						.then(response => {
 							if (response.ok) {
 								return response.json();
@@ -692,7 +692,7 @@
 						});
 
 					// Fetch Patient details based on PatientId
-					fetch(`https://localhost:7139/api/Patient/GetPatient/${item.patientId}`)
+					fetch(`http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/GetPatient/${item.patientId}`)
 						.then(response => {
 							if (response.ok) {
 								return response.json();
@@ -728,7 +728,7 @@
 						//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
 
 						// Send a DELETE request to the server
-						fetch('https://localhost:7139/api/Schedule/DeleteSchedule/' + item.id, {
+						fetch('https://rafaelajxnnx-001-site1.btempurl.com/api/Schedule/DeleteSchedule/' + item.id, {
 							method: 'DELETE'
 						})
 							.then(response => {

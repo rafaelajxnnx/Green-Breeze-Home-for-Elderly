@@ -172,7 +172,6 @@
 			color: red;
 			font-weight: bold;
 		}
-	
 	</style>
 </header>
 
@@ -188,7 +187,7 @@
 			<!---<a href="#" class="nav-link">Categories</a> --->
 			<form action="#">
 				<div class="form-input">
-				<input type="search" id="search-bar" onkeyup="searchTable()" placeholder="Search...">
+					<input type="search" id="search-bar" onkeyup="searchTable()" placeholder="Search...">
 					<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
 				</div>
 			</form>
@@ -220,7 +219,7 @@
 						</li>-->
 					</ul>
 				</div>
-				<a href="#" class="btn-download"  id="downloadButton">
+				<a href="#" class="btn-download" id="downloadButton">
 					<i class='bx bxs-cloud-download'></i>
 					<span class="text">Download PDF</span>
 				</a>
@@ -230,7 +229,7 @@
 				<div class="order">
 					<div class="head">
 						<h3>List of Medicine</h3>
-						
+
 						<!--<i class='bx bx-search'></i>-->
 						<i class='bx bx-filter'></i>
 						<i id="add-medicine" class='bx bx-plus'></i>
@@ -376,7 +375,7 @@
 
 			console.log(data);
 
-			fetch('https://localhost:7139/api/Medicine/insertNew', {
+			fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Medicine/insertNew', {
 				method: 'Post',
 				headers: {
 					'Content-Type': 'application/json'
@@ -396,7 +395,7 @@
 				.then(data => {
 					if (data != null)
 						console.log(data)
-					window.location.replace("http://localhost/Green-Breeze-Home-for-Elderly/medicine.php");
+					window.location.replace("medicine.php");
 
 				})
 				.catch(error => console.log(error));
@@ -408,7 +407,7 @@
 
 		//getting data
 		// JavaScript to retrieve and display the data
-		fetch('https://localhost:7139/api/Medicine/GetAllMedicine')
+		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Medicine/GetAllMedicine')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -462,7 +461,7 @@
 						const editformEl = document.querySelector('.formupdate');
 
 						// Get the form data from the server
-						fetch('https://localhost:7139/api/Medicine/GetMedicine/' + item.id)
+						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Medicine/GetMedicine/' + item.id)
 							.then(response => response.json())
 							.then(data => {
 								// Populate the form with the item data
@@ -489,7 +488,7 @@
 
 									console.log(data);
 
-									fetch('https://localhost:7139/api/Medicine/UpdateMedicineInfo/' + itemId, {
+									fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Medicine/UpdateMedicineInfo/' + itemId, {
 										method: 'PUT',
 										headers: {
 											'Content-Type': 'application/json'
@@ -545,7 +544,7 @@
 						//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
 
 						// Send a DELETE request to the server
-						fetch('https://localhost:7139/api/Medicine/DeleteMedicine/' + item.id, {
+						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Medicine/DeleteMedicine/' + item.id, {
 							method: 'DELETE'
 						})
 							.then(response => {
@@ -578,7 +577,7 @@
 
 
 
-			window.jsPDF = window.jspdf.jsPDF;
+		window.jsPDF = window.jspdf.jsPDF;
 
 		// Function to convert table to PDF
 		function convertToPDF() {
@@ -598,7 +597,7 @@
 				const logoHeight = 30; // Calculate height based on aspect ratio
 				pdf.addImage(logoImage, "PNG", 10, 10, logoWidth, logoHeight);
 
-			
+
 
 				// Add additional title
 				const additionalTitle = "Medicine Information Summary";
@@ -621,7 +620,7 @@
 		downloadButton.addEventListener("click", convertToPDF);
 
 		function searchTable() {
-			var input, filter, table, tr, td1, td2,td3,td4,td5, i, txtValue1, txtValue2,txtValue3,txtValue4,txtValue5;
+			var input, filter, table, tr, td1, td2, td3, td4, td5, i, txtValue1, txtValue2, txtValue3, txtValue4, txtValue5;
 			input = document.getElementById("search-bar");
 			filter = input.value.toUpperCase();
 			table = document.getElementById("myTable");
@@ -641,7 +640,7 @@
 					txtValue5 = td5.textContent || td5.innerText;
 
 
-					if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 || txtValue3.toUpperCase().indexOf(filter) > -1 || txtValue4.toUpperCase().indexOf(filter) > -1 || txtValue5.toUpperCase().indexOf(filter) > -1 ) {
+					if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 || txtValue3.toUpperCase().indexOf(filter) > -1 || txtValue4.toUpperCase().indexOf(filter) > -1 || txtValue5.toUpperCase().indexOf(filter) > -1) {
 						tr[i].style.display = "";
 					} else {
 						tr[i].style.display = "none";

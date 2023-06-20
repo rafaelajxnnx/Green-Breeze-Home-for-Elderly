@@ -2,6 +2,10 @@
 <html lang="en">
 
 <head>
+    
+<?php header('Access-Control-Allow-Origin:*'); ?>
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/login-signup.css">
@@ -61,7 +65,7 @@
 
         console.log(data);
 
-        fetch('https://localhost:7139/api/User/login', {
+        fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/User/login', {
                 method: 'Post',
                 headers: {
                     'Content-Type': 'application/json'
@@ -81,7 +85,7 @@
                 if (data != null)
                 console.log(data)
                 localStorage.setItem('AccessKey', JSON.stringify(data))
-                window.location.replace("http://localhost/Green-Breeze-Home-for-Elderly/index.php");
+                window.location.replace("index.php");
             })
             .catch(error => console.log(error));
 

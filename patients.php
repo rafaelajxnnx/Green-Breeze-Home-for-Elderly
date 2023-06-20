@@ -542,7 +542,7 @@
 		//}
 
 		// Retrieve data from the database and populate the dropdown
-		fetch('https://localhost:7139/api/Patient/GetAllPatient')
+		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/GetAllPatient')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -627,7 +627,7 @@
 
 
 
-			fetch('https://localhost:7139/api/Patient/insertNew', {
+			fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/insertNew', {
 				method: 'Post',
 				//headers: {
 				//	'Content-Type': 'application/json'
@@ -647,7 +647,7 @@
 				.then(data => {
 					if (data != null)
 						console.log(data)
-					window.location.replace("http://localhost/Green-Breeze-Home-for-Elderly/patients.php");
+					window.location.replace("patients.php");
 
 				})
 				.catch(error => console.log(error));
@@ -669,7 +669,7 @@
 			console.log(data);
 
 
-			fetch('https://localhost:7139/api/MedHistory/insertNew', {
+			fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/MedHistory/insertNew', {
 				method: 'Post',
 				// headers: {
 				// 	'Content-Type': 'application/json'
@@ -688,7 +688,7 @@
 				.then(data => {
 					if (data != null)
 						console.log(data)
-					window.location.replace("http://localhost/Green-Breeze-Home-for-Elderly/patients.php");
+					window.location.replace("patients.php");
 
 
 				})
@@ -703,7 +703,7 @@
 
 		//getting data
 		// JavaScript to retrieve and display the data
-		fetch('https://localhost:7139/api/Patient/GetAllPatient')
+		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/GetAllPatient')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -770,12 +770,12 @@
 						const editformEl = document.querySelector('.formupdate');
 
 						// Get the form data from the server
-						fetch('https://localhost:7139/api/Patient/GetPatient/' + item.id)
+						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/GetPatient/' + item.id)
 							.then(response => response.json())
 							.then(data => {
 								// Populate the form with the item data
 								const imagePath = item.profilePicPath;
-								const baseUrl = "https://localhost:7139/"; // Replace with your base URL
+								const baseUrl = "http://rafaelajxnnx-001-site1.btempurl.com/"; // Replace with your base URL
 								const completePath = baseUrl + imagePath;
 								const imageElement = document.getElementById('image');
 								imageElement.src = completePath;
@@ -816,7 +816,7 @@
 
 									console.log(data);
 
-									fetch('https://localhost:7139/api/Patient/UpdatePatientInfo/' + itemId, {
+									fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/UpdatePatientInfo/' + itemId, {
 										method: 'PUT',
 										//headers: {
 										//	'Content-Type': 'application/json'
@@ -870,7 +870,7 @@
 						//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
 
 						// Send a DELETE request to the server
-						fetch('https://localhost:7139/api/Patient/DeletePatient/' + item.id, {
+						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/DeletePatient/' + item.id, {
 							method: 'DELETE'
 						})
 							.then(response => {
@@ -898,7 +898,7 @@
 						hsviewmodal.style.display = "block";
 
 
-						fetch('https://localhost:7139/api/MedHistory/GetMedHistoryofSpecificPatient/' + item.id,)
+						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/MedHistory/GetMedHistoryofSpecificPatient/' + item.id,)
 							.then(response => {
 								if (response.ok) {
 									return response.json();
@@ -950,7 +950,7 @@
 									modalContent.appendChild(itemDiv);
 
 									const photoUrl = item.prescriptionPath;
-									const baseUrl = "https://localhost:7139/"; // Replace with your base URL
+									const baseUrl = "http://rafaelajxnnx-001-site1.btempurl.com/"; // Replace with your base URL
 									const completeUrl = baseUrl + photoUrl;
 
 									// Create an img element for the photo
