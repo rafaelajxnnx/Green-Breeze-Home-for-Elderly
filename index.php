@@ -74,7 +74,7 @@
 					<i class='bx bxs-error' ></i>
 					<span class="text">
 						<h3>3</h3>
-						<p>FAILED</p>
+						<p>DUE</p>
 					</span>
 				</li>
 			</ul>
