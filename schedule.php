@@ -436,7 +436,7 @@
 
 
 		// Retrieve data from the database and populate the dropdown
-		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/GetAllNurse')
+		fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Nurse/GetAllNurse')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -473,7 +473,7 @@
 
 
 		// Retrieve data from the database and populate the dropdown
-		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/GetAllPatient')
+		fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Patient/GetAllPatient')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -506,7 +506,7 @@
 
 
 		// Retrieve data from the database and populate the dropdown
-		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Medicine/GetAllMedicine')
+		fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Medicine/GetAllMedicine')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -585,7 +585,7 @@
 
 			console.log(data);
 
-			fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Schedule/insertNew', {
+			fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Schedule/insertNew', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -627,7 +627,7 @@
 
 		//GET data
 		// JavaScript to retrieve and display the data
-		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Schedule/GetAllSchedule')
+		fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Schedule/GetAllSchedule')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -675,7 +675,7 @@
 					var editspan = document.getElementsByClassName("editclose")[0];
 
 					// Fetch Nurse details based on NurseId
-					fetch(`http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/GetNurse/${item.nurseId}`)
+					fetch(`https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Nurse/GetNurse/${item.nurseId}`)
 						.then(response => {
 							if (response.ok) {
 								return response.json();
@@ -692,7 +692,7 @@
 						});
 
 					// Fetch Patient details based on PatientId
-					fetch(`http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/GetPatient/${item.patientId}`)
+					fetch(`https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Patient/GetPatient/${item.patientId}`)
 						.then(response => {
 							if (response.ok) {
 								return response.json();

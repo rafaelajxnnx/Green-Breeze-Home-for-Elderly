@@ -375,7 +375,7 @@
 
 			console.log(data);
 
-			fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Medicine/insertNew', {
+			fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Medicine/insertNew', {
 				method: 'Post',
 				headers: {
 					'Content-Type': 'application/json'
@@ -407,7 +407,7 @@
 
 		//getting data
 		// JavaScript to retrieve and display the data
-		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Medicine/GetAllMedicine')
+		fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Medicine/GetAllMedicine')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -461,7 +461,7 @@
 						const editformEl = document.querySelector('.formupdate');
 
 						// Get the form data from the server
-						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Medicine/GetMedicine/' + item.id)
+						fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Medicine/GetMedicine/' + item.id)
 							.then(response => response.json())
 							.then(data => {
 								// Populate the form with the item data
@@ -488,7 +488,7 @@
 
 									console.log(data);
 
-									fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Medicine/UpdateMedicineInfo/' + itemId, {
+									fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Medicine/UpdateMedicineInfo/' + itemId, {
 										method: 'PUT',
 										headers: {
 											'Content-Type': 'application/json'
@@ -544,7 +544,7 @@
 						//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
 
 						// Send a DELETE request to the server
-						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Medicine/DeleteMedicine/' + item.id, {
+						fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Medicine/DeleteMedicine/' + item.id, {
 							method: 'DELETE'
 						})
 							.then(response => {

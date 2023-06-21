@@ -390,7 +390,7 @@
 
 			console.log(data);
 
-			fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/insertNew', {
+			fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Nurse/insertNew', {
 				method: 'Post',
 				// headers: {
 				// 	'Content-Type': 'application/json'
@@ -418,7 +418,7 @@
 
 		//getting data
 		// JavaScript to retrieve and display the data
-		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/GetAllNurse')
+		fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Nurse/GetAllNurse')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -474,12 +474,12 @@
 						const editformEl = document.querySelector('.formupdate');
 
 						// Get the form data from the server
-						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/GetNurse/' + item.id)
+						fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Nurse/GetNurse/' + item.id)
 							.then(response => response.json())
 							.then(data => {
 								// Populate the form with the item data
 								const imagePath = item.profilePicPath;
-								const baseUrl = "http://rafaelajxnnx-001-site1.btempurl.com/"; // Replace with your base URL
+								const baseUrl = "https://smjp.intelligent-leakey.103-108-220-125.plesk.page/"; // Replace with your base URL
 								const completePath = baseUrl + imagePath;
 								const imageElement = document.getElementById('image');
 								imageElement.src = completePath;
@@ -524,7 +524,7 @@
 
 									console.log(data);
 
-									fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/UpdateNurseInfo/' + itemId, {
+									fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Nurse/UpdateNurseInfo/' + itemId, {
 										method: 'PUT',
 										//headers: {
 										//	'Content-Type': 'application/json'
@@ -582,7 +582,7 @@
 						//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
 
 						// Send a DELETE request to the server
-						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/DeleteNurse/' + item.id, {
+						fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Nurse/DeleteNurse/' + item.id, {
 							method: 'DELETE'
 						})
 							.then(response => {

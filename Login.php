@@ -65,7 +65,7 @@
 
         console.log(data);
 
-        fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/User/login', {
+        fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/User/login', {
                 method: 'Post',
                 headers: {
                     'Content-Type': 'application/json'

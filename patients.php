@@ -542,7 +542,7 @@
 		//}
 
 		// Retrieve data from the database and populate the dropdown
-		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/GetAllPatient')
+		fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Patient/GetAllPatient')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -627,7 +627,7 @@
 
 
 
-			fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/insertNew', {
+			fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Patient/insertNew', {
 				method: 'Post',
 				//headers: {
 				//	'Content-Type': 'application/json'
@@ -669,7 +669,7 @@
 			console.log(data);
 
 
-			fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/MedHistory/insertNew', {
+			fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/MedHistory/insertNew', {
 				method: 'Post',
 				// headers: {
 				// 	'Content-Type': 'application/json'
@@ -703,7 +703,7 @@
 
 		//getting data
 		// JavaScript to retrieve and display the data
-		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/GetAllPatient')
+		fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Patient/GetAllPatient')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -770,12 +770,12 @@
 						const editformEl = document.querySelector('.formupdate');
 
 						// Get the form data from the server
-						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/GetPatient/' + item.id)
+						fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Patient/GetPatient/' + item.id)
 							.then(response => response.json())
 							.then(data => {
 								// Populate the form with the item data
 								const imagePath = item.profilePicPath;
-								const baseUrl = "http://rafaelajxnnx-001-site1.btempurl.com/"; // Replace with your base URL
+								const baseUrl = "https://smjp.intelligent-leakey.103-108-220-125.plesk.page/"; // Replace with your base URL
 								const completePath = baseUrl + imagePath;
 								const imageElement = document.getElementById('image');
 								imageElement.src = completePath;
@@ -816,7 +816,7 @@
 
 									console.log(data);
 
-									fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/UpdatePatientInfo/' + itemId, {
+									fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Patient/UpdatePatientInfo/' + itemId, {
 										method: 'PUT',
 										//headers: {
 										//	'Content-Type': 'application/json'
@@ -870,7 +870,7 @@
 						//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
 
 						// Send a DELETE request to the server
-						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/DeletePatient/' + item.id, {
+						fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Patient/DeletePatient/' + item.id, {
 							method: 'DELETE'
 						})
 							.then(response => {
@@ -898,7 +898,7 @@
 						hsviewmodal.style.display = "block";
 
 
-						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/MedHistory/GetMedHistoryofSpecificPatient/' + item.id,)
+						fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/MedHistory/GetMedHistoryofSpecificPatient/' + item.id,)
 							.then(response => {
 								if (response.ok) {
 									return response.json();
@@ -950,7 +950,7 @@
 									modalContent.appendChild(itemDiv);
 
 									const photoUrl = item.prescriptionPath;
-									const baseUrl = "http://rafaelajxnnx-001-site1.btempurl.com/"; // Replace with your base URL
+									const baseUrl = "https://smjp.intelligent-leakey.103-108-220-125.plesk.page/"; // Replace with your base URL
 									const completeUrl = baseUrl + photoUrl;
 
 									// Create an img element for the photo
