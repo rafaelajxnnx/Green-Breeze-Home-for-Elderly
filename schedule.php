@@ -417,8 +417,10 @@
 					<table id="myTable">
 						<thead>
 							<tr>
-								<th>Date</th>
-								<th>Time</th>
+								<th>Start Time</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+								<th>Interval</th>
 								<th>Patient Name</th>
 								<th>Assigned Nurse</th>
 								<th>Status</th>
@@ -504,7 +506,7 @@
 					//debugger
 					const option = document.createElement('option');
 
-					option.textContent = item.firstName + " " + item.lastName + " - " + item.shift +"(Room No." +item.roomId+")";
+					option.textContent = item.firstName + " " + item.lastName + " - " + item.shift + "(Room No." + item.roomId + ")";
 					option.value = item.id;
 					dropdown.appendChild(option);
 
@@ -513,7 +515,7 @@
 				dropdown.addEventListener('change', function () {
 					const selectedValue = this.value;
 					console.log('Selected Value:', selectedValue);
-				 });
+				});
 			})
 			.catch(error => {
 				console.error('Error:', error);
@@ -540,7 +542,7 @@
 				// Populate the dropdown with the retrieved data
 				data.forEach(item => {
 					const option = document.createElement('option');
-					option.textContent = item.firstName + " " + item.lastName + "(Room No." +item.roomId+")";
+					option.textContent = item.firstName + " " + item.lastName + "(Room No." + item.roomId + ")";
 					option.value = item.id;
 					dropdown.appendChild(option);
 				});
@@ -731,8 +733,10 @@
 					const row = tableBody.insertRow();
 
 					// Create cells for the name and age columns
-					const date = row.insertCell();
 					const time = row.insertCell();
+					const dateStart = row.insertCell();
+					const dateEnd = row.insertCell();
+					const interval =row.insertCell();
 					const patient = row.insertCell();
 					const nurse = row.insertCell();
 					const status = row.insertCell();
@@ -743,8 +747,11 @@
 
 
 					// Set the text content of the cells to the item's values
-					date.textContent = formatDate(item.startDateTime);
+					dateStart.textContent = formatDate(item.startDateTime);
+					dateEnd.textContent = formatDate(item.endDateTime);
+
 					time.textContent = formatTime(item.startDateTime);
+					interval.textContent = item.interval + " hrs";
 
 
 					// Create an edit icon element

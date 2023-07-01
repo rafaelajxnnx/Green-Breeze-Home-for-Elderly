@@ -412,7 +412,7 @@
 					date.textContent = formatDate(item.scheduleTime);
 					time.textContent = formatTime(item.scheduleTime);
 					patient.textContent = item.patientName;
-					
+					nurse.textContent = item.nurseName;
 					medicine.textContent = item.medicineName;
 					quantity.textContent = item.scheduleObj.quantity;
 					dosage.textContent = item.scheduleObj.dosage;
@@ -442,37 +442,37 @@
 					var editmodal = document.getElementById("editModal");
 					var editspan = document.getElementsByClassName("editclose")[0];
 
-					// Fetch Nurse details based on NurseId
-					fetch(`http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/GetNurse/${item.scheduleObj.nurseId}`)
-						.then(response => {
-							if (response.ok) {
-								return response.json();
-							} else {
-								throw new Error('Network response was not ok');
-							}
-						})
-						.then(nurseData => {
-							// Set the text content of the nurse cell to the nurse's first name and last name
-							nurse.textContent = `${nurseData.firstName} ${nurseData.lastName}`;
-						})
-						.catch(error => {
-							console.error('Error while fetching Nurse:', error);
-						});
+					// // Fetch Nurse details based on NurseId
+					// fetch(`http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/GetNurse/${item.scheduleObj.nurseId}`)
+					// 	.then(response => {
+					// 		if (response.ok) {
+					// 			return response.json();
+					// 		} else {
+					// 			throw new Error('Network response was not ok');
+					// 		}
+					// 	})
+					// 	.then(nurseData => {
+					// 		// Set the text content of the nurse cell to the nurse's first name and last name
+					// 		nurse.textContent = `${nurseData.firstName} ${nurseData.lastName}`;
+					// 	})
+					// 	.catch(error => {
+					// 		console.error('Error while fetching Nurse:', error);
+					// 	});
 
-					// Set the text content of the status cell
-					if (item.status === false) {
-						const statusSpan = document.createElement('span');
-						statusSpan.textContent = 'Pending';
-						statusSpan.classList.add('onprogress'); // Apply the CSS class
+					// // Set the text content of the status cell
+					// if (item.status === false) {
+					// 	const statusSpan = document.createElement('span');
+					// 	statusSpan.textContent = 'Pending';
+					// 	statusSpan.classList.add('onprogress'); // Apply the CSS class
 
-						status.appendChild(statusSpan);
-					} else {
-						const statusSpan = document.createElement('span');
-						statusSpan.textContent = 'Done';
-						statusSpan.classList.add('onsucess'); // Apply the CSS class
+					// 	status.appendChild(statusSpan);
+					// } else {
+					// 	const statusSpan = document.createElement('span');
+					// 	statusSpan.textContent = 'Done';
+					// 	statusSpan.classList.add('onsucess'); // Apply the CSS class
 
-						status.appendChild(statusSpan);
-					}
+					// 	status.appendChild(statusSpan);
+					// }
 
 
 					//DELETE event when delete button is clicked
