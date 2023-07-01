@@ -82,7 +82,7 @@ function checkAccessToken() {
 	const localstorageAccesstoken = JSON.parse(localStorage.getItem('AccessKey'));
 	if (localstorageAccesstoken == null)
 	{
-		window.location.replace("http://localhost/Green-Breeze-Home-for-Elderly/login.php");
+		window.location.replace("login.php");
 	}
 }
 
@@ -91,6 +91,6 @@ checkAccessToken();
 
 function logout(){
 	window.localStorage.clear()
-	window.location.replace("http://localhost/Green-Breeze-Home-for-Elderly/login.php");
+	window.location.replace("login.php");
 }
 

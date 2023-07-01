@@ -378,7 +378,7 @@
 
             console.log(data);
 
-            fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/User/signup', {
+            fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/User/signup', {
                 method: 'Post',
                 // headers: {
                 // 	'Content-Type': 'application/json'
@@ -406,7 +406,7 @@
 
         //getting data
         // JavaScript to retrieve and display the data
-        fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/User/GetAllUser')
+        fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/User/GetAllUser')
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -459,12 +459,12 @@
                         const editformEl = document.querySelector('.formupdate');
 
                         // Get the form data from the server
-                        fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/User/GetUser/' + item.id)
+                        fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/User/GetUser/' + item.id)
                             .then(response => response.json())
                             .then(data => {
                                 // Populate the form with the item data
                                 const imagePath = item.profilePicPath;
-                                const baseUrl = "https://smjp.intelligent-leakey.103-108-220-125.plesk.page/"; // Replace with your base URL
+                                const baseUrl = "http://rafaelajxnnx-001-site1.btempurl.com/"; // Replace with your base URL
                                 const completePath = baseUrl + imagePath;
                                 const imageElement = document.getElementById('image');
                                 imageElement.src = completePath;
@@ -497,7 +497,7 @@
 
                                     console.log(data);
 
-                                    fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/User/UpdateUserInfo/' + itemId, {
+                                    fetch('http://rafaelajxnnx-001-site1.btempurl.com/User/UpdateUserInfo/' + itemId, {
                                         method: 'PUT',
                                         //headers: {
                                         //	'Content-Type': 'application/json'
@@ -555,7 +555,7 @@
                         //const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
 
                         // Send a DELETE request to the server
-                        fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/User/DeleteUser/' + item.id, {
+                        fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/User/DeleteUser/' + item.id, {
                             method: 'DELETE'
                         })
                             .then(response => {

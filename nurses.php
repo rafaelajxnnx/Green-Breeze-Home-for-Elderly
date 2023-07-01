@@ -181,6 +181,48 @@
 			border-radius: 50%;
 			object-fit: cover;
 		}
+
+	
+		/*yung dropdown*/
+		.dropbtn {
+			font-family: FontAwesome, "Poppins", sans-serif;
+			outline: 0;
+			background: #f2f2f2;
+			width: 45%;
+			border: 0;
+			margin: 0 5px 10px;
+			padding: 10px;
+			box-sizing: border-box;
+			font-size: 12px;
+			border-radius: 10px;
+			float: left;
+		}
+
+
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			background-color: #f9f9f9;
+			min-width: 160px;
+			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+			z-index: 1;
+		}
+
+		.dropdown-content option {
+			color: black;
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;
+			font-size: 12px;
+		}
+
+		.dropdown-content option:hover {
+			background-color: #f1f1f1
+		}
+
+		.dropdown-content {
+			display: block;
+		}
 	</style>
 </header>
 
@@ -252,6 +294,7 @@
 								<th>Username</th>
 								<th>Gender</th>
 								<th>Room</th>
+								<th>Shift</th>
 								<th></th>
 								<th></th>
 							</tr>
@@ -304,6 +347,24 @@
 					<input type="password" name="password" id="password" placeholder="Password" />
 				</div>
 
+				<div class="one-row">
+				<!-- <select class="dropbtn" id="shift" required name="Shift">
+											<div class="dropdown-content">
+												<option value="0">Select Shift</option>
+												<option value="Morning">Morning Shift 6:00 AM - 6:00 PM</option>
+												<option value="Night">Night Shift 6:00 AM - 6:00 PM</option>
+											</div>
+										</select> -->
+										<select class="dropbtn" onChange="dropdownTip()" id="select" name="shift"
+											style="margin-right:10px; margin-top:2px;">
+											<div class="dropdown-content">
+												<option selected="selected" value="tbsp">Select Shift</option>
+												<option value="Morning">Morning Shift 6:00 AM - 6:00 PM</option>
+												<option value="Night">Night Shift 6:00 AM - 6:00 PM</option>
+											</div>
+										</select>
+				</div>
+				
 
 				<button type="submit">ADD</button>
 			</form>
@@ -354,7 +415,7 @@
 
 
 
-	<script src="script/script.js"></script>
+	
 	<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.3.2/dist/html2canvas.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 	<script>
@@ -390,7 +451,7 @@
 
 			console.log(data);
 
-			fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Nurse/insertNew', {
+			fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/insertNew', {
 				method: 'Post',
 				// headers: {
 				// 	'Content-Type': 'application/json'
@@ -409,7 +470,7 @@
 				.then(data => {
 					if (data != null)
 						console.log(data)
-					window.location.replace("nurses.php");
+					window.location.replace("http://localhost/Green-Breeze-Home-for-Elderly/nurses.php");
 
 				})
 				.catch(error => console.log(error));
@@ -418,7 +479,7 @@
 
 		//getting data
 		// JavaScript to retrieve and display the data
-		fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Nurse/GetAllNurse')
+		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/GetAllNurse')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -444,6 +505,8 @@
 					const Username = row.insertCell();
 					const Gender = row.insertCell();
 					const RoomNo = row.insertCell();
+					const Shift = row.insertCell();
+
 					const edit = row.insertCell();
 					const del = row.insertCell();
 
@@ -454,6 +517,8 @@
 					Username.textContent = item.userName;
 					Gender.textContent = item.gender;
 					RoomNo.textContent = item.roomId;
+					Shift.textContent = item.shift;
+
 
 					// Create an edit icon element
 					const editIcon = document.createElement('i');
@@ -474,12 +539,12 @@
 						const editformEl = document.querySelector('.formupdate');
 
 						// Get the form data from the server
-						fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Nurse/GetNurse/' + item.id)
+						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/GetNurse/' + item.id)
 							.then(response => response.json())
 							.then(data => {
 								// Populate the form with the item data
 								const imagePath = item.profilePicPath;
-								const baseUrl = "https://smjp.intelligent-leakey.103-108-220-125.plesk.page/"; // Replace with your base URL
+								const baseUrl = "http://rafaelajxnnx-001-site1.btempurl.com/"; // Replace with your base URL
 								const completePath = baseUrl + imagePath;
 								const imageElement = document.getElementById('image');
 								imageElement.src = completePath;
@@ -524,7 +589,7 @@
 
 									console.log(data);
 
-									fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Nurse/UpdateNurseInfo/' + itemId, {
+									fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/UpdateNurseInfo/' + itemId, {
 										method: 'PUT',
 										//headers: {
 										//	'Content-Type': 'application/json'
@@ -582,7 +647,7 @@
 						//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
 
 						// Send a DELETE request to the server
-						fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Nurse/DeleteNurse/' + item.id, {
+						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/DeleteNurse/' + item.id, {
 							method: 'DELETE'
 						})
 							.then(response => {

@@ -117,7 +117,7 @@
 								</td>
 								<td>RENVELA: Sevelemer or Sevelamer Carbonate</td>
 								<td>AJ Concepcion</td>
-								<td><span class="status pending">FAILED</span></td>
+								<td><span class="status pending">DUE</span></td>
 							</tr>
 							<tr>
 								<td>June 2, 2023</td>

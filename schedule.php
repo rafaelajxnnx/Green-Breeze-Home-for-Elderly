@@ -37,7 +37,7 @@
 			padding: 20px;
 			border: 1px solid #888;
 			width: 80%;
-			height: 65%;
+			height: 85%;
 			border-radius: 20px;
 		}
 
@@ -236,7 +236,6 @@
 			letter-spacing: 1px;
 			/* Add more styles as needed */
 		}
-
 	</style>
 </header>
 
@@ -252,7 +251,7 @@
 			<!---<a href="#" class="nav-link">Categories</a> --->
 			<form action="#">
 				<div class="form-input">
-				<input type="search" id="search-bar" onkeyup="searchTable()" placeholder="Search...">
+					<input type="search" id="search-bar" onkeyup="searchTable()" placeholder="Search...">
 					<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
 				</div>
 			</form>
@@ -274,10 +273,10 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Schedule</h1>
+					<h1>All Schedule</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="#">Schedule</a>
+							<a href="#">Schedule Information</a>
 						</li>
 						<!--<li><i class='bx bx-chevron-right'></i></li>
 						<li>
@@ -285,7 +284,7 @@
 						</li>-->
 					</ul>
 				</div>
-				<a href="#" class="btn-download"  id="downloadButton">
+				<a href="#" class="btn-download" id="downloadButton">
 					<i class='bx bxs-cloud-download'></i>
 					<span class="text">Download PDF</span>
 				</a>
@@ -325,20 +324,71 @@
 										</select>-->
 
 										<!--<label for="alarm-input">Set Alarm:</label>-->
-										<input type="time" name="time" id="time">
+										<input type="time" name="time1" id="time1">
 										<!--<button id="set-alarm-button">Set</button>-->
 
-										<input type="date" name="date" id="date" />
+										<input type="date" name="date1" id="date1" />
 									</div>
 									<div class="two-rows" style="margin:0;padding:0">
-										
+
+										<!--<label for="alarm-input">Set Alarm:</label>-->
+										<input type="time" name="time2" id="time2">
+										<!--<button id="set-alarm-button">Set</button>-->
+
+										<input type="date" name="date2" id="date2" />
+									</div>
+
+									<div class="two-rows" style="margin:0;padding:0">
+										<!--<select class="dropbtn" onChange="dropdownTip()" id="select" name="time"
+											style="margin-right:10px; margin-top:2px; width:30%;">
+											<div class="dropdown-content">
+												<option selected="selected" value="6:00 AM">6:00 AM</option>
+												<option value="7:00 AM">7:00 AM</option>
+												<option value="8:00 AM">8:00 AM</option>
+												<option value="9:00 AM">9:00 AM</option>
+											</div>
+											
+										</select>-->
+
+										<!--<label for="alarm-input">Set Alarm:</label>-->
+										<select class="dropbtn" id="duration" required name="duration">
+											<div class="dropdown-content">
+												<option value="0">Select Duration</option>
+												<option value="daily">Daily</option>
+												<option value="weekly">Weekly</option>
+												<option value="monthly">Monthly</option>
+											</div>
+										</select>
+										<!--<button id="set-alarm-button">Set</button>-->
+
+										<select class="dropbtn" id="interval" required name="interval">
+											<div class="dropdown-content">
+												<option value="0">Select Interval</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+												<option value="6">6</option>
+												<option value="7">7</option>
+												<option value="8">8</option>
+												<option value="9">9</option>
+												<option value="10">10</option>
+												<option value="11">11</option>
+												<option value="12">12</option>
+
+											</div>
+										</select>
+									</div>
+									<div class="two-rows" style="margin:0;padding:0">
+
 										<!--<p>Assigned Nurse</p>-->
-										<select class="dropbtn" name="nurseId" id="nurseId"></select>
-										
+
 										<!--<p>Patient</p>-->
-										
+
 										<select class="dropbtn" name="patientId" id="patientId"></select>
-										
+										<select class="dropbtn" name="nurseId" id="nurseId"></select>
+
 									</div>
 									<div class="three-rows" style="margin:0;padding:0">
 										<select style="width:30%;" class="dropbtn" name="medicineId" id="medicineId">
@@ -402,7 +452,6 @@
 
 
 	<script src="script/script.js"></script>
-	
 	<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.3.2/dist/html2canvas.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 	<script>
@@ -436,7 +485,7 @@
 
 
 		// Retrieve data from the database and populate the dropdown
-		fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Nurse/GetAllNurse')
+		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/GetAllNurse')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -447,14 +496,15 @@
 			.then(data => {
 				console.log('Data received from server:', data);
 
-				// Get the dropdown element
+				//Get the dropdown element
 				const dropdown = document.getElementById('nurseId');
 
 				// Populate the dropdown with the retrieved data
 				data.forEach(item => {
+					//debugger
 					const option = document.createElement('option');
 
-					option.textContent = item.firstName + " " + item.lastName;
+					option.textContent = item.firstName + " " + item.lastName + " - " + item.shift +"(Room No." +item.roomId+")";
 					option.value = item.id;
 					dropdown.appendChild(option);
 
@@ -463,7 +513,7 @@
 				dropdown.addEventListener('change', function () {
 					const selectedValue = this.value;
 					console.log('Selected Value:', selectedValue);
-				});
+				 });
 			})
 			.catch(error => {
 				console.error('Error:', error);
@@ -473,7 +523,7 @@
 
 
 		// Retrieve data from the database and populate the dropdown
-		fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Patient/GetAllPatient')
+		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/GetAllPatient')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -490,7 +540,7 @@
 				// Populate the dropdown with the retrieved data
 				data.forEach(item => {
 					const option = document.createElement('option');
-					option.textContent = item.firstName + " " + item.lastName;
+					option.textContent = item.firstName + " " + item.lastName + "(Room No." +item.roomId+")";
 					option.value = item.id;
 					dropdown.appendChild(option);
 				});
@@ -506,7 +556,7 @@
 
 
 		// Retrieve data from the database and populate the dropdown
-		fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Medicine/GetAllMedicine')
+		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Medicine/GetAllMedicine')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -552,25 +602,47 @@
 			var medicineValue = document.getElementById('medicineId').value;
 			var quantityValue = document.getElementById('quantity').value;
 			var dosageValue = document.getElementById('dosage').value;
-			var dateValue = document.getElementById('date').value;
-			var timeValue = document.getElementById('time').value;
+			var interval = document.getElementById('interval').value;
+			var duration = document.getElementById('duration').value;
+
+
+			var dateValue1 = document.getElementById('date1').value;
+			var timeValue1 = document.getElementById('time1').value;
+
+			var dateValue2 = document.getElementById('date2').value;
+			var timeValue2 = document.getElementById('time2').value;
 
 
 
 			// Split the date value into year, month, and day
-			var [year, month, day] = dateValue.split('-');
+			var [year, month, day] = dateValue1.split('-');
 
 			// Split the time value into hours and minutes
-			var [hours, minutes] = timeValue.split(':');
+			var [hours, minutes] = timeValue1.split(':');
 
 			// Create a new Date object with the corrected date and time values
-			var dateTimeObject = new Date(year, month - 1, day, hours, minutes, 0);
-			console.log(dateTimeObject);
+			var dateTimeObject1 = new Date(year, month - 1, day, hours, minutes, 0);
+			console.log(dateTimeObject1);
 
 
 			// Format the date and time as a string in the desired format
-			var utcString = dateTimeObject.toISOString().split('T')[0] + 'T' + dateTimeObject.toTimeString().split(' ')[0];
-			console.log(utcString);
+			var utcString1 = dateTimeObject1.toISOString().split('T')[0] + 'T' + dateTimeObject1.toTimeString().split(' ')[0];
+			console.log(utcString1);
+
+			// Split the date value into year, month, and day
+			[year, month, day] = dateValue2.split('-');
+
+			// Split the time value into hours and minutes
+			[hours, minutes] = timeValue2.split(':');
+
+			// Create a new Date object with the corrected date and time values
+			var dateTimeObject2 = new Date(year, month - 1, day, hours, minutes, 0);
+			console.log(dateTimeObject2);
+
+
+			// Format the date and time as a string in the desired format
+			var utcString2 = dateTimeObject2.toISOString().split('T')[0] + 'T' + dateTimeObject2.toTimeString().split(' ')[0];
+			console.log(utcString2);
 
 			// Create an object to send via AJAX
 			var data = {
@@ -580,12 +652,16 @@
 				medicineId: medicineValue,
 				quantity: quantityValue,
 				dosage: dosageValue,
-				dateTime: utcString
+				startDateTime: utcString1,
+				endDateTime: utcString2,
+
+				interval: interval,
+				duration: duration
 			};
 
 			console.log(data);
 
-			fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Schedule/insertNew', {
+			fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Schedule/insertNew', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -604,7 +680,7 @@
 				.then(data => {
 					if (data != null)
 						console.log(data)
-					window.location.replace("schedule.php");
+					window.location.replace("http://localhost/Green-Breeze-Home-for-Elderly/schedule.php");
 
 				})
 				.catch(error => console.log(error));
@@ -627,16 +703,20 @@
 
 		//GET data
 		// JavaScript to retrieve and display the data
-		fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Schedule/GetAllSchedule')
+		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Schedule/GetAllSchedule')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
 				} else {
 					throw new Error('Network response was not ok');
+
 				}
 			})
 			.then(data => {
 				// Select the table body element
+				//debugger
+
+
 				console.log('Data received from server:', data);
 				const tableBody = document.querySelector('#myTable tbody');
 				//const tableHistoryBody = document.querySelector('#myHistoryTable tbody');
@@ -645,6 +725,9 @@
 				// Create a row for each item in the data array
 				data.forEach(item => {
 					console.log('Current item:', item);
+
+
+
 					const row = tableBody.insertRow();
 
 					// Create cells for the name and age columns
@@ -653,29 +736,34 @@
 					const patient = row.insertCell();
 					const nurse = row.insertCell();
 					const status = row.insertCell();
-					const edit = row.insertCell();
+					// const edit = row.insertCell();
 					const del = row.insertCell();
+					const dets = row.insertCell();
+
 
 
 					// Set the text content of the cells to the item's values
-					date.textContent = formatDate(item.dateTime);
-					time.textContent = formatTime(item.dateTime);
+					date.textContent = formatDate(item.startDateTime);
+					time.textContent = formatTime(item.startDateTime);
 
 
 					// Create an edit icon element
-					const editIcon = document.createElement('i');
-					editIcon.classList.add('bx', 'bx-edit-alt');
+					// const editIcon = document.createElement('i');
+					// editIcon.classList.add('bx', 'bx-edit-alt');
 
 					// Create a delete icon element
 					const deleteIcon = document.createElement('i');
 					deleteIcon.classList.add('bx', 'bx-trash');
+
+					const detailsIcon = document.createElement('i');
+					detailsIcon.classList.add('bx', 'bx-detail');
 
 
 					var editmodal = document.getElementById("editModal");
 					var editspan = document.getElementsByClassName("editclose")[0];
 
 					// Fetch Nurse details based on NurseId
-					fetch(`https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Nurse/GetNurse/${item.nurseId}`)
+					fetch(`http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/GetNurse/${item.nurseId}`)
 						.then(response => {
 							if (response.ok) {
 								return response.json();
@@ -692,7 +780,7 @@
 						});
 
 					// Fetch Patient details based on PatientId
-					fetch(`https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/Patient/GetPatient/${item.patientId}`)
+					fetch(`http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/GetPatient/${item.patientId}`)
 						.then(response => {
 							if (response.ok) {
 								return response.json();
@@ -728,7 +816,7 @@
 						//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
 
 						// Send a DELETE request to the server
-						fetch('https://rafaelajxnnx-001-site1.btempurl.com/api/Schedule/DeleteSchedule/' + item.id, {
+						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Schedule/DeleteSchedule/' + item.id, {
 							method: 'DELETE'
 						})
 							.then(response => {
@@ -750,9 +838,23 @@
 
 					});
 
+					//DELETE event when delete button is clicked
+					detailsIcon.addEventListener('click', () => {
+						// Handle the delete icon click event here
+						console.log(`details showing in item with ID ${item.id}`);
+
+						window.location.replace("scheduleDetails.php");
+						const scheduleId = item.id; // Replace with the actual Schedule ID from your previous page
+						const url = `http://localhost/Green-Breeze-Home-for-Elderly/scheduleDetails.php?id=${scheduleId}`;
+						window.location.href = url;
+
+
+					});
+
 					// Append the edit icon element to the edit cell
-					edit.appendChild(editIcon);
+					// edit.appendChild(editIcon);
 					del.appendChild(deleteIcon);
+					dets.appendChild(detailsIcon);
 				});
 			})
 			.catch(error => {
@@ -808,7 +910,7 @@
 				const logoHeight = 30; // Calculate height based on aspect ratio
 				pdf.addImage(logoImage, "PNG", 10, 10, logoWidth, logoHeight);
 
-			
+
 
 				// Add additional title
 				const additionalTitle = "Schedule Information Summary";
@@ -832,7 +934,7 @@
 
 
 		function searchTable() {
-			var input, filter, table, tr, td1, td2,td3,td4,td5, i, txtValue1, txtValue2,txtValue3,txtValue4,txtValue5;
+			var input, filter, table, tr, td1, td2, td3, td4, td5, i, txtValue1, txtValue2, txtValue3, txtValue4, txtValue5;
 			input = document.getElementById("search-bar");
 			filter = input.value.toUpperCase();
 			table = document.getElementById("myTable");
@@ -852,7 +954,7 @@
 					txtValue5 = td5.textContent || td5.innerText;
 
 
-					if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 || txtValue3.toUpperCase().indexOf(filter) > -1 || txtValue4.toUpperCase().indexOf(filter) > -1 || txtValue5.toUpperCase().indexOf(filter) > -1 ) {
+					if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 || txtValue3.toUpperCase().indexOf(filter) > -1 || txtValue4.toUpperCase().indexOf(filter) > -1 || txtValue5.toUpperCase().indexOf(filter) > -1) {
 						tr[i].style.display = "";
 					} else {
 						tr[i].style.display = "none";

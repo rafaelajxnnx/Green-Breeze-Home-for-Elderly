@@ -10,10 +10,10 @@
 	<title>GREEN BREEZE HOME</title>
 
 	<script>
-		const localToken = JSON.parse(localStorage.getItem('AccessKey'));
+		const UserisLogin= JSON.parse(localStorage.getItem('UserInfo'));
 		
-		if(!localToken){
-			window.location.href = "http://localhost/Green-Breeze-Home-for-Elderly/login.php" ;
+		if(!UserisLogin){
+			window.location.href = "login.php" ;
 		}
 	</script>
 </head>

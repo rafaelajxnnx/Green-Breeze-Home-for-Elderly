@@ -2,9 +2,6 @@
 <html lang="en">
 
 <head>
-    
-<?php header('Access-Control-Allow-Origin:*'); ?>
-
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,52 +41,52 @@
 </body>
 <!-- Transfer to UserAPI -->
 <script>
-     function show() {
-        var password = document.getElementById("password");
-        var icon = document.querySelector(".fas");
+  function show() {
+    var password = document.getElementById("password");
+    var icon = document.querySelector(".fas");
 
-        // ========== Checking type of password ===========
-        if (password.type === "password") {
-          password.type = "text";
-        } else {
-          password.type = "password";
+    // ========== Checking type of password ===========
+    if (password.type === "password") {
+      password.type = "text";
+    } else {
+      password.type = "password";
+    }
+  }
+  
+  const loginformEl = document.querySelector('.form')
+
+  loginformEl.addEventListener('submit', event => {
+    event.preventDefault();
+
+    const formdata = new FormData(loginformEl);
+    const data = Object.fromEntries(formdata);
+
+    console.log(data);
+    fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/User/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json()
         }
-      }
-    const loginformEl = document.querySelector('.form')
-
-    loginformEl.addEventListener('submit', event => {
-        event.preventDefault();
-
-        const formdata = new FormData(loginformEl);
-        const data = Object.fromEntries(formdata);
-
-        console.log(data);
-
-        fetch('https://smjp.intelligent-leakey.103-108-220-125.plesk.page/api/User/login', {
-                method: 'Post',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return res.text()
-                    .then(text => {
-                        throw new Error(text)
-                    })
-            })
-            .then(data => {
+        return res.text()
+          .then(text => {
+            throw new Error(text)
+          })
+      })
+      .then(data => {
                 if (data != null)
                 console.log(data)
-                localStorage.setItem('AccessKey', JSON.stringify(data))
+                localStorage.setItem('UserInfo', JSON.stringify(data))
                 window.location.replace("index.php");
-            })
-            .catch(error => console.log(error));
-
-    });
+      })
+      .catch(error => console.log(error));
+  });
 </script>
+
 
 </html>
