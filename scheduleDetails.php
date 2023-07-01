@@ -327,7 +327,6 @@
 								<th>Patient</th>
 								<th>Nurse</th>
 								<th>Medicine</th>
-								<th>Quantity</th>
 								<th>Dosage</th>
 								<th>Status</th>
 								<th></th>
@@ -375,7 +374,7 @@
 		const scheduleId = urlParams.get('id');
 		console.log(scheduleId);
 
-		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Schedule/GetScheduleDetails/' + scheduleId)
+		fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Schedule/GetScheduleDetails/' + scheduleId)
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -402,7 +401,6 @@
 					const nurse = row.insertCell();
 					const medicine = row.insertCell();
 					const quantity = row.insertCell();
-					const dosage = row.insertCell();
 					const status = row.insertCell();
 					const edit = row.insertCell();
 					const del = row.insertCell();
@@ -414,8 +412,7 @@
 					patient.textContent = item.patientName;
 					nurse.textContent = item.nurseName;
 					medicine.textContent = item.medicineName;
-					quantity.textContent = item.scheduleObj.quantity;
-					dosage.textContent = item.scheduleObj.dosage;
+					quantity.textContent = item.scheduleObj.quantity +" "+item.scheduleObj.dosage;
 
 
 					let x = document.createElement("INPUT");
@@ -443,7 +440,7 @@
 					var editspan = document.getElementsByClassName("editclose")[0];
 
 					// // Fetch Nurse details based on NurseId
-					// fetch(`http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/GetNurse/${item.scheduleObj.nurseId}`)
+					// fetch(`https://rafaelajxnnxx-001-site1.ftempurl.com/api/Nurse/GetNurse/${item.scheduleObj.nurseId}`)
 					// 	.then(response => {
 					// 		if (response.ok) {
 					// 			return response.json();
@@ -483,7 +480,7 @@
 						//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
 
 						// Send a DELETE request to the server
-						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Schedule/DeleteSchedule/' + item.id, {
+						fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Schedule/DeleteSchedule/' + item.id, {
 							method: 'DELETE'
 						})
 							.then(response => {
@@ -525,7 +522,7 @@
 						ids.push($(this).data('id'))
 				});
 
-				fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Schedule/SaveScheduleDetails', {
+				fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Schedule/SaveScheduleDetails', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -544,7 +541,7 @@
 					.then(data => {
 						if (data != null)
 							console.log(data)
-						window.location.replace("http://localhost/Green-Breeze-Home-for-Elderly/scheduleDetails.php");
+						window.location.replace("scheduleDetails.php");
 
 					})
 					.catch(error => console.log(error));

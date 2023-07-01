@@ -487,7 +487,7 @@
 
 
 		// Retrieve data from the database and populate the dropdown
-		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/GetAllNurse')
+		fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Nurse/GetAllNurse')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -525,7 +525,7 @@
 
 
 		// Retrieve data from the database and populate the dropdown
-		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/GetAllPatient')
+		fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Patient/GetAllPatient')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -558,7 +558,7 @@
 
 
 		// Retrieve data from the database and populate the dropdown
-		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Medicine/GetAllMedicine')
+		fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Medicine/GetAllMedicine')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -663,7 +663,7 @@
 
 			console.log(data);
 
-			fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Schedule/insertNew', {
+			fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Schedule/insertNew', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -682,7 +682,7 @@
 				.then(data => {
 					if (data != null)
 						console.log(data)
-					window.location.replace("http://localhost/Green-Breeze-Home-for-Elderly/schedule.php");
+					window.location.replace("schedule.php");
 
 				})
 				.catch(error => console.log(error));
@@ -705,7 +705,7 @@
 
 		//GET data
 		// JavaScript to retrieve and display the data
-		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Schedule/GetAllSchedule')
+		fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Schedule/GetAllSchedule')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -770,7 +770,7 @@
 					var editspan = document.getElementsByClassName("editclose")[0];
 
 					// Fetch Nurse details based on NurseId
-					fetch(`http://rafaelajxnnx-001-site1.btempurl.com/api/Nurse/GetNurse/${item.nurseId}`)
+					fetch(`https://rafaelajxnnxx-001-site1.ftempurl.com/api/Nurse/GetNurse/${item.nurseId}`)
 						.then(response => {
 							if (response.ok) {
 								return response.json();
@@ -787,7 +787,7 @@
 						});
 
 					// Fetch Patient details based on PatientId
-					fetch(`http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/GetPatient/${item.patientId}`)
+					fetch(`https://rafaelajxnnxx-001-site1.ftempurl.com/api/Patient/GetPatient/${item.patientId}`)
 						.then(response => {
 							if (response.ok) {
 								return response.json();
@@ -823,7 +823,7 @@
 						//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
 
 						// Send a DELETE request to the server
-						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Schedule/DeleteSchedule/' + item.id, {
+						fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Schedule/DeleteSchedule/' + item.id, {
 							method: 'DELETE'
 						})
 							.then(response => {
@@ -852,7 +852,7 @@
 
 						window.location.replace("scheduleDetails.php");
 						const scheduleId = item.id; // Replace with the actual Schedule ID from your previous page
-						const url = `http://localhost/Green-Breeze-Home-for-Elderly/scheduleDetails.php?id=${scheduleId}`;
+						const url = `scheduleDetails.php?id=${scheduleId}`;
 						window.location.href = url;
 
 

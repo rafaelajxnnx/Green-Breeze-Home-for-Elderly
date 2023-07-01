@@ -62,7 +62,7 @@
     const data = Object.fromEntries(formdata);
 
     console.log(data);
-    fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/User/login', {
+    fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/User/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

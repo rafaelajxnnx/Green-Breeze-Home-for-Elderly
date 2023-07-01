@@ -244,7 +244,7 @@
 			font-family: FontAwesome, "Poppins", sans-serif;
 			outline: 0;
 			background: #f2f2f2;
-			width: 30%;
+			width: 17%;
 			border: 0;
 			margin: 0 5px 10px;
 			padding: 8px;
@@ -393,10 +393,20 @@
 
 									<div class="five-rows" style="margin:0;padding:0">
 										<input type="date" name="birthday" id="birthday" />
-										<input type="text" name="gender" id="gender" placeholder="Gender" />
+										<select class="dropbtn" onChange="dropdownTip()" id="select" name="shift"
+											style="margin-right:10px; margin-top:2px;">
+											<div class="dropdown-content">
+												<option selected="selected" value="tbsp">Gender</option>
+												<option value="Male">Male</option>
+												<option value="Female">Female</option>
+											</div>
+										</select>
 										<input type="text" name="height" id="height" placeholder="Height" />
 										<input type="text" name="weight" id="weight" placeholder="Weight" />
-										<input type="text" name="roomId" id="roomId" placeholder="Assigned Room" />
+										<!-- <input type="text" name="roomId" id="roomId" placeholder="Assigned Room" /> -->
+										<select style="width:17%;" class="dropbtn" name="roomId" id="roomId">
+										<option selected="selected" value="tbsp">Room #</option>
+										</select>
 									</div>
 									<div class="one-row">
 										<input type="text" name="address" id="address"
@@ -542,7 +552,38 @@
 		//}
 
 		// Retrieve data from the database and populate the dropdown
-		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/GetAllPatient')
+		fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Room/GetAllRoom')
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				} else {
+					throw new Error('Network response was not ok');
+				}
+			})
+			.then(data => {
+				console.log('Data received from server:', data);
+
+				// Get the dropdown element
+				const dropdown = document.getElementById('roomId');
+
+				// Populate the dropdown with the retrieved data
+				data.forEach(item => {
+					const option = document.createElement('option');
+					option.textContent = item.roomNumber
+					option.value = item.id;
+					dropdown.appendChild(option);
+				});
+				dropdown.addEventListener('change', function () {
+					const selectedValue = this.value;
+					console.log('Selected Value:', selectedValue);
+				});
+			})
+			.catch(error => {
+				console.error('Error:', error);
+			});
+
+		// Retrieve data from the database and populate the dropdown
+		fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Patient/GetAllPatient')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -627,7 +668,7 @@
 
 
 
-			fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/insertNew', {
+			fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Patient/insertNew', {
 				method: 'Post',
 				//headers: {
 				//	'Content-Type': 'application/json'
@@ -669,7 +710,7 @@
 			console.log(data);
 
 
-			fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/MedHistory/insertNew', {
+			fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/MedHistory/insertNew', {
 				method: 'Post',
 				// headers: {
 				// 	'Content-Type': 'application/json'
@@ -703,7 +744,7 @@
 
 		//getting data
 		// JavaScript to retrieve and display the data
-		fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/GetAllPatient')
+		fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Patient/GetAllPatient')
 			.then(response => {
 				if (response.ok) {
 					return response.json();
@@ -770,12 +811,12 @@
 						const editformEl = document.querySelector('.formupdate');
 
 						// Get the form data from the server
-						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/GetPatient/' + item.id)
+						fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Patient/GetPatient/' + item.id)
 							.then(response => response.json())
 							.then(data => {
 								// Populate the form with the item data
 								const imagePath = item.profilePicPath;
-								const baseUrl = "http://rafaelajxnnx-001-site1.btempurl.com/"; // Replace with your base URL
+								const baseUrl = "https://rafaelajxnnxx-001-site1.ftempurl.com/"; // Replace with your base URL
 								const completePath = baseUrl + imagePath;
 								const imageElement = document.getElementById('image');
 								imageElement.src = completePath;
@@ -816,7 +857,7 @@
 
 									console.log(data);
 
-									fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/UpdatePatientInfo/' + itemId, {
+									fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Patient/UpdatePatientInfo/' + itemId, {
 										method: 'PUT',
 										//headers: {
 										//	'Content-Type': 'application/json'
@@ -870,7 +911,7 @@
 						//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
 
 						// Send a DELETE request to the server
-						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/Patient/DeletePatient/' + item.id, {
+						fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Patient/DeletePatient/' + item.id, {
 							method: 'DELETE'
 						})
 							.then(response => {
@@ -898,7 +939,7 @@
 						hsviewmodal.style.display = "block";
 
 
-						fetch('http://rafaelajxnnx-001-site1.btempurl.com/api/MedHistory/GetMedHistoryofSpecificPatient/' + item.id,)
+						fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/MedHistory/GetMedHistoryofSpecificPatient/' + item.id,)
 							.then(response => {
 								if (response.ok) {
 									return response.json();
@@ -950,7 +991,7 @@
 									modalContent.appendChild(itemDiv);
 
 									const photoUrl = item.prescriptionPath;
-									const baseUrl = "http://rafaelajxnnx-001-site1.btempurl.com/"; // Replace with your base URL
+									const baseUrl = "https://rafaelajxnnxx-001-site1.ftempurl.com/"; // Replace with your base URL
 									const completeUrl = baseUrl + photoUrl;
 
 									// Create an img element for the photo
