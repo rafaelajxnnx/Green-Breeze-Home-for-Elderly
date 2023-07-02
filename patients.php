@@ -572,12 +572,12 @@
 				// Populate the dropdown with the retrieved data
 				data.forEach(item => {
 					// Check if the room ID is within the accepted range [1, 2, 3, 4, 5]
-					if ([1, 2, 3, 4, 5].includes(item.id)) {
+					if (item.roomId === 1 || item.roomId === 2 || item.roomId === 3 || item.roomId === 4 || item.roomId === 5) {
 						// Check if the room count is already greater than or equal to 4
 						if (roomCount >= 4) {
 							console.log(`Room ${item.roomNumber} cannot accept more patients.`);
 
-							const optionToRemove = dropdown.querySelector(`option[value="${item.id}"]`);
+							const optionToRemove = dropdown.querySelector(`option[value="${item.roomId}"]`);
 
 							// Remove the option if found
 							if (optionToRemove) {
@@ -585,7 +585,6 @@
 							}
 							return; // Skip adding the room to the dropdown
 						}
-
 						// If the room is accepted, increment the counter
 						roomCount++;
 					}
@@ -607,7 +606,6 @@
 			.catch(error => {
 				console.error('Error:', error);
 			});
-
 
 		// Retrieve data from the database and populate the dropdown
 		fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Patient/GetAllPatient')
