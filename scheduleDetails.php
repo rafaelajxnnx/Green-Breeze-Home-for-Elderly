@@ -456,20 +456,20 @@
 					// 		console.error('Error while fetching Nurse:', error);
 					// 	});
 
-					// // Set the text content of the status cell
-					// if (item.status === false) {
-					// 	const statusSpan = document.createElement('span');
-					// 	statusSpan.textContent = 'Pending';
-					// 	statusSpan.classList.add('onprogress'); // Apply the CSS class
+					// Set the text content of the status cell
+					if (item.status === false) {
+						const statusSpan = document.createElement('span');
+						statusSpan.textContent = 'Pending';
+						statusSpan.classList.add('onprogress'); // Apply the CSS class
 
-					// 	status.appendChild(statusSpan);
-					// } else {
-					// 	const statusSpan = document.createElement('span');
-					// 	statusSpan.textContent = 'Done';
-					// 	statusSpan.classList.add('onsucess'); // Apply the CSS class
+						status.appendChild(statusSpan);
+					} else {
+						const statusSpan = document.createElement('span');
+						statusSpan.textContent = 'Done';
+						statusSpan.classList.add('onsucess'); // Apply the CSS class
 
-					// 	status.appendChild(statusSpan);
-					// }
+						status.appendChild(statusSpan);
+					}
 
 
 					//DELETE event when delete button is clicked
