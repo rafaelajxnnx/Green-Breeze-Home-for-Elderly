@@ -405,7 +405,7 @@
 										<input type="text" name="weight" id="weight" placeholder="Weight" />
 										<!-- <input type="text" name="roomId" id="roomId" placeholder="Assigned Room" /> -->
 										<select style="width:17%;" class="dropbtn" name="roomId" id="roomId">
-										<option selected="selected" value="tbsp">Room #</option>
+											<option selected="selected" value="tbsp">Room #</option>
 										</select>
 									</div>
 									<div class="one-row">
@@ -566,21 +566,48 @@
 				// Get the dropdown element
 				const dropdown = document.getElementById('roomId');
 
+				// Create a counter variable to keep track of room count
+				let roomCount = 0;
+
 				// Populate the dropdown with the retrieved data
 				data.forEach(item => {
+					// Check if the room ID is within the accepted range [1, 2, 3, 4, 5]
+					if ([1, 2, 3, 4, 5].includes(item.id)) {
+						// Check if the room count is already greater than or equal to 4
+						if (roomCount >= 4) {
+							console.log(`Room ${item.roomNumber} cannot accept more patients.`);
+
+							const optionToRemove = dropdown.querySelector(`option[value="${item.id}"]`);
+
+							// Remove the option if found
+							if (optionToRemove) {
+								optionToRemove.remove();
+							}
+							return; // Skip adding the room to the dropdown
+						}
+
+						// If the room is accepted, increment the counter
+						roomCount++;
+					}
+
+					// Create the option element and add it to the dropdown
 					const option = document.createElement('option');
-					option.textContent = item.roomNumber
+					option.textContent = item.roomNumber;
 					option.value = item.id;
 					dropdown.appendChild(option);
 				});
+
 				dropdown.addEventListener('change', function () {
 					const selectedValue = this.value;
 					console.log('Selected Value:', selectedValue);
 				});
+
+
 			})
 			.catch(error => {
 				console.error('Error:', error);
 			});
+
 
 		// Retrieve data from the database and populate the dropdown
 		fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Patient/GetAllPatient')
@@ -759,6 +786,7 @@
 				const tableHistoryBody = document.querySelector('#myHistoryTable tbody');
 				console.log('Table body element:', tableBody);
 
+
 				// Create a row for each item in the data array
 				data.forEach(item => {
 					console.log('Current item:', item);
@@ -774,6 +802,9 @@
 					const edit = row.insertCell();
 					const del = row.insertCell();
 					const hs = row.insertCell();
+
+
+
 
 
 					// Set the text content of the cells to the item's values
