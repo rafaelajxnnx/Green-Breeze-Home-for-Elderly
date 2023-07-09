@@ -38,7 +38,7 @@
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
-            height: 60%;
+            height: 70%;
             border-radius: 20px;
         }
 
@@ -202,12 +202,15 @@
             </form>
             <!--<input type="checkbox" id="switch-mode" hidden>
             <label for="switch-mode" class="switch-mode"></label>-->
-            <a href="#" class="notification">
+            <!-- <a href="#" class="notification">
                 <i class='bx bxs-bell'></i>
                 <span class="num">8</span>
+            </a> -->
+            <a  href="#">
+                <p style ="font-family: FontAwesome, 'Poppins', sans-serif; font-weight:bold" id="displayName"></p>
             </a>
             <a href="#" class="profile">
-                <img src="img/headnursepic.jpg">
+                <img id="profilePic" src="">
             </a>
         </nav>
         <!-- NAVBAR -->
@@ -405,7 +408,24 @@
         });
 
         //getting data
-        // JavaScript to retrieve and display the data
+        //JavaScript to retrieve and display the PROFILE PIC
+        const profilePicElement = document.getElementById("profilePic");
+        const displayNameElement = document.getElementById("displayName");
+
+        fetch("https://rafaelajxnnxx-001-site1.ftempurl.com/api/User/GetUser/2")
+            .then(response => response.json())
+            .then(data => {
+                const baseUrl = "https://rafaelajxnnxx-001-site1.ftempurl.com/";
+                const profilePicUrl = baseUrl + data.profilePicPath; // Assuming the API response contains the profile picture URL
+                const displayName = data.firstName + " " + data.lastName;
+
+                profilePicElement.src = profilePicUrl;
+                displayNameElement.textContent = displayName;
+            })
+            .catch(error => {
+                console.error("Error fetching profile picture:", error);
+            });
+        //JavaScript to retrieve and display the data
         fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/User/GetAllUser')
             .then(response => {
                 if (response.ok) {

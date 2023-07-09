@@ -37,7 +37,7 @@
 			padding: 20px;
 			border: 1px solid #888;
 			width: 80%;
-			height: 85%;
+			height: 90%;
 			border-radius: 20px;
 		}
 
@@ -50,7 +50,7 @@
 			margin: 0 5px 10px;
 			padding: 10px;
 			box-sizing: border-box;
-			font-size: 14px;
+			font-size: 10px;
 			border-radius: 10px;
 			float: left;
 
@@ -65,7 +65,7 @@
 			margin: 0 5px 10px;
 			padding: 10px;
 			box-sizing: border-box;
-			font-size: 14px;
+			font-size: 10px;
 			border-radius: 10px;
 			float: left;
 
@@ -79,7 +79,7 @@
 			margin: 0 5px 10px;
 			padding: 10px;
 			box-sizing: border-box;
-			font-size: 14px;
+			font-size: 10px;
 			border-radius: 10px;
 			float: left;
 
@@ -111,7 +111,7 @@
 			margin: 0 5px 10px;
 			padding: 10px;
 			box-sizing: border-box;
-			font-size: 14px;
+			font-size: 10px;
 			border-radius: 10px;
 			float: left;
 		}
@@ -131,7 +131,7 @@
 			padding: 12px 16px;
 			text-decoration: none;
 			display: block;
-			font-size: 14px;
+			font-size: 10px;
 		}
 
 		.dropdown-content option:hover {
@@ -144,7 +144,7 @@
 
 		.modal-content button {
 			font-family: "Poppins", sans-serif;
-			font-size: 14px;
+			font-size: 10px;
 			font-weight: bold;
 			letter-spacing: .1em;
 			outline: 0;
@@ -188,7 +188,7 @@
 			margin: 0 5px 10px;
 			padding: 10px;
 			box-sizing: border-box;
-			font-size: 14px;
+			font-size: 10px;
 			border-radius: 10px;
 			float: left;
 		}
@@ -208,7 +208,7 @@
 			padding: 12px 16px;
 			text-decoration: none;
 			display: block;
-			font-size: 14px;
+			font-size: 10px;
 		}
 
 		.dropdown-content option:hover {
@@ -236,6 +236,109 @@
 			letter-spacing: 1px;
 			/* Add more styles as needed */
 		}
+
+		.onsucess {
+			background: var(--blue);
+			color: #fff;
+			padding: 5px 10px;
+			border-radius: 20px;
+			font-size: 10px;
+			font-weight: bold;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			/* Add more styles as needed */
+		}
+
+		/* Add this CSS for the modal */
+		.modalDelete {
+			display: none;
+			/* Hide the modal by default */
+			position: fixed;
+			z-index: 9999;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			background-color: rgba(0, 0, 0, 0.4);
+			/* Semi-transparent background */
+		}
+
+		.modal-contentDelete {
+			background-color: var(--light);
+			margin: 15% auto;
+			padding: 20px;
+			border: 1px solid #888;
+			width: 320px;
+			height: 190px;
+			border-radius: 20px;
+		}
+
+		.closeDelete {
+			color: #aaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+
+		.closeDelete:hover,
+		.closeDelete:focus {
+			color: black;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+		#passwordInput {
+			margin-bottom: 10px;
+			width: 100%;
+			padding: 8px;
+			font-size: 16px;
+		}
+
+		#confirmButton {
+			font-family: "Poppins", sans-serif;
+			font-size: 14px;
+			font-weight: bold;
+			letter-spacing: .1em;
+			outline: 0;
+			background: #3C91E6;
+			width: 50%;
+			border: 0;
+			border-radius: 30px;
+			margin: 10px 0px 10px;
+			padding: 5px;
+			color: #FFFFFF;
+			-webkit-transition: all 0.3 ease;
+			transition: all 0.3 ease;
+			cursor: pointer;
+			transition: all 0.2s;
+			float: left;
+
+
+		}
+
+		#confirmButton:hover,
+		#confirmButton:focus {
+			background: #2167ad;
+			box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+			transform: translateY(-4px);
+		}
+
+		#confirmButton:active {
+			transform: translateY(2px);
+			box-shadow: 0 2.5px 5px rgba(0, 0, 0, 0.2);
+		}
+		/* #confirmButton {
+			background-color: #4CAF50;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			cursor: pointer;
+		}
+
+		#confirmButton:hover {
+			background-color: #45a049;
+		} */
 	</style>
 </header>
 
@@ -259,13 +362,12 @@
 			<!--<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>-->
 
-			<a href="#" class="notification">
-				<i class='bx bxs-bell'></i>
-				<span class="num">8</span>
-			</a>
-			<a href="#" class="profile">
-				<img src="img/headnursepic.jpg">
-			</a>
+			<a  href="#">
+                <p style ="font-family: FontAwesome, 'Poppins', sans-serif; font-weight:bold" id="displayName"></p>
+            </a>
+            <a href="#" class="profile">
+                <img id="profilePic" src="">
+            </a>
 		</nav>
 		<!-- NAVBAR -->
 
@@ -310,7 +412,10 @@
 								<form class="form">
 									<h3>Add New Schedule</h3>
 									<input type="text" name="status" id="status" placeholder="status" hidden />
-
+									<!-- <div class="direction">
+										
+									</div> -->
+									<p  style="font-size:10px; font-style:bold;">Start Time and Date</p>
 									<div class="two-rows" style="margin:0;padding:0">
 										<!--<select class="dropbtn" onChange="dropdownTip()" id="select" name="time"
 											style="margin-right:10px; margin-top:2px; width:30%;">
@@ -329,6 +434,9 @@
 
 										<input type="date" name="date1" id="date1" />
 									</div>
+									<br>
+									<br>
+									<p  style="font-size:10px; font-style:bold;">End Time and Date</p>
 									<div class="two-rows" style="margin:0;padding:0">
 
 										<!--<label for="alarm-input">Set Alarm:</label>-->
@@ -380,6 +488,11 @@
 											</div>
 										</select>
 									</div>
+									<br>
+									<br>
+									<br>
+									<br>
+									<p style="font-size:10px; font-style:bold;">Choose Assigned Patient and Nurse</p>
 									<div class="two-rows" style="margin:0;padding:0">
 
 										<!--<p>Assigned Nurse</p>-->
@@ -417,12 +530,12 @@
 					<table id="myTable">
 						<thead>
 							<tr>
-								<th>Start Time</th>
 								<th>Start Date</th>
 								<th>End Date</th>
 								<th>Interval</th>
 								<th>Patient Name</th>
 								<th>Assigned Nurse</th>
+								<th>Medicine</th>
 								<th>Status</th>
 								<th></th>
 								<th></th>
@@ -445,6 +558,16 @@
 							</tr>
 						</tbody>
 					</table>
+
+					<div id="passwordModal" class="modalDelete">
+						<div class="modal-contentDelete">
+							<span class="closeDelete">&times;</span>
+							<h4>Are you sure to delete this Schedule?</h4>
+							<p>Enter Password</p>
+							<input type="password" id="passwordInput" placeholder="Password">
+							<button id="confirmButton">Confirm</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</main>
@@ -484,7 +607,23 @@
 		//document.getElementByID("result").innerHTML = value;
 		//}
 
+		//JavaScript to retrieve and display the PROFILE PIC
+        const profilePicElement = document.getElementById("profilePic");
+        const displayNameElement = document.getElementById("displayName");
 
+        fetch("https://rafaelajxnnxx-001-site1.ftempurl.com/api/User/GetUser/2")
+            .then(response => response.json())
+            .then(data => {
+                const baseUrl = "https://rafaelajxnnxx-001-site1.ftempurl.com/";
+                const profilePicUrl = baseUrl + data.profilePicPath; // Assuming the API response contains the profile picture URL
+                const displayName = data.firstName + " " + data.lastName;
+
+                profilePicElement.src = profilePicUrl;
+                displayNameElement.textContent = displayName;
+            })
+            .catch(error => {
+                console.error("Error fetching profile picture:", error);
+            });
 
 		// Retrieve data from the database and populate the dropdown
 		fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Nurse/GetAllNurse')
@@ -733,12 +872,12 @@
 					const row = tableBody.insertRow();
 
 					// Create cells for the name and age columns
-					const time = row.insertCell();
 					const dateStart = row.insertCell();
 					const dateEnd = row.insertCell();
-					const interval =row.insertCell();
+					const interval = row.insertCell();
 					const patient = row.insertCell();
 					const nurse = row.insertCell();
+					const medicine = row.insertCell();
 					const status = row.insertCell();
 					// const edit = row.insertCell();
 					const del = row.insertCell();
@@ -750,7 +889,6 @@
 					dateStart.textContent = formatDate(item.startDateTime);
 					dateEnd.textContent = formatDate(item.endDateTime);
 
-					time.textContent = formatTime(item.startDateTime);
 					interval.textContent = item.interval + " hrs";
 
 
@@ -768,6 +906,23 @@
 
 					var editmodal = document.getElementById("editModal");
 					var editspan = document.getElementsByClassName("editclose")[0];
+
+					// Fetch Nurse details based on NurseId
+					fetch(`https://rafaelajxnnxx-001-site1.ftempurl.com/api/Medicine/GetMedicine/${item.medicineId}`)
+						.then(response => {
+							if (response.ok) {
+								return response.json();
+							} else {
+								throw new Error('Network response was not ok');
+							}
+						})
+						.then(medicineData => {
+							// Set the text content of the nurse cell to the nurse's first name and last name
+							medicine.textContent = `${medicineData.drugName}`;
+						})
+						.catch(error => {
+							console.error('Error while fetching Nurse:', error);
+						});
 
 					// Fetch Nurse details based on NurseId
 					fetch(`https://rafaelajxnnxx-001-site1.ftempurl.com/api/Nurse/GetNurse/${item.nurseId}`)
@@ -804,6 +959,7 @@
 						});
 
 					// Set the text content of the status cell
+
 					if (item.status === false) {
 						const statusSpan = document.createElement('span');
 						statusSpan.textContent = 'Pending';
@@ -811,39 +967,166 @@
 
 						status.appendChild(statusSpan);
 					} else {
-						status.textContent = item.status;
+						const statusSpan = document.createElement('span');
+						statusSpan.textContent = 'Done';
+						statusSpan.classList.add('onsucess'); // Apply the CSS class
+
+						status.appendChild(statusSpan);
 					}
+
+					//
+					fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Schedule/GetScheduleDetails/' + item.id)
+						.then(response => {
+							if (response.ok) {
+								return response.json();
+							} else {
+								throw new Error('Network response was not ok');
+							}
+						})
+						.then(data => {
+							//console.log('NEW Data received from server:', data);
+
+							const dataLength = data.length;
+							//console.log('Number of data items:', dataLength);
+
+							// Count the number of items with status = true
+							const trueStatusCount = data.filter(item => item.status === true).length;
+
+							// Check if the number of true status items is equal to the length of data
+							if (trueStatusCount === dataLength) {
+								console.log('All items have status = true');
+
+								// Prepare the data to be sent in the request
+								console.log('id' + item.id)
+
+								//Make a POST request to update the schedule statuses
+								let ids = [item.id];
+								fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Schedule/SaveDetailsAndUpdateStatus', {
+									method: 'POST',
+									headers: {
+										'Content-Type': 'application/json'
+									},
+									body: JSON.stringify(ids)
+								})
+									.then(response => {
+										if (response.ok) {
+											console.log('Status updated successfully.');
+											// Additional logic for successful status update goes here
+										} else {
+											console.log('Failed to update status on ' + item.id + ' because it is already DONE');
+											// Additional logic for failed status update goes here
+										}
+									})
+									.catch(error => {
+										console.error('Error:', error);
+									});
+
+
+							} else {
+								console.log('Not all items have status = true');
+								// Do something else if not all items have status = true
+							}
+						})
+						.catch(error => {
+							console.error('Error:', error);
+						});
+
+
 
 
 					//DELETE event when delete button is clicked
+					// deleteIcon.addEventListener('click', () => {
+					// 	// Handle the delete icon click event here
+					// 	console.log(`Deleting item with ID ${item.id}`);
+
+					// 	//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
+
+					// 	// Send a DELETE request to the server
+					// 	fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Schedule/DeleteSchedule/' + item.id, {
+					// 		method: 'DELETE'
+					// 	})
+					// 		.then(response => {
+					// 			if (!response.ok) {
+					// 				throw new Error('Network response was not ok');
+					// 			}
+					// 			return response.json();
+					// 		})
+					// 		.then(data => {
+					// 			console.log('Item deleted:', data);
+					// 			// Remove the deleted row from the table
+					// 			deleteIcon.parentNode.parentNode.remove();
+
+					// 		})
+					// 		.catch(error => {
+					// 			console.error('Error deleting item:', error);
+					// 		});
+
+
+					// });
+
 					deleteIcon.addEventListener('click', () => {
-						// Handle the delete icon click event here
-						console.log(`Deleting item with ID ${item.id}`);
+						// Show the password modal
+						const modal = document.getElementById('passwordModal');
+						modal.style.display = 'block';
 
-						//const itemId = deleteIcon.parentNode.parentNode.dataset.itemId;
+						// Get the password input and confirm button from the modal
+						const passwordInput = document.getElementById('passwordInput');
+						const confirmButton = document.getElementById('confirmButton');
 
-						// Send a DELETE request to the server
-						fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Schedule/DeleteSchedule/' + item.id, {
-							method: 'DELETE'
-						})
-							.then(response => {
-								if (!response.ok) {
-									throw new Error('Network response was not ok');
-								}
-								return response.json();
-							})
-							.then(data => {
-								console.log('Item deleted:', data);
-								// Remove the deleted row from the table
-								deleteIcon.parentNode.parentNode.remove();
+						// Function to handle the confirm button click event
+						const confirmDelete = () => {
+							// Get the entered password
+							const password = passwordInput.value;
 
-							})
-							.catch(error => {
-								console.error('Error deleting item:', error);
-							});
+							// Check if the password is correct
+							if (password === 'Pass123!') {
+								console.log(`Deleting item with ID ${item.id}`);
 
+								fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Schedule/DeleteSchedule/' + item.id, {
+									method: 'DELETE'
+								})
+									.then(response => {
+										if (!response.ok) {
+											throw new Error('Network response was not ok');
+										}
+										return response.json();
+									})
+									.then(data => {
+										console.log('Item deleted:', data);
+										deleteIcon.parentNode.parentNode.remove();
+									})
+									.catch(error => {
+										console.error('Error deleting item:', error);
+									});
 
+								// Hide the password modal
+								modal.style.display = 'none';
+							} else {
+								// Incorrect password, display an error message or take other actions
+								console.error('Incorrect password. Deletion canceled.');
+								// You can display an error message or perform any other desired actions here
+							}
+						};
+
+						// Add event listener to the confirm button
+						confirmButton.addEventListener('click', confirmDelete);
+
+						// Function to handle the close button click event
+						const closeModal = () => {
+							// Hide the password modal
+							modal.style.display = 'none';
+
+							// Remove event listener from the confirm button
+							confirmButton.removeEventListener('click', confirmDelete);
+						};
+
+						// Get the close button from the modal
+						const closeButton = document.getElementsByClassName('closeDelete')[0];
+
+						// Add event listener to the close button
+						closeButton.addEventListener('click', closeModal);
 					});
+
 
 					//DELETE event when delete button is clicked
 					detailsIcon.addEventListener('click', () => {
@@ -941,7 +1224,7 @@
 
 
 		function searchTable() {
-			var input, filter, table, tr, td1, td2, td3, td4, td5, i, txtValue1, txtValue2, txtValue3, txtValue4, txtValue5;
+			var input, filter, table, tr, td1, td2, td3, td4, td5,td6,td7, i, txtValue1, txtValue2, txtValue3, txtValue4, txtValue5,txtValue6,txtValue7;
 			input = document.getElementById("search-bar");
 			filter = input.value.toUpperCase();
 			table = document.getElementById("myTable");
@@ -953,15 +1236,22 @@
 				td3 = tr[i].getElementsByTagName("td")[2];
 				td4 = tr[i].getElementsByTagName("td")[3];
 				td5 = tr[i].getElementsByTagName("td")[4];
-				if (td1 && td2 && td3 && td4 && td5) {
+				td6 = tr[i].getElementsByTagName("td")[5];
+				td7 = tr[i].getElementsByTagName("td")[6];
+
+
+				if (td1 && td2 && td3 && td4 && td5 && td6 && td7) {
 					txtValue1 = td1.textContent || td1.innerText;
 					txtValue2 = td2.textContent || td2.innerText;
 					txtValue3 = td3.textContent || td3.innerText;
 					txtValue4 = td4.textContent || td4.innerText;
 					txtValue5 = td5.textContent || td5.innerText;
+					txtValue6 = td6.textContent || td6.innerText;
+					txtValue7 = td7.textContent || td7.innerText;
 
 
-					if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 || txtValue3.toUpperCase().indexOf(filter) > -1 || txtValue4.toUpperCase().indexOf(filter) > -1 || txtValue5.toUpperCase().indexOf(filter) > -1) {
+
+					if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 || txtValue3.toUpperCase().indexOf(filter) > -1 || txtValue4.toUpperCase().indexOf(filter) > -1 || txtValue5.toUpperCase().indexOf(filter) > -1 || txtValue6.toUpperCase().indexOf(filter) > -1 || txtValue7.toUpperCase().indexOf(filter) > -1) {
 						tr[i].style.display = "";
 					} else {
 						tr[i].style.display = "none";

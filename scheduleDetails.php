@@ -271,13 +271,12 @@
 			<!--<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>-->
 
-			<a href="#" class="notification">
-				<i class='bx bxs-bell'></i>
-				<span class="num">8</span>
-			</a>
-			<a href="#" class="profile">
-				<img src="img/headnursepic.jpg">
-			</a>
+			<a  href="#">
+                <p style ="font-family: FontAwesome, 'Poppins', sans-serif; font-weight:bold" id="displayName"></p>
+            </a>
+            <a href="#" class="profile">
+                <img id="profilePic" src="">
+            </a>
 		</nav>
 		<!-- NAVBAR -->
 
@@ -367,7 +366,24 @@
 	<script>
 
 
+		//JavaScript to retrieve and display the PROFILE PIC
+        const profilePicElement = document.getElementById("profilePic");
+        const displayNameElement = document.getElementById("displayName");
 
+        fetch("https://rafaelajxnnxx-001-site1.ftempurl.com/api/User/GetUser/2")
+            .then(response => response.json())
+            .then(data => {
+                const baseUrl = "https://rafaelajxnnxx-001-site1.ftempurl.com/";
+                const profilePicUrl = baseUrl + data.profilePicPath; // Assuming the API response contains the profile picture URL
+                const displayName = data.firstName + " " + data.lastName;
+
+                profilePicElement.src = profilePicUrl;
+                displayNameElement.textContent = displayName;
+            })
+            .catch(error => {
+                console.error("Error fetching profile picture:", error);
+            });
+			
 		//GET data
 		// JavaScript to retrieve and display the data
 		const urlParams = new URLSearchParams(window.location.search);
@@ -423,9 +439,6 @@
 						x.setAttribute("checked", status);
 
 					}
-
-
-
 
 					// Create an edit icon element
 					const editIcon = document.createElement('i');
@@ -522,6 +535,8 @@
 						ids.push($(this).data('id'))
 				});
 
+				console.log(ids)
+
 				fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Schedule/SaveScheduleDetails', {
 					method: 'POST',
 					headers: {
@@ -541,7 +556,7 @@
 					.then(data => {
 						if (data != null)
 							console.log(data)
-						window.location.replace("scheduleDetails.php");
+						window.location.replace("schedule.php");
 
 					})
 					.catch(error => console.log(error));
@@ -575,6 +590,42 @@
 			const formattedSeconds = (seconds < 10 ? "0" : "") + seconds;
 
 			return `${formattedHours}:${formattedMinutes} ${period}`;
+		}
+		function searchTable() {
+			var input, filter, table, tr, td1, td2, td3, td4, td5,td6,td7, i, txtValue1, txtValue2, txtValue3, txtValue4, txtValue5,txtValue6,txtValue7;
+			input = document.getElementById("search-bar");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr");
+
+			for (i = 0; i < tr.length; i++) {
+				td1 = tr[i].getElementsByTagName("td")[0];
+				td2 = tr[i].getElementsByTagName("td")[1];
+				td3 = tr[i].getElementsByTagName("td")[2];
+				td4 = tr[i].getElementsByTagName("td")[3];
+				td5 = tr[i].getElementsByTagName("td")[4];
+				td6 = tr[i].getElementsByTagName("td")[5];
+				td7 = tr[i].getElementsByTagName("td")[6];
+
+
+				if (td1 && td2 && td3 && td4 && td5 && td6 && td7) {
+					txtValue1 = td1.textContent || td1.innerText;
+					txtValue2 = td2.textContent || td2.innerText;
+					txtValue3 = td3.textContent || td3.innerText;
+					txtValue4 = td4.textContent || td4.innerText;
+					txtValue5 = td5.textContent || td5.innerText;
+					txtValue6 = td6.textContent || td6.innerText;
+					txtValue7 = td7.textContent || td7.innerText;
+
+
+
+					if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 || txtValue3.toUpperCase().indexOf(filter) > -1 || txtValue4.toUpperCase().indexOf(filter) > -1 || txtValue5.toUpperCase().indexOf(filter) > -1 || txtValue6.toUpperCase().indexOf(filter) > -1 || txtValue7.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
 		}
 	</script>
 </body>

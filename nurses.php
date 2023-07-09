@@ -182,13 +182,13 @@
 			object-fit: cover;
 		}
 
-	
+
 		/*yung dropdown*/
 		.dropbtn {
 			font-family: FontAwesome, "Poppins", sans-serif;
 			outline: 0;
 			background: #f2f2f2;
-			width: 45%;
+			width: 30%;
 			border: 0;
 			margin: 0 5px 10px;
 			padding: 10px;
@@ -244,13 +244,12 @@
 			</form>
 			<!--<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>-->
-			<a href="#" class="notification">
-				<i class='bx bxs-bell'></i>
-				<span class="num">8</span>
-			</a>
-			<a href="#" class="profile">
-				<img src="img/headnursepic.jpg">
-			</a>
+			<a  href="#">
+                <p style ="font-family: FontAwesome, 'Poppins', sans-serif; font-weight:bold" id="displayName"></p>
+            </a>
+            <a href="#" class="profile">
+                <img id="profilePic" src="">
+            </a>
 		</nav>
 		<!-- NAVBAR -->
 
@@ -334,8 +333,18 @@
 
 				<div class="three-rows" style="margin:0;padding:0">
 					<input type="date" name="birthday" id="birthday" />
-					<input type="text" name="gender" id="gender" placeholder="Gender" />
-					<input type="text" name="roomId" id="roomId" placeholder="Assigned Room" />
+					<select class="dropbtn" onChange="dropdownTip()" id="select" name="shift"
+						style="margin-right:10px; margin-top:2px;">
+						<div class="dropdown-content">
+							<option selected="selected" value="tbsp">Gender</option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+						</div>
+					</select>
+					<!-- <input type="text" name="roomId" id="roomId" placeholder="Assigned Room" /> -->
+					<select style="width:30%;" class="dropbtn" name="roomId" id="roomId">
+						<option selected="selected" value="tbsp">Room #</option>
+					</select>
 				</div>
 				<div class="one-row">
 					<input type="text" name="address" id="address"
@@ -348,23 +357,23 @@
 				</div>
 
 				<div class="one-row">
-				<!-- <select class="dropbtn" id="shift" required name="Shift">
+					<!-- <select class="dropbtn" id="shift" required name="Shift">
 											<div class="dropdown-content">
 												<option value="0">Select Shift</option>
 												<option value="Morning">Morning Shift 6:00 AM - 6:00 PM</option>
 												<option value="Night">Night Shift 6:00 AM - 6:00 PM</option>
 											</div>
 										</select> -->
-										<select class="dropbtn" onChange="dropdownTip()" id="select" name="shift"
-											style="margin-right:10px; margin-top:2px;">
-											<div class="dropdown-content">
-												<option selected="selected" value="tbsp">Select Shift</option>
-												<option value="Morning">Morning Shift 6:00 AM - 6:00 PM</option>
-												<option value="Night">Night Shift 6:00 AM - 6:00 PM</option>
-											</div>
-										</select>
+					<select class="dropbtn" onChange="dropdownTip()" id="select" name="shift"
+						style="margin-right:10px; margin-top:2px;">
+						<div class="dropdown-content">
+							<option selected="selected" value="tbsp">Select Shift</option>
+							<option value="Morning">Morning Shift 6:00 AM - 6:00 PM</option>
+							<option value="Night">Night Shift 6:00 AM - 6:00 PM</option>
+						</div>
+					</select>
 				</div>
-				
+
 
 				<button type="submit">ADD</button>
 			</form>
@@ -415,7 +424,7 @@
 
 
 
-	
+
 	<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.3.2/dist/html2canvas.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 	<script>
@@ -477,7 +486,79 @@
 
 		});
 
+
+		//JavaScript to retrieve and display the PROFILE PIC
+        const profilePicElement = document.getElementById("profilePic");
+        const displayNameElement = document.getElementById("displayName");
+
+        fetch("https://rafaelajxnnxx-001-site1.ftempurl.com/api/User/GetUser/2")
+            .then(response => response.json())
+            .then(data => {
+                const baseUrl = "https://rafaelajxnnxx-001-site1.ftempurl.com/";
+                const profilePicUrl = baseUrl + data.profilePicPath; // Assuming the API response contains the profile picture URL
+                const displayName = data.firstName + " " + data.lastName;
+
+                profilePicElement.src = profilePicUrl;
+                displayNameElement.textContent = displayName;
+            })
+            .catch(error => {
+                console.error("Error fetching profile picture:", error);
+            });
+			
 		//getting data
+		fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Room/GetAllRoom')
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				} else {
+					throw new Error('Network response was not ok');
+				}
+			})
+			.then(data => {
+				console.log('Data received from server:', data);
+
+				// Get the dropdown element
+				const dropdown = document.getElementById('roomId');
+
+				// Create a counter variable to keep track of room count
+				let roomCount = 0;
+
+				// Populate the dropdown with the retrieved data
+				data.forEach(item => {
+					if (item.roomNumber === 3 && roomCount >= 4) {
+						console.log(`Room ${item.roomNumber} cannot accept more patients.`);
+						const optionToRemove = dropdown.querySelector(`option[value="${item.id}"]`);
+						if (optionToRemove) {
+							optionToRemove.remove();
+						}
+						return; // Skip adding the room to the dropdown
+					}
+
+					if (item.roomNumber === 3) {
+						roomCount++;
+					}
+
+					// Create the option element and add it to the dropdown
+					const option = document.createElement('option');
+					option.textContent = item.roomNumber;
+					option.value = item.id;
+					dropdown.appendChild(option);
+				});
+
+
+
+
+				dropdown.addEventListener('change', function () {
+					const selectedValue = this.value;
+					console.log('Selected Value:', selectedValue);
+				});
+
+
+			})
+			.catch(error => {
+				console.error('Error:', error);
+			});
+
 		// JavaScript to retrieve and display the data
 		fetch('https://rafaelajxnnxx-001-site1.ftempurl.com/api/Nurse/GetAllNurse')
 			.then(response => {
