@@ -174,13 +174,6 @@
 
 		// Get the current date and previous date in the desired format
 		var currentDate = moment().format('YYYY-MM-DD');
-		// var previousDate = moment().subtract(1, 'day').format('YYYY-MM-DD');
-		// console.log('Current Date:', currentDate);
-		// console.log('Previous Date:', previousDate);
-
-		// Fetch the schedule details for both the current date and previous date
-		// fetchScheduleDetails(currentDate);
-		// fetchScheduleDetails(previousDate);
 		
 		//JavaScript to retrieve and display the PROFILE PIC
         const profilePicElement = document.getElementById("profilePic");
