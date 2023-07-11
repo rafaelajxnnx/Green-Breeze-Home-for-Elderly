@@ -44,6 +44,12 @@
                 <span class="text">Message</span>
             </a>
         </li>
+        <li class="">
+            <a href="announcement.php">
+                <i class='bx bxs-news'></i>
+                <span class="text">Announcement</span>
+            </a>
+        </li>
         
     </ul>
 
@@ -64,7 +70,7 @@
 </section>
 <!-- SIDEBAR -->
 <script>
-const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
+const allSideMenu = document.querySelectorAll('#sidebar .side-menu .top li a');
 
 		allSideMenu.forEach(item => {
 			const li = item.parentElement;
